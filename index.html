@@ -998,26 +998,37 @@ Como te comenté, la idea es que no tengas que correr con emergencias caras de m
     }
 
     // FUNCIÓN DE DESCARGA DE STORY COMO IMAGEN (HTML2CANVAS)
-    function downloadStoryImage() {
-        const elem = $('story-preview');
-        showToast('Generando imagen PNG...');
-        html2canvas(elem, {
-            scale: 3,
-            useCORS: true,
-            allowTaint: true,
-            backgroundColor: null
-        }).then(canvas => {
+function downloadStoryImage() {
+    const elem = $('story-preview');
+    showToast('Generando imagen PNG...');
+    
+    html2canvas(elem, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false
+    }).then(canvas => {
+        try {
+            const dataUrl = canvas.toDataURL('image/png');
             const link = document.createElement('a');
             link.download = `story-guaros-vet-dia-${currentDay}.png`;
-            link.href = canvas.toDataURL('image/png');
+            link.href = dataUrl;
+            
+            document.body.appendChild(link);
             link.click();
-            showToast('¡Imagen descargada!');
-        }).catch(err => {
-            console.error('Error al descargar story:', err);
-            showToast('Error generando imagen');
-        });
-    }
-
+            document.body.removeChild(link);
+            
+            showToast('¡Imagen descargada con éxito!');
+        } catch (e) {
+            console.error('Error al exportar canvas:', e);
+            showToast('Error: Intenta mantener presionada la vista previa.');
+        }
+    }).catch(err => {
+        console.error('Error al generar story:', err);
+        showToast('No se pudo generar la imagen');
+    });
+}
     // ================= PLANES & QUO =================
     let planPrices = store.get('plan-prices', {});
     let currentQuoMode = store.get('quo-mode', 'vet'); 
