@@ -207,5 +207,214 @@ Escríbenos al enlace de la bio o por DM para conocer cuál plan le corresponde 
             </h2>
             <p class="text-xs text-slate-500">Secuencia visual basada en fotos, placas y stickers interactivos.</p>
           </div>
-          <button onclick="export
-            
+          <button onclick="exportIcsCalendar()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs border-b-4 border-emerald-900 active:border-b-0 transition-all flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-calendar-plus"></i> Exportar Calendario (.ics)
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-5 bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Seleccionar Día (1 al 14):</label>
+              <select id="story-day-select" onchange="loadStoryDay(this.value)" class="w-full p-2.5 bg-white border-2 border-gray-300 rounded-xl text-xs font-bold text-gray-700 outline-none"></select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Indicación Visual / Foto:</label>
+              <input type="text" id="story-edit-visual" oninput="updateStoryLive()" class="w-full p-2 bg-white border-2 border-gray-300 rounded-xl text-xs font-medium outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Titular en Pantalla:</label>
+              <input type="text" id="story-edit-title" oninput="updateStoryLive()" class="w-full p-2 bg-white border-2 border-gray-300 rounded-xl text-xs font-semibold outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Sticker recomendado:</label>
+              <input type="text" id="story-edit-sticker" oninput="updateStoryLive()" class="w-full p-2 bg-white border-2 border-gray-300 rounded-xl text-xs font-medium outline-none">
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-gray-300 rounded-2xl p-5 flex flex-col items-center justify-between space-y-4 shadow-inner">
+            <div id="story-card-preview" class="story-aspect w-full max-w-[270px] bg-azul-noche text-white p-5 rounded-3xl shadow-2xl border-4 border-cyan-400 flex flex-col justify-between relative overflow-hidden guaros-bubbles-bg">
+              <div class="flex justify-between items-center text-[10px] text-cian-guaros font-bold uppercase z-10">
+                <span>GUAROS VET LARA</span>
+                <span id="story-day-tag" class="bg-cian-guaros text-azul-noche px-2 py-0.5 rounded-full font-extrabold">DÍA 1</span>
+              </div>
+              <div class="space-y-3 my-auto z-10 text-center">
+                <p id="story-live-visual" class="text-[10px] text-cyan-200 bg-white/10 px-2 py-1 rounded-lg italic">Foto real de consulta</p>
+                <p id="story-live-title" class="font-black font-fredoka text-lg text-white leading-tight uppercase">¿CUÁNTO GASTASTE EL ÚLTIMO AÑO?</p>
+              </div>
+              <div class="z-10 space-y-2">
+                <div id="story-live-sticker" class="bg-white/20 backdrop-blur-md p-2 rounded-xl text-center text-xs font-bold text-naranja-atardecer border border-white/20">
+                  Sticker: Encuesta rápida
+                </div>
+              </div>
+            </div>
+
+            <button onclick="downloadStory()" class="bg-white border-2 border-gray-300 text-gray-700 font-bold px-5 py-2.5 rounded-xl text-xs border-b-4 active:border-b-0 transition-all flex items-center justify-center gap-2 shadow">
+              <i class="fa-solid fa-download"></i> Descargar Story PNG
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECCIÓN 4: PLANES & DASHBOARD QUO -->
+    <div id="sec-planes" class="hidden space-y-6">
+      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-3">
+          <div>
+            <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🏷 Catálogo de Planes & Dashboard QUO</h2>
+            <p class="text-xs text-slate-500">Selecciona el modo de pago fraccionado exacto de tu tablero QUO.</p>
+          </div>
+          <div class="flex gap-2 p-1.5 bg-gray-100 rounded-2xl border border-gray-200">
+            <button id="btn-quo-vet" onclick="setQuoMode('vet')" class="py-2 px-3 bg-azul-noche text-white font-bold text-xs uppercase rounded-xl">Guaros Vet (50% / 50%)</button>
+            <button id="btn-quo-pets" onclick="setQuoMode('pets')" class="py-2 px-3 bg-gray-200 text-gray-700 font-bold text-xs uppercase rounded-xl">Guaros Pets (40 / 30 / 30)</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="plans-grid">
+          <!-- Tarjetas de planes -->
+        </div>
+      </section>
+    </div>
+
+    <!-- SECCIÓN 5: FLYERS & PROMPTS -->
+    <div id="sec-flyers" class="hidden space-y-6">
+      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
+        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🖼 Generador de Prompts para Flyers</h2>
+        <p class="text-xs text-slate-500">Copia los prompts exactos para generar los flyers institucionales de la clínica.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
+            <h4 class="font-bold text-xs text-azul-noche">1️⃣ Promoción de Lanzamiento (Primeros 20 Afiliados)</h4>
+            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic promotion with the text "¡PROMOCIÓN DE LANZAMIENTO! Primeros 20 afiliados a los Planes de Salud reciben Hematología Completa GRATIS", professional medical background with cute puppy and kitten illustrations, modern and clean style. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
+          </div>
+          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
+            <h4 class="font-bold text-xs text-azul-noche">2️⃣ Plan Canino Puppy (Primer Año)</h4>
+            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic with the text "Plan Guaros Puppy - Protocolo completo: 1 Puppy, 4 Séxtuples, 2 Antirrábicas y Desparasitación", clean modern healthcare background with a cute golden retriever puppy. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
+          </div>
+          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
+            <h4 class="font-bold text-xs text-azul-noche">3️⃣ Plan Guaros Cat (Salud Felina)</h4>
+            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic with the text "Plan Guaros Cat - Salud Felina: Triple, Quíntuple y Antirrábica", clean modern healthcare background with a cute tabby cat. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
+          </div>
+          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
+            <h4 class="font-bold text-xs text-azul-noche">4️⃣ Plan Guaros Senior (Geriátrico)</h4>
+            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic with the text "Plan Guaros Senior - Monitoreo Geriátrico Integral con exámenes de laboratorio completos", clean professional veterinary background. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECCIÓN 6: BANCO DE MARCA -->
+    <div id="sec-marca" class="hidden space-y-6">
+      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
+        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🎨 Banco de Identidad & Canva</h2>
+        <p class="text-xs text-slate-500">Colores institucionales, tipografías y recursos visuales de Guaros Vet.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="p-4 bg-[#0B2545] text-white rounded-2xl text-center"><p class="font-bold text-sm">Azul Noche</p><p class="text-xs">#0B2545</p></div>
+          <div class="p-4 bg-[#00A3E0] text-azul-noche rounded-2xl text-center"><p class="font-bold text-sm">Cian Guaros</p><p class="text-xs">#00A3E0</p></div>
+          <div class="p-4 bg-[#FF7A00] text-white rounded-2xl text-center"><p class="font-bold text-sm">Naranja</p><p class="text-xs">#FF7A00</p></div>
+          <div class="p-4 bg-[#8E24AA] text-white rounded-2xl text-center"><p class="font-bold text-sm">Morado Lara</p><p class="text-xs">#8E24AA</p></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECCIÓN 7: CÁMARA Y PACIENTES -->
+    <div id="sec-camara" class="hidden space-y-6">
+      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
+        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">📸 Módulo de Cámara & Registro de Pacientes</h2>
+        <p class="text-xs text-slate-500">Captura o sube fotos rápidas de pacientes en consulta para tus reportes.</p>
+        <div class="p-6 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl text-center space-y-3">
+          <i class="fa-solid fa-camera text-4xl text-slate-400"></i>
+          <p class="text-xs text-slate-600">Utiliza la cámara de tu Honor X8C para documentar casos clínicos.</p>
+          <input type="file" accept="image/*" capture="environment" class="block mx-auto text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-cyan-50 file:text-cyan-700 hover:file:bg-cyan-100">
+        </div>
+      </section>
+    </div>
+
+    <!-- SECCIÓN 8: AGENTE IG -->
+    <div id="sec-agente" class="hidden space-y-6">
+      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
+        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🤖 Agente IG (Comandos y Skills)</h2>
+        <p class="text-xs text-slate-500">Automatizaciones y directrices del tono corporativo del Dr. Carlos Enrique.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-viral</span><span class="text-[10px] text-slate-500">Ideas de Reels</span></div>
+          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-reel</span><span class="text-[10px] text-slate-500">Guiones de valor</span></div>
+          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-caption</span><span class="text-[10px] text-slate-500">Descripciones</span></div>
+          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-plan</span><span class="text-[10px] text-slate-500">Grilla semanal</span></div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- SCRIPT DE CONTROL Y NAVEGACIÓN -->
+  <script>
+    function switchSection(sectionId) {
+      // 1. Ocultar todas las secciones contenedoras
+      const sections = ['cierre', 'anuncio', 'stories', 'planes', 'flyers', 'marca', 'camara', 'agente'];
+      sections.forEach(id => {
+        const el = document.getElementById('sec-' + id);
+        if (el) el.classList.add('hidden');
+      });
+
+      // 2. Mostrar la sección seleccionada
+      const targetSection = document.getElementById('sec-' + sectionId);
+      if (targetSection) {
+        targetSection.classList.remove('hidden');
+      }
+
+      // 3. Cambiar estilos visuales de los botones
+      sections.forEach(id => {
+        const btn = document.getElementById('nav-' + id);
+        if (btn) {
+          btn.classList.remove('bg-cian-guaros', 'text-white', 'border-blue-950');
+          btn.classList.add('bg-gray-200', 'text-gray-600', 'border-gray-400');
+        }
+      });
+
+      const activeBtn = document.getElementById('nav-' + sectionId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-gray-200', 'text-gray-600', 'border-gray-400');
+        activeBtn.classList.add('bg-cian-guaros', 'text-white', 'border-blue-950');
+      }
+    }
+
+    function updateCupos() {
+      const total = parseInt(document.getElementById('cupos-total').value) || 20;
+      const vendidos = parseInt(document.getElementById('cupos-vendidos').value) || 0;
+      const restantes = Math.max(0, total - vendidos);
+      document.getElementById('cupos-restantes').innerText = restantes;
+      const pct = Math.min(100, Math.max(0, (vendidos / total) * 100));
+      document.getElementById('cupos-bar').style.width = pct + '%';
+    }
+
+    function renderWaScript() {
+      const tutor = document.getElementById('wa-tutor').value.trim() || '[Nombre del tutor]';
+      const pet = document.getElementById('wa-pet').value.trim() || '[Mascota]';
+      const text = `¡Hola ${tutor}! Estuve revisando los registros y recordé que me preguntaste por el Plan de Salud Preventiva para ${pet}. Te cuento que ya estamos cerrando los cupos de esta primera cohorte con el beneficio de apertura.\n\nRecuerda que puedes fraccionar el pago cómodamente con la app QUO. ¿Te ayudo a activar tu cupo hoy?`;
+      document.getElementById('wa-script-body').innerText = text;
+    }
+
+    // Inicializaciones básicas
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCupos();
+      renderWaScript();
+      const select = document.getElementById('story-day-select');
+      if(select && select.options.length === 0) {
+        for(let i=1; i<=14; i++) {
+          let opt = document.createElement('option');
+          opt.value = i;
+          opt.textContent = `Día ${i}`;
+          select.appendChild(opt);
+        }
+      }
+    });
+
+    function copyToClipboardText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('¡Copiado al portapapeles con éxito!');
+      });
+    }
+  </script>
+</body>
+</html>
