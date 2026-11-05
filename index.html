@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GUAROS VET Lara - Suite Digital Completa</title>
   <meta name="description" content="Suite digital de Guaros Vet (Barquisimeto, Lara): estrategia de lanzamiento, calculadora QUO, generador de Stories y flyers.">
-
-  <!-- FUENTES CORPORATIVAS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- TAILWIND CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -32,11 +28,8 @@
       }
     }
   </script>
-  <!-- FONT AWESOME ICONS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- HTML2CANVAS FOR STORY & FLYER EXPORTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #F4F6F9; }
     .font-fredoka { font-family: 'Fredoka', sans-serif; }
@@ -53,11 +46,8 @@
   </style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col">
-
-  <!-- NAVBAR DE NAVEGACIÓN SUPERIOR CORPORATIVO -->
   <nav class="bg-azul-noche text-white shadow-xl sticky top-0 z-50 border-b-4 border-cian-guaros">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-col gap-2">
-      <!-- Header Superior -->
       <div class="flex items-center justify-between border-b border-white/10 pb-2">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-full bg-white p-0.5 flex items-center justify-center overflow-hidden border-2 border-cian-guaros shadow" id="logo-container">
@@ -72,7 +62,6 @@
           </div>
         </div>
       </div>
-      <!-- Botones de Navegación -->
       <div class="flex flex-wrap gap-1.5 font-fredoka font-bold text-xs">
         <button onclick="switchSection('cierre')" id="nav-cierre" class="bg-cian-guaros text-white px-3 py-1.5 rounded-xl border-b-2 border-blue-950 active:border-b-0 transition-all flex items-center gap-1"><i class="fa-solid fa-bullseye text-amber-300"></i> Cierre</button>
         <button onclick="switchSection('anuncio')" id="nav-anuncio" class="bg-gray-200 text-gray-600 px-3 py-1.5 rounded-xl border-b-2 border-gray-400 active:border-b-0 transition-all flex items-center gap-1"><i class="fa-solid fa-rocket text-cyan-500"></i> Anuncio</button>
@@ -85,58 +74,29 @@
       </div>
     </div>
   </nav>
-
-  <!-- CONTENIDO PRINCIPAL -->
   <main class="container mx-auto p-4 mt-2 max-w-6xl flex-1">
-
-    <!-- SECCIÓN 1: FASE 3 CIERRE & WHATSAPP -->
     <div id="sec-cierre" class="space-y-6">
       <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-3 h-full bg-naranja-atardecer"></div>
         <div class="pl-4 space-y-4">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600 text-white font-bold rounded-full text-xs uppercase tracking-wider shadow">
-            <i class="fa-solid fa-fire"></i> FASE 3: Conversión, Escasez y Cierre (Días 9 a 14)
-          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600 text-white font-bold rounded-full text-xs uppercase tracking-wider shadow"><i class="fa-solid fa-fire"></i> FASE 3: Conversión, Escasez y Cierre (Días 9 a 14)</span>
           <h2 class="font-fredoka text-2xl font-extrabold text-azul-noche">🎯 La Recta Final del Lanzamiento</h2>
-          <p class="text-gray-700 text-sm leading-relaxed">
-            Cierre 1 a 1 por WhatsApp, resolución de objeciones inmediatas y liquidación de los últimos cupos de la primera cohorte preventivas en Barquisimeto.
-          </p>
-
-          <!-- Contador de Cupos -->
+          <p class="text-gray-700 text-sm leading-relaxed">Cierre 1 a 1 por WhatsApp, resolución de objeciones inmediatas y liquidación de los últimos cupos de la primera cohorte preventivas en Barquisimeto.</p>
           <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-2xl border border-gray-300 max-w-md shadow-inner space-y-3">
-            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
-              <i class="fa-solid fa-ticket text-naranja-atardecer"></i> Contador Dinámico de Cupos
-            </h3>
+            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-ticket text-naranja-atardecer"></i> Contador Dinámico de Cupos</h3>
             <div class="grid grid-cols-3 gap-2 text-center font-bold">
-              <div class="bg-white p-2.5 rounded-xl border border-gray-200">
-                <input id="cupos-total" type="number" min="1" value="20" oninput="updateCupos()" class="w-full text-center font-fredoka text-xl text-gray-800 outline-none">
-                <p class="text-[9px] text-gray-400 uppercase">Total</p>
-              </div>
-              <div class="bg-white p-2.5 rounded-xl border border-gray-200">
-                <input id="cupos-vendidos" type="number" min="0" value="16" oninput="updateCupos()" class="w-full text-center font-fredoka text-xl text-emerald-600 outline-none">
-                <p class="text-[9px] text-gray-400 uppercase">Vendidos</p>
-              </div>
-              <div class="bg-naranja-atardecer p-2.5 rounded-xl text-white flex flex-col justify-center">
-                <p id="cupos-restantes" class="font-fredoka text-xl">4</p>
-                <p class="text-[9px] uppercase font-bold">Restantes</p>
-              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-gray-200"><input id="cupos-total" type="number" min="1" value="20" oninput="updateCupos()" class="w-full text-center font-fredoka text-xl text-gray-800 outline-none"><p class="text-[9px] text-gray-400 uppercase">Total</p></div>
+              <div class="bg-white p-2.5 rounded-xl border border-gray-200"><input id="cupos-vendidos" type="number" min="0" value="16" oninput="updateCupos()" class="w-full text-center font-fredoka text-xl text-emerald-600 outline-none"><p class="text-[9px] text-gray-400 uppercase">Vendidos</p></div>
+              <div class="bg-naranja-atardecer p-2.5 rounded-xl text-white flex flex-col justify-center"><p id="cupos-restantes" class="font-fredoka text-xl">4</p><p class="text-[9px] uppercase font-bold">Restantes</p></div>
             </div>
-            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
-              <div id="cupos-bar" class="bg-gradient-to-r from-cian-guaros via-naranja-atardecer to-red-600 h-full transition-all" style="width: 80%"></div>
-            </div>
+            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden"><div id="cupos-bar" class="bg-gradient-to-r from-cian-guaros via-naranja-atardecer to-red-600 h-full transition-all" style="width: 80%"></div></div>
           </div>
-
-          <!-- Script 1 a 1 WhatsApp -->
           <div class="bg-slate-50 p-4 rounded-2xl border space-y-3">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
               <h4 class="font-fredoka font-bold text-azul-noche text-sm">📱 Script para WhatsApp Directo (Días 9 y 10):</h4>
               <div class="flex gap-2">
-                <button onclick="copyToClipboardText(document.getElementById('wa-script-body').innerText)" class="px-3 py-1 bg-emerald-600 text-white font-bold text-xs rounded-xl hover:bg-emerald-700 transition flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar Script
-                </button>
-                <a id="wa-direct-btn" href="https://wa.me/584261601079" target="_blank" class="px-3 py-1 bg-[#25D366] text-white font-bold text-xs rounded-xl hover:bg-green-600 transition flex items-center gap-1">
-                  <i class="fa-brands fa-whatsapp"></i> Abrir Chat
-                </a>
+                <button onclick="copyToClipboardText(document.getElementById('wa-script-body').innerText)" class="px-3 py-1 bg-emerald-600 text-white font-bold text-xs rounded-xl hover:bg-emerald-700 transition flex items-center gap-1"><i class="fa-solid fa-copy"></i> Copiar Script</button>
+                <a id="wa-direct-btn" href="https://wa.me/584261601079" target="_blank" class="px-3 py-1 bg-[#25D366] text-white font-bold text-xs rounded-xl hover:bg-green-600 transition flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Abrir Chat</a>
               </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -148,24 +108,16 @@
         </div>
       </section>
     </div>
-
-    <!-- SECCIÓN 2: FASE 2 ANUNCIO & CARRUSEL -->
     <div id="sec-anuncio" class="hidden space-y-6">
       <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-3 h-full bg-cian-guaros"></div>
         <div class="pl-4 space-y-4">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-cian-guaros text-azul-noche font-bold rounded-full text-xs uppercase tracking-wider shadow">
-            <i class="fa-solid fa-bolt"></i> FASE 2: El Anuncio de la Solución (Días 5 al 8)
-          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-cian-guaros text-azul-noche font-bold rounded-full text-xs uppercase tracking-wider shadow"><i class="fa-solid fa-bolt"></i> FASE 2: El Anuncio de la Solución (Días 5 al 8)</span>
           <h2 class="font-fredoka text-2xl font-extrabold text-azul-noche">🚀 Lanzamiento Oficial & Alianza QUO</h2>
           <p class="text-gray-700 text-sm">Revelación del Plan de Salud Preventiva en Guaros Vet y el beneficio exclusivo de cuotas quincenales.</p>
-          
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl p-5 max-w-md mx-auto w-full text-center space-y-4">
-              <div class="flex justify-between items-center text-xs font-bold text-azul-noche">
-                <span>Día 5: Carrusel Oficial 4:5</span>
-                <span id="carrusel-num-tag" class="bg-cian-guaros text-azul-noche px-2 py-0.5 rounded-full text-[10px]">Lámina 1/5</span>
-              </div>
+              <div class="flex justify-between items-center text-xs font-bold text-azul-noche"><span>Día 5: Carrusel Oficial 4:5</span><span id="carrusel-num-tag" class="bg-cian-guaros text-azul-noche px-2 py-0.5 rounded-full text-[10px]">Lámina 1/5</span></div>
               <div id="carrusel-display" class="bg-azul-noche text-white border border-gray-200 rounded-2xl p-6 shadow-md h-64 flex flex-col items-center justify-center text-center space-y-3 relative overflow-hidden guaros-bubbles-bg">
                 <span id="carrusel-tag" class="bg-naranja-atardecer text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">REVELACIÓN</span>
                 <p id="carrusel-title" class="font-fredoka font-bold text-xl text-white">Plan de Salud Preventiva</p>
@@ -176,245 +128,15 @@
                 <button onclick="nextSlide()" class="flex-1 bg-azul-noche hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl text-xs border-b-4 border-black active:border-b-0 transition-all">Siguiente</button>
               </div>
             </div>
-
             <div class="space-y-3">
               <div class="flex justify-between items-center">
                 <h4 class="font-fredoka font-bold text-azul-noche text-sm">Caption Recomendado para Instagram:</h4>
-                <button onclick="copyToClipboardText(document.getElementById('carrusel-caption-text').innerText)" class="px-3 py-1 bg-cian-guaros text-azul-noche font-bold text-xs rounded-xl hover:bg-cyan-400 transition flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar Caption
-                </button>
+                <button onclick="copyToClipboardText(document.getElementById('carrusel-caption-text').innerText)" class="px-3 py-1 bg-cian-guaros text-azul-noche font-bold text-xs rounded-xl hover:bg-cyan-400 transition flex items-center gap-1"><i class="fa-solid fa-copy"></i> Copiar Caption</button>
               </div>
-              <div id="carrusel-caption-text" class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-700 whitespace-pre-line leading-relaxed h-64 overflow-y-auto font-mono">
-La verdadera protección no espera a la emergencia. 🩺 Hoy lanzamos oficialmente los Planes de Salud Preventiva de Guaros Vet en Barquisimeto.
-
-💳 Además, olvídate de pagar todo de golpe: actívalo de forma fraccionada y cómoda con la app QUO (50% / 50% o 40% / 30% / 30%).
-
-Escríbenos al enlace de la bio o por DM para conocer cuál plan le corresponde a tu peludito.
-              </div>
+              <div id="carrusel-caption-text" class="p-4 bg-slate-50 border rounded-2xl text-xs text-slate-700 whitespace-pre-line leading-relaxed h-64 overflow-y-auto font-mono">La verdadera protección no espera a la emergencia. 🩺 Hoy lanzamos oficialmente los Planes de Salud Preventiva de Guaros Vet en Barquisimeto.\n\n💳 Además, olvídate de pagar todo de golpe: actívalo de forma fraccionada y cómoda con la app QUO (50% / 50% o 40% / 30% / 30%).\n\nEscríbenos al enlace de la bio o por DM para conocer cuál plan le corresponde a tu peludito.</div>
             </div>
           </div>
         </div>
       </section>
     </div>
-
-    <!-- SECCIÓN 3: STORIES 14 DÍAS & CALENDARIO -->
-    <div id="sec-stories" class="hidden space-y-6">
-      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-3">
-          <div>
-            <h2 class="font-fredoka text-2xl font-bold text-azul-noche flex items-center gap-2">
-              📱 Generador de Stories (14 Días Visuales)
-            </h2>
-            <p class="text-xs text-slate-500">Secuencia visual basada en fotos, placas y stickers interactivos.</p>
-          </div>
-          <button onclick="exportIcsCalendar()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs border-b-4 border-emerald-900 active:border-b-0 transition-all flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-calendar-plus"></i> Exportar Calendario (.ics)
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-5 bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-3">
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Seleccionar Día (1 al 14):</label>
-              <select id="story-day-select" onchange="loadStoryDay(this.value)" class="w-full p-2.5 bg-white border-2 border-gray-300 rounded-xl text-xs font-bold text-gray-700 outline-none"></select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Indicación Visual / Foto:</label>
-              <input type="text" id="story-edit-visual" oninput="updateStoryLive()" class="w-full p-2 bg-white border-2 border-gray-300 rounded-xl text-xs font-medium outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Titular en Pantalla:</label>
-              <input type="text" id="story-edit-title" oninput="updateStoryLive()" class="w-full p-2 bg-white border-2 border-gray-300 rounded-xl text-xs font-semibold outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Sticker recomendado:</label>
-              <input type="text" id="story-edit-sticker" oninput="updateStoryLive()" class="w-full p-2 bg-white border-2 border-gray-300 rounded-xl text-xs font-medium outline-none">
-            </div>
-          </div>
-
-          <div class="lg:col-span-7 bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-gray-300 rounded-2xl p-5 flex flex-col items-center justify-between space-y-4 shadow-inner">
-            <div id="story-card-preview" class="story-aspect w-full max-w-[270px] bg-azul-noche text-white p-5 rounded-3xl shadow-2xl border-4 border-cyan-400 flex flex-col justify-between relative overflow-hidden guaros-bubbles-bg">
-              <div class="flex justify-between items-center text-[10px] text-cian-guaros font-bold uppercase z-10">
-                <span>GUAROS VET LARA</span>
-                <span id="story-day-tag" class="bg-cian-guaros text-azul-noche px-2 py-0.5 rounded-full font-extrabold">DÍA 1</span>
-              </div>
-              <div class="space-y-3 my-auto z-10 text-center">
-                <p id="story-live-visual" class="text-[10px] text-cyan-200 bg-white/10 px-2 py-1 rounded-lg italic">Foto real de consulta</p>
-                <p id="story-live-title" class="font-black font-fredoka text-lg text-white leading-tight uppercase">¿CUÁNTO GASTASTE EL ÚLTIMO AÑO?</p>
-              </div>
-              <div class="z-10 space-y-2">
-                <div id="story-live-sticker" class="bg-white/20 backdrop-blur-md p-2 rounded-xl text-center text-xs font-bold text-naranja-atardecer border border-white/20">
-                  Sticker: Encuesta rápida
-                </div>
-              </div>
-            </div>
-
-            <button onclick="downloadStory()" class="bg-white border-2 border-gray-300 text-gray-700 font-bold px-5 py-2.5 rounded-xl text-xs border-b-4 active:border-b-0 transition-all flex items-center justify-center gap-2 shadow">
-              <i class="fa-solid fa-download"></i> Descargar Story PNG
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- SECCIÓN 4: PLANES & DASHBOARD QUO -->
-    <div id="sec-planes" class="hidden space-y-6">
-      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-3">
-          <div>
-            <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🏷 Catálogo de Planes & Dashboard QUO</h2>
-            <p class="text-xs text-slate-500">Selecciona el modo de pago fraccionado exacto de tu tablero QUO.</p>
-          </div>
-          <div class="flex gap-2 p-1.5 bg-gray-100 rounded-2xl border border-gray-200">
-            <button id="btn-quo-vet" onclick="setQuoMode('vet')" class="py-2 px-3 bg-azul-noche text-white font-bold text-xs uppercase rounded-xl">Guaros Vet (50% / 50%)</button>
-            <button id="btn-quo-pets" onclick="setQuoMode('pets')" class="py-2 px-3 bg-gray-200 text-gray-700 font-bold text-xs uppercase rounded-xl">Guaros Pets (40 / 30 / 30)</button>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="plans-grid">
-          <!-- Tarjetas de planes -->
-        </div>
-      </section>
-    </div>
-
-    <!-- SECCIÓN 5: FLYERS & PROMPTS -->
-    <div id="sec-flyers" class="hidden space-y-6">
-      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
-        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🖼 Generador de Prompts para Flyers</h2>
-        <p class="text-xs text-slate-500">Copia los prompts exactos para generar los flyers institucionales de la clínica.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
-            <h4 class="font-bold text-xs text-azul-noche">1️⃣ Promoción de Lanzamiento (Primeros 20 Afiliados)</h4>
-            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic promotion with the text "¡PROMOCIÓN DE LANZAMIENTO! Primeros 20 afiliados a los Planes de Salud reciben Hematología Completa GRATIS", professional medical background with cute puppy and kitten illustrations, modern and clean style. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
-          </div>
-          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
-            <h4 class="font-bold text-xs text-azul-noche">2️⃣ Plan Canino Puppy (Primer Año)</h4>
-            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic with the text "Plan Guaros Puppy - Protocolo completo: 1 Puppy, 4 Séxtuples, 2 Antirrábicas y Desparasitación", clean modern healthcare background with a cute golden retriever puppy. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
-          </div>
-          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
-            <h4 class="font-bold text-xs text-azul-noche">3️⃣ Plan Guaros Cat (Salud Felina)</h4>
-            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic with the text "Plan Guaros Cat - Salud Felina: Triple, Quíntuple y Antirrábica", clean modern healthcare background with a cute tabby cat. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
-          </div>
-          <div class="bg-gray-50 border p-4 rounded-2xl space-y-2">
-            <h4 class="font-bold text-xs text-azul-noche">4️⃣ Plan Guaros Senior (Geriátrico)</h4>
-            <textarea readonly class="w-full h-24 p-2 bg-white border rounded-xl text-[11px] font-mono select-all">flat front-facing social media flyer design for a veterinary clinic with the text "Plan Guaros Senior - Monitoreo Geriátrico Integral con exámenes de laboratorio completos", clean professional veterinary background. Render only the text listed above. Do not add any other words, names, dates, times, locations, contact details, or placeholder fields.</textarea>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- SECCIÓN 6: BANCO DE MARCA -->
-    <div id="sec-marca" class="hidden space-y-6">
-      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
-        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🎨 Banco de Identidad & Canva</h2>
-        <p class="text-xs text-slate-500">Colores institucionales, tipografías y recursos visuales de Guaros Vet.</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="p-4 bg-[#0B2545] text-white rounded-2xl text-center"><p class="font-bold text-sm">Azul Noche</p><p class="text-xs">#0B2545</p></div>
-          <div class="p-4 bg-[#00A3E0] text-azul-noche rounded-2xl text-center"><p class="font-bold text-sm">Cian Guaros</p><p class="text-xs">#00A3E0</p></div>
-          <div class="p-4 bg-[#FF7A00] text-white rounded-2xl text-center"><p class="font-bold text-sm">Naranja</p><p class="text-xs">#FF7A00</p></div>
-          <div class="p-4 bg-[#8E24AA] text-white rounded-2xl text-center"><p class="font-bold text-sm">Morado Lara</p><p class="text-xs">#8E24AA</p></div>
-        </div>
-      </section>
-    </div>
-
-    <!-- SECCIÓN 7: CÁMARA Y PACIENTES -->
-    <div id="sec-camara" class="hidden space-y-6">
-      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
-        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">📸 Módulo de Cámara & Registro de Pacientes</h2>
-        <p class="text-xs text-slate-500">Captura o sube fotos rápidas de pacientes en consulta para tus reportes.</p>
-        <div class="p-6 bg-gray-50 border-2 border-dashed border-gray-300 rounded-2xl text-center space-y-3">
-          <i class="fa-solid fa-camera text-4xl text-slate-400"></i>
-          <p class="text-xs text-slate-600">Utiliza la cámara de tu Honor X8C para documentar casos clínicos.</p>
-          <input type="file" accept="image/*" capture="environment" class="block mx-auto text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-cyan-50 file:text-cyan-700 hover:file:bg-cyan-100">
-        </div>
-      </section>
-    </div>
-
-    <!-- SECCIÓN 8: AGENTE IG -->
-    <div id="sec-agente" class="hidden space-y-6">
-      <section class="bg-white rounded-3xl shadow-xl border-2 border-gray-200 p-6 space-y-4">
-        <h2 class="font-fredoka text-2xl font-bold text-azul-noche">🤖 Agente IG (Comandos y Skills)</h2>
-        <p class="text-xs text-slate-500">Automatizaciones y directrices del tono corporativo del Dr. Carlos Enrique.</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-viral</span><span class="text-[10px] text-slate-500">Ideas de Reels</span></div>
-          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-reel</span><span class="text-[10px] text-slate-500">Guiones de valor</span></div>
-          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-caption</span><span class="text-[10px] text-slate-500">Descripciones</span></div>
-          <div class="p-3 bg-gray-50 border rounded-xl text-center"><span class="font-bold text-xs text-cyan-600 block">/ig-plan</span><span class="text-[10px] text-slate-500">Grilla semanal</span></div>
-        </div>
-      </section>
-    </div>
-
-  </main>
-
-  <!-- SCRIPT DE CONTROL Y NAVEGACIÓN -->
-  <script>
-    function switchSection(sectionId) {
-      // 1. Ocultar todas las secciones contenedoras
-      const sections = ['cierre', 'anuncio', 'stories', 'planes', 'flyers', 'marca', 'camara', 'agente'];
-      sections.forEach(id => {
-        const el = document.getElementById('sec-' + id);
-        if (el) el.classList.add('hidden');
-      });
-
-      // 2. Mostrar la sección seleccionada
-      const targetSection = document.getElementById('sec-' + sectionId);
-      if (targetSection) {
-        targetSection.classList.remove('hidden');
-      }
-
-      // 3. Cambiar estilos visuales de los botones
-      sections.forEach(id => {
-        const btn = document.getElementById('nav-' + id);
-        if (btn) {
-          btn.classList.remove('bg-cian-guaros', 'text-white', 'border-blue-950');
-          btn.classList.add('bg-gray-200', 'text-gray-600', 'border-gray-400');
-        }
-      });
-
-      const activeBtn = document.getElementById('nav-' + sectionId);
-      if (activeBtn) {
-        activeBtn.classList.remove('bg-gray-200', 'text-gray-600', 'border-gray-400');
-        activeBtn.classList.add('bg-cian-guaros', 'text-white', 'border-blue-950');
-      }
-    }
-
-    function updateCupos() {
-      const total = parseInt(document.getElementById('cupos-total').value) || 20;
-      const vendidos = parseInt(document.getElementById('cupos-vendidos').value) || 0;
-      const restantes = Math.max(0, total - vendidos);
-      document.getElementById('cupos-restantes').innerText = restantes;
-      const pct = Math.min(100, Math.max(0, (vendidos / total) * 100));
-      document.getElementById('cupos-bar').style.width = pct + '%';
-    }
-
-    function renderWaScript() {
-      const tutor = document.getElementById('wa-tutor').value.trim() || '[Nombre del tutor]';
-      const pet = document.getElementById('wa-pet').value.trim() || '[Mascota]';
-      const text = `¡Hola ${tutor}! Estuve revisando los registros y recordé que me preguntaste por el Plan de Salud Preventiva para ${pet}. Te cuento que ya estamos cerrando los cupos de esta primera cohorte con el beneficio de apertura.\n\nRecuerda que puedes fraccionar el pago cómodamente con la app QUO. ¿Te ayudo a activar tu cupo hoy?`;
-      document.getElementById('wa-script-body').innerText = text;
-    }
-
-    // Inicializaciones básicas
-    document.addEventListener('DOMContentLoaded', () => {
-      updateCupos();
-      renderWaScript();
-      const select = document.getElementById('story-day-select');
-      if(select && select.options.length === 0) {
-        for(let i=1; i<=14; i++) {
-          let opt = document.createElement('option');
-          opt.value = i;
-          opt.textContent = `Día ${i}`;
-          select.appendChild(opt);
-        }
-      }
-    });
-
-    function copyToClipboardText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('¡Copiado al portapapeles con éxito!');
-      });
-    }
-  </script>
-</body>
-</html>
+    
