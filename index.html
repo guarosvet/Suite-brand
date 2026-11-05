@@ -883,33 +883,27 @@ Como te comenté, la idea es que no tengas que correr con emergencias caras de m
 
     // ================= FASE 2 =================
     let slideIdx = 0;
-    function bgClass(bg) {
-        return { navy: 'guaros-bubbles-bg text-white', light: 'guaros-bubbles-light text-[#0B2545]', sunset: 'sunset-gradient text-white', urgent: 'bg-gradient-to-br from-red-700 to-red-500 text-white' }[bg] || 'guaros-bubbles-bg text-white';
-    }
-    function renderSlide() {
-        const s = SLIDES[slideIdx];
-        const light = s.bg === 'light';
-        $('carousel-slide').className = `insta-slide-aspect rounded-2xl overflow-hidden shadow-lg relative fade-in ${bgClass(s.bg)}`;
-        $('carousel-slide').innerHTML = `
-            <div class="absolute top-3 left-3 w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden"><img src="./guaros-vet-logo.png" class="scale-[1.6] object-contain" alt="" onerror="this.src='guaros-vet-logo.png'"></div>
-            <div class="absolute top-4 right-3 text-[9px] font-bold px-2 py-0.5 rounded-full ${light ? 'bg-[#0B2545] text-white' : 'bg-white/90 text-[#0B2545]'}">${slideIdx + 1}/${SLIDES.length}</div>
-            <div class="absolute inset-x-0 bottom-0 p-4 ${light ? 'bg-white/85' : 'bg-[#0B2545]/75'} backdrop-blur-sm">
-                <p class="text-[9px] font-extrabold tracking-widest ${light ? 'text-[#00A3E0]' : 'text-cyan-300'}">${esc(s.kicker)}</p>
-                <p class="font-display font-bold text-xl leading-tight">${esc(s.title)}</p>
-                <p class="text-[10px] mt-1 ${light ? 'text-slate-600' : 'text-slate-200'}">${esc(s.sub)}</p>
-            </div>`;
-        $('carousel-note').textContent = s.note;
-        $('carousel-dots').innerHTML = SLIDES.map((_, i) => `<button onclick="slideIdx=${i};renderSlide()" class="w-2 h-2 rounded-full ${i === slideIdx ? 'bg-[#00A3E0]' : 'bg-slate-300'}" aria-label="Diapositiva ${i + 1}"></button>`).join('');
-    }
-    function moveSlide(d) { slideIdx = (slideIdx + d + SLIDES.length) % SLIDES.length; renderSlide(); }
-    function renderFaq() {
-        $('faq-list').innerHTML = FAQ.map(f => `
-            <div class="p-3 rounded-xl bg-purple-50 border border-purple-100">
-                <p class="font-bold text-purple-900">${esc(f.q)}</p>
-                <p class="text-slate-600">${esc(f.a)}</p>
-            </div>`).join('');
-    }
-
+function bgClass(bg) {
+    return { navy: 'guaros-bubbles-bg text-white', light: 'guaros-bubbles-light text-[#0B2545]', sunset: 'sunset-gradient text-white', urgent: 'bg-gradient-to-br from-red-700 to-red-500 text-white' }[bg] || 'guaros-bubbles-bg text-white';
+}
+function renderSlide() {
+    const s = SLIDES[slideIdx];
+    const light = s.bg === 'light';
+    const slideElem = $('carousel-slide');
+    slideElem.className = `insta-slide-aspect rounded-2xl overflow-hidden shadow-lg relative fade-in ${bgClass(s.bg)}`;
+    slideElem.innerHTML = `
+        <div class="absolute top-3 left-3 w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden"><img src="./guaros-vet-logo.png" class="scale-[1.6] object-contain" alt="" onerror="this.src='guaros-vet-logo.png'"></div>
+        <div class="absolute top-4 right-3 text-[9px] font-bold px-2 py-0.5 rounded-full ${light ? 'bg-[#0B2545] text-white' : 'bg-white/90 text-[#0B2545]'}">${slideIdx + 1}/${SLIDES.length}</div>
+        <div class="absolute inset-x-0 bottom-0 p-4 ${light ? 'bg-white/85' : 'bg-[#0B2545]/75'} backdrop-blur-sm">
+            <p class="text-[9px] font-extrabold tracking-widest ${light ? 'text-[#00A3E0]' : 'text-cyan-300'}">${esc(s.kicker)}</p>
+            <p class="font-display font-bold text-xl leading-tight">${esc(s.title)}</p>
+            <p class="text-[10px] mt-1 ${light ? 'text-slate-600' : 'text-slate-200'}">${esc(s.sub)}</p>
+        </div>`;
+    $('carousel-note').textContent = s.note + " (Tip: Mantén presionada la imagen para guardarla directo en tu galería).";
+    $('carousel-dots').innerHTML = SLIDES.map((_, i) => `<button onclick="slideIdx=${i};renderSlide()" class="w-2 h-2 rounded-full ${i === slideIdx ? 'bg-[#00A3E0]' : 'bg-slate-300'}" aria-label="Diapositiva ${i + 1}"></button>`).join('');
+}
+function moveSlide(d) { slideIdx = (slideIdx + d + SLIDES.length) % SLIDES.length; renderSlide(); }
+        
     // ================= STORIES & DESCARGADOR DE IMAGEN =================
     let currentDay = 1;
     let storyEdits = store.get('story-edits', {});
