@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guaros Vet Suite | Panel de Gestión, Marketing y Planes</title>
-    <meta name="description" content="Suite digital de Guaros Vet (Barquisimeto, Lara): estrategia de lanzamiento, generador de Stories, catálogo completo de planes preventivos y estética canina/felina.">
+    <title>Guaros Vet Suite Pro | Marketing & IA</title>
+    <meta name="description" content="Suite digital de Guaros Vet (Barquisimeto, Lara): generador automático de historias con IA, creador de carruseles, catálogo de planes y banco de marca.">
     <link rel="icon" type="image/png" href="img/guaros-vet-logo.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -78,28 +78,28 @@
                 <div>
                     <h1 class="font-display font-bold text-lg tracking-wide flex items-center gap-2">
                         <span>GUAROS VET</span>
-                        <span class="text-[9px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Suite Pro</span>
+                        <span class="text-[9px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Suite IA</span>
                     </h1>
                     <p class="text-[10px] text-slate-300 hidden sm:block">Barquisimeto, Lara · Dr. Carlos Enrique Rodríguez</p>
                 </div>
             </div>
 
-            <!-- Navegación con los 5 Módulos -->
+            <!-- Navegación -->
             <nav class="hidden md:flex space-x-1">
                 <button onclick="switchTab('plans')" id="nav-plans" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 bg-brandCyan text-brandNavy font-bold shadow-md">
-                    <i class="fa-solid fa-layer-group"></i> Catálogo de Planes
+                    <i class="fa-solid fa-layer-group"></i> Planes
                 </button>
                 <button onclick="switchTab('stories')" id="nav-stories" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-circle-play text-cyan-400"></i> Stories (14 Días)
+                    <i class="fa-solid fa-circle-play text-cyan-400"></i> Stories IA (14D)
                 </button>
-                <button onclick="switchTab('phase2')" id="nav-phase2" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-rocket text-orange-400"></i> Fase 2: Anuncio
+                <button onclick="switchTab('carousel')" id="nav-carousel" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-images text-orange-400"></i> Carrusel IA (5 Láminas)
                 </button>
                 <button onclick="switchTab('phase3')" id="nav-phase3" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-bullseye text-red-400"></i> Fase 3: Cierre & WA
+                    <i class="fa-solid fa-bullseye text-red-400"></i> Cierre & WA
                 </button>
                 <button onclick="switchTab('brand')" id="nav-brand" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-palette"></i> Banco Marca
+                    <i class="fa-solid fa-palette"></i> Marca
                 </button>
             </nav>
 
@@ -107,8 +107,8 @@
             <div class="md:hidden">
                 <select id="mobile-nav" onchange="switchTab(this.value)" class="bg-slate-800 text-white text-xs px-3 py-2 rounded-xl border border-slate-700 font-medium focus:outline-none">
                     <option value="plans">🏷️ Catálogo de Planes</option>
-                    <option value="stories">📱 Stories (14 Días)</option>
-                    <option value="phase2">🚀 Fase 2: Anuncio</option>
+                    <option value="stories">📱 Stories IA (14 Días)</option>
+                    <option value="carousel">🚀 Carrusel IA (5 Láminas)</option>
                     <option value="phase3">🎯 Fase 3: Cierre y WA</option>
                     <option value="brand">🎨 Banco de Marca</option>
                 </select>
@@ -119,7 +119,7 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
 
-        <!-- TAB 1: PLANES Y COTIZADOR (Oficial según PDF) -->
+        <!-- TAB 1: PLANES Y COTIZADOR -->
         <section id="tab-plans" class="tab-content space-y-6">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
@@ -128,47 +128,51 @@
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Catálogo Oficial de Planes Guaros Vet</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Modifica precios y valores en tiempo real. Envía fichas limpias directamente a tus clientes por WhatsApp con un solo clic.
+                        Modifica precios en tiempo real y comparte fichas profesionales por WhatsApp.
                     </p>
                 </div>
             </div>
 
             <!-- Filtros por categoría -->
             <div class="flex flex-wrap gap-2 items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                <span class="text-xs font-bold text-[#0B2545] mr-2"><i class="fa-solid fa-filter text-[#00A3E0]"></i> Filtrar categoría:</span>
+                <span class="text-xs font-bold text-[#0B2545] mr-2"><i class="fa-solid fa-filter text-[#00A3E0]"></i> Filtrar:</span>
                 <button onclick="filterPlans('all')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-[#0B2545] text-white transition">Todos</button>
                 <button onclick="filterPlans('preventiva')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Preventiva</button>
                 <button onclick="filterPlans('felina')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Felina</button>
                 <button onclick="filterPlans('maternidad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Maternidad</button>
-                <button onclick="filterPlans('estetica')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Estética Canina (Razas)</button>
-                <button onclick="filterPlans('seguridad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Identificación y Seguridad</button>
+                <button onclick="filterPlans('estetica')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Estética Razas</button>
+                <button onclick="filterPlans('seguridad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Guaros ID</button>
             </div>
 
-            <!-- Grid de Planes -->
             <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- TAB 2: GENERADOR DE STORIES (14 DÍAS) -->
+        <!-- TAB 2: GENERADOR DE STORIES CON IA (14 DÍAS) -->
         <section id="tab-stories" class="tab-content space-y-6 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brandCyan text-brandNavy font-bold rounded-full text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-circle-play"></i> Contenido para Instagram
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Motor IA de Historias
                     </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Generador de Historias (14 Días)</h2>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Generador Automático de 14 Días con Hook IA</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Previsualiza la Story en formato 9:16, edita el titular y descarga la imagen HD lista para publicar.
+                        Cada día genera automáticamente ganchos persuasivos adaptados para maximizar la retención y conversión en Instagram.
                     </p>
                 </div>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex items-center justify-between mb-3">
-                    <p class="font-bold text-xs text-[#0B2545]">Selecciona el día de campaña</p>
-                    <p class="text-[11px] text-slate-500"><span id="stories-done-count">0</span>/14 publicadas</p>
+            <!-- Panel de Control IA para Stories -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <p class="font-display font-bold text-sm text-[#0B2545]">Selecciona el Día de Campaña (1 al 14)</p>
+                    <p class="text-[11px] text-slate-500">Haz clic en cualquier día para cargar su estructura generada por IA.</p>
                 </div>
-                <div id="day-picker" class="grid grid-cols-7 sm:grid-cols-14 gap-2"></div>
+                <button onclick="generateAllStoriesAI()" class="px-4 py-2 bg-gradient-to-r from-brandCyan to-brandNavy text-white font-bold rounded-xl text-xs shadow-md hover:opacity-90 transition flex items-center gap-2">
+                    <i class="fa-solid fa-brain"></i> Regenerar los 14 Días con IA
+                </button>
             </div>
+
+            <div id="day-picker" class="grid grid-cols-7 sm:grid-cols-14 gap-2"></div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 <div class="lg:col-span-4 flex flex-col items-center gap-3">
@@ -176,7 +180,7 @@
                         <div id="story-preview" class="insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 fade-in"></div>
                     </div>
                     <button onclick="downloadStoryImage()" class="w-full max-w-[280px] py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-download text-sm"></i> Descargar Story (PNG HD)
+                        <i class="fa-solid fa-download text-sm"></i> Descargar Story HD (PNG)
                     </button>
                 </div>
 
@@ -192,16 +196,16 @@
                     </div>
 
                     <div class="grid sm:grid-cols-2 gap-4">
-                        <label class="text-[11px] font-semibold text-slate-600 sm:col-span-2">Titular de la Story
+                        <label class="text-[11px] font-semibold text-slate-600 sm:col-span-2">Hook / Titular con IA
                             <textarea id="story-headline" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl text-sm font-display"></textarea>
                         </label>
-                        <label class="text-[11px] font-semibold text-slate-600 sm:col-span-2">Texto de apoyo
+                        <label class="text-[11px] font-semibold text-slate-600 sm:col-span-2">Texto de Apoyo
                             <textarea id="story-body" rows="3" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs"></textarea>
                         </label>
-                        <label class="text-[11px] font-semibold text-slate-600">Sticker / CTA
+                        <label class="text-[11px] font-semibold text-slate-600">Sticker / Llamado a la Acción (CTA)
                             <input id="story-cta" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
                         </label>
-                        <label class="text-[11px] font-semibold text-slate-600">Diseño de Fondo
+                        <label class="text-[11px] font-semibold text-slate-600">Estilo de Fondo
                             <select id="story-bg" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
                                 <option value="navy">Burbujas Navy</option>
                                 <option value="light">Burbujas Claro</option>
@@ -212,86 +216,93 @@
                     </div>
 
                     <div class="p-3 bg-slate-50 border rounded-xl space-y-1">
-                        <p class="font-bold text-[11px] text-[#0B2545]"><i class="fa-solid fa-camera text-[#00A3E0]"></i> Indicación visual:</p>
+                        <p class="font-bold text-[11px] text-[#0B2545]"><i class="fa-solid fa-camera text-[#00A3E0]"></i> Indicación visual para grabar:</p>
                         <p id="story-visual" class="text-[11px] text-slate-600"></p>
                     </div>
 
                     <div class="flex flex-wrap gap-2 pt-2">
                         <button onclick="copyStory()" class="px-4 py-2 bg-[#0B2545] text-white font-bold rounded-xl text-xs hover:opacity-90"><i class="fa-solid fa-copy"></i> Copiar texto</button>
-                        <button onclick="resetStory()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs hover:bg-slate-200"><i class="fa-solid fa-rotate-left"></i> Restaurar</button>
+                        <button onclick="resetStory()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs hover:bg-slate-200"><i class="fa-solid fa-rotate-left"></i> Restaurar original</button>
                         <button onclick="selectDay(Math.min(14, currentDay + 1))" class="px-4 py-2 bg-[#00A3E0] text-[#0B2545] font-bold rounded-xl text-xs hover:opacity-90 ml-auto">Siguiente día <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 3: FASE 2 - ANUNCIO DEL PLAN (REEL & CARRUSEL DÍAS 5-8) -->
-        <section id="tab-phase2" class="tab-content space-y-6 hidden">
+        <!-- TAB 3: GENERADOR DE CARRUSEL CON IA (5 LÁMINAS) -->
+        <section id="tab-carousel" class="tab-content space-y-6 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brandOrange text-white font-bold rounded-full text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-bolt"></i> Fase 2: El Anuncio de la Solución
+                        <i class="fa-solid fa-images"></i> Generador IA de Carruseles
                     </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Estrategia del Lanzamiento Oficial</h2>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Carrusel de Lanzamiento (5 Láminas)</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Contenidos clave para revelar el Plan de Salud Preventiva y las facilidades de pago.
+                        Crea automáticamente secuencias de 5 imágenes con textos persuasivos generados por IA para enganchar y vender en Instagram.
                     </p>
                 </div>
             </div>
 
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <label class="text-xs font-bold text-[#0B2545]">Selecciona el tema del carrusel con IA:</label>
+                    <select id="carousel-topic" class="mt-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-[#0B2545] focus:outline-none">
+                        <option value="preventivo">Plan de Salud Preventiva (Vacunas & Controles)</option>
+                        <option value="emergencias">El peligro de las emergencias de medianoche</option>
+                        <option value="quo">Facilidades de pago con QUO (Cuotas quincenales)</option>
+                    </select>
+                </div>
+                <button onclick="generateCarouselAI()" class="px-4 py-2 bg-brandOrange text-white font-bold rounded-xl text-xs shadow-md hover:brightness-95 transition flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Carrusel con IA (5 Láminas)
+                </button>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <!-- Carrusel Día 5 -->
-                <div class="lg:col-span-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="flex items-center justify-between border-b pb-3 border-slate-100">
-                        <div class="flex items-center gap-2">
-                            <span class="w-8 h-8 rounded-xl bg-[#00A3E0] text-[#0B2545] font-bold font-display flex items-center justify-center text-sm">D5</span>
-                            <div>
-                                <h3 class="font-display font-bold text-base text-[#0B2545]">Día 5: Carrusel de Lanzamiento</h3>
-                                <p class="text-[11px] text-slate-500">Post Instagram (4:5)</p>
-                            </div>
-                        </div>
-                        <span class="px-2.5 py-1 bg-cyan-100 text-[#0B2545] font-bold rounded-full text-[10px]">REVELACIÓN</span>
+                <!-- Preview de la lámina actual del carrusel -->
+                <div class="lg:col-span-5 flex flex-col items-center gap-3">
+                    <div class="w-full max-w-[280px]">
+                        <div id="carousel-preview" class="insta-slide-aspect rounded-2xl overflow-hidden shadow-2xl relative border-4 border-slate-900 fade-in"></div>
                     </div>
-
-                    <div class="p-4 bg-slate-50 border rounded-xl text-xs space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-[#0B2545]">Caption del Carrusel Principal:</span>
-                            <button onclick="copyToClipboardText(document.getElementById('caption-d5').innerText)" class="px-2 py-1 bg-[#00A3E0] text-[#0B2545] font-bold rounded text-[10px]"><i class="fa-solid fa-copy"></i> Copiar</button>
-                        </div>
-                        <div id="caption-d5" class="text-slate-600 text-[11px] leading-relaxed whitespace-pre-line font-mono">🩺 ¡Llegó el Plan de Salud Preventiva de Guaros Vet!
-
-Durante años hemos visto lo mismo en consulta: mascotas que llegan en emergencia por algo que pudo detectarse a tiempo. Por eso creamos un plan anual que cuida a tu peludito ANTES de que se enferme.
-
-✅ Consultas de control programadas
-✅ Vacunación y desparasitación al día
-✅ Perfil de laboratorio inicial
-✅ Prioridad en agenda y seguimiento por WhatsApp
-
-🎁 Bono de apertura (solo primera cohorte): exoneración de inscripción + perfil de laboratorio inicial.
-
-Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
-📍 Carrera 17 entre 45 y 46, Barquisimeto, Lara</div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="moveCarouselSlide(-1)" class="px-3 py-1.5 bg-slate-200 text-[#0B2545] font-bold rounded-xl text-xs"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+                        <span id="carousel-counter" class="text-xs font-bold text-[#0B2545]">Lámina 1 de 5</span>
+                        <button onclick="moveCarouselSlide(1)" class="px-3 py-1.5 bg-slate-200 text-[#0B2545] font-bold rounded-xl text-xs">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
                     </div>
+                    <button onclick="downloadCarouselSlide()" class="w-full max-w-[280px] py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download text-sm"></i> Descargar Lámina HD (PNG)
+                    </button>
                 </div>
 
-                <!-- Día 6 al 8 -->
-                <div class="lg:col-span-6 space-y-4">
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                        <span class="px-2.5 py-0.5 bg-orange-100 text-orange-800 font-bold rounded-full text-[10px]">DÍAS 6 Y 7</span>
-                        <h4 class="font-display font-bold text-sm text-[#0B2545]">Explicación de Facilidades de Pago & Preguntas</h4>
-                        <p class="text-xs text-slate-600">Graba un Reel corto mostrando cómo el plan de salud permite fraccionar la inversión y resolver las dudas más frecuentes sobre si aplica para cachorros o adultos.</p>
+                <!-- Editor de textos del carrusel -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b pb-3">
+                        <h3 id="carousel-slide-title" class="font-display font-bold text-base text-[#0B2545]">Lámina 1: Gancho</h3>
+                        <span id="carousel-tag" class="px-2.5 py-0.5 bg-cyan-100 text-[#0B2545] font-bold rounded-full text-[10px]">PORTADA</span>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                        <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 font-bold rounded-full text-[10px]">DÍA 8</span>
-                        <h4 class="font-display font-bold text-sm text-[#0B2545]">Prueba Social & Primeros Inscritos</h4>
-                        <p class="text-xs text-slate-600">Muestra en Stories las fotos de las primeras mascotas que se unieron a la primera cohorte (con permiso del tutor) para generar confianza comunitaria.</p>
+                    <div class="space-y-3">
+                        <label class="text-[11px] font-semibold text-slate-600 block">Kicker / Categoría superior
+                            <input id="c-kicker" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                        <label class="text-[11px] font-semibold text-slate-600 block">Titular principal (Fredoka)
+                            <textarea id="c-title" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl text-sm font-display"></textarea>
+                        </label>
+                        <label class="text-[11px] font-semibold text-slate-600 block">Texto secundario o viñetas
+                            <textarea id="c-sub" rows="3" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs"></textarea>
+                        </label>
                     </div>
+
+                    <div class="p-3 bg-slate-50 border rounded-xl space-y-1">
+                        <p class="font-bold text-[11px] text-[#0B2545]"><i class="fa-solid fa-lightbulb text-orange-500"></i> Instrucción de diseño en Canva:</p>
+                        <p id="c-note" class="text-[11px] text-slate-600"></p>
+                    </div>
+
+                    <button onclick="copyCarouselCaption()" class="w-full py-2.5 bg-[#0B2545] text-white font-bold rounded-xl text-xs hover:opacity-90"><i class="fa-solid fa-copy"></i> Copiar Caption completo para el Post</button>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 4: FASE 3 - CIERRE & WHATSAPP (DÍAS 9-14) -->
+        <!-- TAB 4: FASE 3 - CIERRE & WHATSAPP -->
         <section id="tab-phase3" class="tab-content space-y-6 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
@@ -300,7 +311,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Central de Cierre por WhatsApp (Días 9 al 14)</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Administra la escasez de cupos y realiza seguimiento 1 a 1 para asegurar la conversión.
+                        Controla los cupos de la cohorte y envía mensajes de seguimiento personalizados.
                     </p>
                 </div>
             </div>
@@ -364,7 +375,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Banco de Marca y Activos</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Logos oficiales limpios, paleta corporativa y acceso a tus recursos gráficos.
+                        Logos oficiales limpios y paleta corporativa.
                     </p>
                 </div>
             </div>
@@ -392,7 +403,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
         Guaros Vet · Carrera 17 entre 45 y 46, Barquisimeto, Lara · 0426-1601079 · @mv.carlosriguez
     </footer>
 
-    <!-- Toast de Notificación -->
+    <!-- Toast -->
     <div id="toast" class="fixed bottom-6 left-1/2 z-[70] px-4 py-2.5 bg-[#0B2545] text-white text-xs font-bold rounded-xl shadow-xl opacity-0 pointer-events-none transition-all" style="transform: translate(-50%, 12px);">
         <i class="fa-solid fa-check text-emerald-400"></i> <span id="toast-msg">¡Copiado!</span>
     </div>
@@ -401,7 +412,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
     <script>
         const WA_NUMBER = '584261601079';
 
-        // DATOS DE PLANES OFICIALES SEGÚN PDF
+        // PLANES OFICIALES SEGÚN PDF
         const PLANS = [
             { id: 'cachorro', category: 'preventiva', name: 'Guaros Puppy (1er Año)', icon: 'fa-dog', color: '#00A3E0', stage: '2 a 12 meses', price: 160, items: ['1 puppy, 4 séxtuples y 2 antirrábicas', 'Desparasitaciones y controles', 'Ajuste de precio para pacientes >10kg'] },
             { id: 'adulto', category: 'preventiva', name: 'Guaros Adulto (1-6 Años)', icon: 'fa-shield-dog', color: '#0B2545', stage: '1 a 6 años', price: 90, items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta de control'] },
@@ -422,10 +433,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
         function renderPlans(filter = 'all') {
             const grid = document.getElementById('plans-grid');
             const filtered = filter === 'all' ? PLANS : PLANS.filter(p => p.category === filter);
-
-            grid.innerHTML = filtered.map(p => {
-                const currentPrice = getPrice(p);
-                return `
+            grid.innerHTML = filtered.map(p => `
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition hover:shadow-md">
                     <div class="p-4 text-white flex items-center justify-between" style="background:${p.color}">
                         <div>
@@ -437,7 +445,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
                     <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
                         <div>
                             <label class="text-[10px] text-slate-400 font-bold uppercase">Precio Oficial (USD)</label>
-                            <div class="flex items-center gap-1 font-display font-bold text-3xl text-[#0B2545]">$<input type="number" min="0" value="${currentPrice}" onchange="updatePrice('${p.id}', this.value)" class="w-28 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]"></div>
+                            <div class="flex items-center gap-1 font-display font-bold text-3xl text-[#0B2545]">$<input type="number" min="0" value="${getPrice(p)}" onchange="updatePrice('${p.id}', this.value)" class="w-28 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]"></div>
                         </div>
                         <ul class="text-[11px] text-slate-600 space-y-1.5 flex-1">${p.items.map(i => `<li class="flex gap-2"><i class="fa-solid fa-check text-[#00A3E0] mt-0.5"></i>${esc(i)}</li>`).join('')}</ul>
                         <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
@@ -445,8 +453,7 @@ Escribe PLAN por DM o WhatsApp 0426-1601079 🐾
                             <button onclick="sendPlanWhatsApp('${p.id}')" class="px-2 py-2 bg-[#25D366] text-white font-bold rounded-xl text-[11px] hover:brightness-95 transition"><i class="fa-brands fa-whatsapp"></i> Enviar WA</button>
                         </div>
                     </div>
-                </div>`;
-            }).join('');
+                </div>`).join('');
         }
 
         function filterPlans(cat) {
@@ -481,8 +488,194 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
         function copyPlanCard(id) { copyToClipboardText(planText(id)); }
         function sendPlanWhatsApp(id) { openWhatsApp(planText(id), WA_NUMBER); }
 
-        // GESTIÓN DE TABS (5 PESTAÑAS)
-        const TABS = ['plans', 'stories', 'phase2', 'phase3', 'brand'];
+        // MOTOR IA DE STORIES (14 DÍAS)
+        let STORIES = Array.from({length: 14}, (_, i) => ({
+            phase: i < 4 ? 1 : i < 8 ? 2 : 3,
+            title: `Día ${i + 1} de Campaña`,
+            headline: `¿Sabías que un chequeo a tiempo salva la vida de tu mascota? 🩺`,
+            body: `Evita emergencias costosas con nuestro Plan de Salud Preventiva en Guaros Vet.`,
+            cta: `Escríbenos por WhatsApp`,
+            bg: i % 2 === 0 ? 'navy' : 'light',
+            visual: `Selfie o video corto en consultorio explicando el beneficio del día ${i + 1}.`
+        }));
+
+        function generateAllStoriesAI() {
+            const hooksAI = [
+                "Si crees que con una sola vacuna tu cachorro ya está protegido, mira esto 🛑",
+                "El error #1 que cometen los dueños de mascotas en Barquisimeto 🐾",
+                "¿Cuánto gastas al año en emergencias veterinarias por no prevenir? 📉",
+                "Llegó el momento de cuidar a tu peludito como se merece ⭐",
+                "¡Lanzamiento Oficial! Conoce el Plan de Salud Preventiva Guaros Vet 🎉",
+                "Paga cómodo y sin sustos de medianoche con nuestras cuotas quincenales QUO 💳",
+                "¿Tienes dudas sobre el plan? Aquí te las respondo todas en 1 minuto ❓",
+                "¡Primeras mascotas inscritas en la cohorte! Únete tú también 🐶",
+                "Estoy respondiendo todas sus dudas por WhatsApp uno a uno 📲",
+                "Testimonio real: 'Ahora sé exactamente cuándo le toca su control' 💙",
+                "¡Últimos cupos disponibles con el bono de apertura en Guaros Vet! 🚨",
+                "¿Aplica para cachorros y adultos? Te explico cómo funciona 🩺",
+                "HOY cerramos oficialmente las inscripciones de la cohorte ⏰",
+                "¡Gracias, Barquisimeto! Primera cohorte completa con éxito 🐾"
+            ];
+            STORIES = STORIES.map((s, i) => ({
+                ...s,
+                headline: hooksAI[i] || s.headline,
+                body: `Estrategia IA Día ${i + 1}: Enfoque en educación y prevención veterinaria sin margen de error.`
+            }));
+            renderDayPicker();
+            renderStory();
+            showToast('¡14 Stories generadas con IA exitosamente!');
+        }
+
+        let currentDay = 1, storyEdits = {};
+
+        function renderDayPicker() {
+            document.getElementById('day-picker').innerHTML = STORIES.map((s, i) => {
+                const d = i + 1, active = d === currentDay;
+                return `<button onclick="selectDay(${d})" class="h-10 rounded-xl font-display font-bold text-xs transition border-2 ${active ? 'bg-[#00A3E0] text-[#0B2545] border-[#00A3E0] shadow-md' : 'bg-white text-[#0B2545] border-slate-200'}">${d}</button>`;
+            }).join('');
+        }
+
+        function selectDay(d) { currentDay = d; renderDayPicker(); renderStory(); }
+
+        function renderStory() {
+            const s = Object.assign({}, STORIES[currentDay - 1], storyEdits[currentDay] || {});
+            document.getElementById('story-title').textContent = s.title;
+            document.getElementById('story-headline').value = s.headline;
+            document.getElementById('story-body').value = s.body;
+            document.getElementById('story-cta').value = s.cta;
+            document.getElementById('story-bg').value = s.bg;
+            document.getElementById('story-visual').textContent = s.visual;
+            const p = document.getElementById('story-preview');
+            p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 guaros-bubbles-bg text-white p-6 flex flex-col justify-between text-center`;
+            p.innerHTML = `<div class="font-display font-bold text-lg">${esc(s.headline)}</div><div class="text-xs opacity-90">${esc(s.body)}</div><div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold">${esc(s.cta)}</div>`;
+        }
+
+        function onStoryEdit() {
+            storyEdits[currentDay] = { headline: document.getElementById('story-headline').value, body: document.getElementById('story-body').value, cta: document.getElementById('story-cta').value, bg: document.getElementById('story-bg').value };
+            renderStory();
+        }
+
+        function downloadStoryImage() {
+            const elem = document.getElementById('story-preview');
+            showToast('Generando PNG HD...');
+            html2canvas(elem, { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `story-guaros-vet-dia-${currentDay}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('¡Imagen descargada!');
+            });
+        }
+
+        // MOTOR IA DE CAROUSEL (5 LÁMINAS)
+        let CAROUSEL_SLIDES = [
+            { kicker: 'NUEVO LANZAMIENTO', title: 'Plan de Salud Preventiva Guaros Vet', sub: 'Cuidamos a tu peludito antes de que aparezca una emergencia 🩺', note: 'Portada oficial con logo y colores corporativos.' },
+            { kicker: 'EL PROBLEMA', title: 'Las emergencias llegan sin avisar', sub: 'Y casi siempre a medianoche, con altos costos en clínicas.', note: 'Foto en consulta expresando preocupación.' },
+            { kicker: 'LA SOLUCIÓN', title: 'Todo lo que necesita en un solo plan', sub: '✅ Vacunas al día\n✅ Consultas de control\n✅ Perfil de laboratorio', note: 'Listado con íconos de check limpios.' },
+            { kicker: 'BENEFICIO EXCLUSIVO', title: 'Bono de apertura primera cohorte', sub: 'Inscripción exonerada + perfil de laboratorio inicial gratis.', note: 'Destacar la oferta con degradado atardecer.' },
+            { kicker: 'LLAMADO A LA ACCIÓN', title: 'Cupos limitados en Barquisimeto', sub: 'Escribe PLAN al DM o WhatsApp 0426-1601079', note: 'CTA directo y datos de contacto.' }
+        ];
+        let currentCarouselIdx = 0;
+
+        function generateCarouselAI() {
+            const topic = document.getElementById('carousel-topic').value;
+            if(topic === 'preventivo') {
+                CAROUSEL_SLIDES = [
+                    { kicker: 'SALUD PREVENTIVA', title: '¿Tu perro está realmente protegido?', sub: 'Un esquema incompleto deja vulnerable a tu cachorro frente a virus letales.', note: 'Portada con gancho fuerte.' },
+                    { kicker: 'EL ESQUEMA REAL', title: '1 Puppy + 4 Séxtuples + 2 Antirrábicas', sub: 'El protocolo clínico exacto que garantiza inmunidad sólida.', note: 'Diseño limpio con números grandes.' },
+                    { kicker: 'BENEFICIOS', title: 'Tranquilidad todo el año', sub: 'Consultas programadas y prioridad en nuestra agenda.', note: 'Gráfico de beneficios.' },
+                    { kicker: 'FACILIDADES', title: 'Págalo en cómodas cuotas', sub: 'Alianza QUO para fraccionar tu inversión sin presiones.', note: 'Mención de la app QUO.' },
+                    { kicker: 'ACTÍVALO HOY', title: 'Asegura el cupo de tu mascota', sub: 'Escribe PLAN al WhatsApp 0426-1601079', note: 'Cierre con datos de contacto.' }
+                ];
+            } else if(topic === 'emergencias') {
+                CAROUSEL_SLIDES = [
+                    { kicker: 'ALERTA VETERINARIA', title: '¿Por qué las emergencias ocurren de noche?', sub: 'Los síntomas silenciosos que ignoramos durante el día.', note: 'Portada llamativa.' },
+                    { kicker: 'LA REALIDAD', title: 'Prevenir es 5 veces más económico', sub: 'Una hospitalización imprevista desajusta cualquier presupuesto familiar.', note: 'Comparativa de costos.' },
+                    { kicker: 'LA ALTERNATIVA', title: 'Chequeos preventivos programados', sub: 'Detectamos anomalías a tiempo en el consultorio.', note: 'Enfoque profesional.' },
+                    { kicker: 'NUESTRO PLAN', title: 'Tu año de salud blindado', sub: 'Asesoría continua con el Dr. Carlos Enrique Rodríguez.', note: 'Autoridad médica.' },
+                    { kicker: 'TOMA ACCIÓN', title: 'No esperes al susto', sub: 'Escribe PLAN al WhatsApp 0426-1601079', note: 'Cierre comercial.' }
+                ];
+            } else {
+                CAROUSEL_SLIDES = [
+                    { kicker: 'FINANCIAMIENTO', title: 'Protege a tu mascota hoy y paga en cuotas', sub: 'Gracias a nuestra alianza QUO, la salud animal es accesible.', note: 'Portada financiera.' },
+                    { kicker: 'CÓMO FUNCIONA', title: 'Cuotas quincenales sin complicaciones', sub: 'Olvídate de pagos gigantescos de un solo golpe.', note: 'Explicación clara.' },
+                    { kicker: 'LO QUE INCLUYE', title: 'Vacunas, consultas y laboratorio', sub: 'Todo cubierto bajo un modelo de suscripción inteligente.', note: 'Detalle de servicios.' },
+                    { kicker: 'BONO ESPECIAL', title: 'Inscripción gratis hoy', sub: 'Beneficio exclusivo para los primeros inscritos.', note: 'Urgencia y escasez.' },
+                    { kicker: 'ESCRÍBENOS', title: 'Activa tu plan ahora', sub: 'WhatsApp: 0426-1601079 · Barquisimeto', note: 'Cierre directo.' }
+                ];
+            }
+            currentCarouselIdx = 0;
+            renderCarouselSlide();
+            showToast('¡Carrusel de 5 láminas generado con IA!');
+        }
+
+        function renderCarouselSlide() {
+            const s = CAROUSEL_SLIDES[currentCarouselIdx];
+            document.getElementById('carousel-counter').textContent = `Lámina ${currentCarouselIdx + 1} de 5`;
+            document.getElementById('carousel-slide-title').textContent = `Lámina ${currentCarouselIdx + 1}: ${s.kicker}`;
+            document.getElementById('c-kicker').value = s.kicker;
+            document.getElementById('c-title').value = s.title;
+            document.getElementById('c-sub').value = s.sub;
+            document.getElementById('c-note').textContent = s.note;
+
+            const p = document.getElementById('carousel-preview');
+            p.className = `insta-slide-aspect rounded-2xl overflow-hidden shadow-lg relative guaros-bubbles-bg text-white p-6 flex flex-col justify-between`;
+            p.innerHTML = `
+                <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-widest text-cyan-300">
+                    <span>${esc(s.kicker)}</span>
+                    <span>${currentCarouselIdx + 1}/5</span>
+                </div>
+                <div class="space-y-2 text-center">
+                    <div class="font-display font-bold text-xl leading-tight">${esc(s.title)}</div>
+                    <div class="text-[11px] text-slate-200 whitespace-pre-line">${esc(s.sub)}</div>
+                </div>
+                <div class="text-center text-[10px] text-slate-400">Guaros Vet · Barquisimeto</div>`;
+        }
+
+        function moveCarouselSlide(d) {
+            currentCarouselIdx = (currentCarouselIdx + d + CAROUSEL_SLIDES.length) % CAROUSEL_SLIDES.length;
+            renderCarouselSlide();
+        }
+
+        function onCarouselEdit() {
+            CAROUSEL_SLIDES[currentCarouselIdx] = {
+                kicker: document.getElementById('c-kicker').value,
+                title: document.getElementById('c-title').value,
+                sub: document.getElementById('c-sub').value,
+                note: document.getElementById('c-note').textContent
+            };
+            renderCarouselSlide();
+        }
+
+        function downloadCarouselSlide() {
+            const elem = document.getElementById('carousel-preview');
+            showToast('Generando lámina PNG...');
+            html2canvas(elem, { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `carrusel-guaros-vet-lamina-${currentCarouselIdx + 1}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('¡Lámina descargada!');
+            });
+        }
+
+        function copyCarouselCaption() {
+            const caption = `🩺 ¡Nuevo Lanzamiento en Guaros Vet!
+
+${CAROUSEL_SLIDES.map((s, i) => `${i + 1}️⃣ ${s.title}\n${s.sub}`).join('\n\n')}
+
+🎁 Bono de apertura para la primera cohorte: inscripción exonerada + perfil de laboratorio inicial.
+💳 Facilidades de pago en cuotas quincenales con QUO.
+
+Escribe PLAN al DM o WhatsApp 0426-1601079 🐾
+📍 Carrera 17 entre 45 y 46, Barquisimeto, Lara
+
+#GuarosVet #Barquisimeto #VeterinarioBarquisimeto #SaludPreventiva #Lara`;
+            copyToClipboardText(caption);
+        }
+
+        // GESTIÓN DE TABS
+        const TABS = ['plans', 'stories', 'carousel', 'phase3', 'brand'];
         function switchTab(tab) {
             TABS.forEach(t => {
                 document.getElementById('tab-' + t).classList.toggle('hidden', t !== tab);
@@ -498,54 +691,6 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
             });
             document.getElementById('mobile-nav').value = tab;
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // STORIES & OBJECTIONS SETUP
-        const STORIES = Array.from({length: 14}, (_, i) => ({
-            phase: i < 4 ? 1 : i < 8 ? 2 : 3,
-            title: `Día ${i + 1} de Campaña`,
-            headline: `¡Protege a tu mascota con Guaros Vet! 🐾`,
-            body: `Conoce nuestros planes preventivos diseñados para cada etapa de su vida en Barquisimeto.`,
-            cta: `Escríbenos por WhatsApp`,
-            bg: i % 2 === 0 ? 'navy' : 'light',
-            visual: `Foto clínica o video explicativo del día ${i + 1}.`
-        }));
-        let currentDay = 1, storyEdits = {};
-
-        function renderDayPicker() {
-            document.getElementById('day-picker').innerHTML = STORIES.map((s, i) => {
-                const d = i + 1, active = d === currentDay;
-                return `<button onclick="selectDay(${d})" class="h-10 rounded-xl font-display font-bold text-xs transition border-2 ${active ? 'bg-[#00A3E0] text-[#0B2545] border-[#00A3E0] shadow-md' : 'bg-white text-[#0B2545] border-slate-200'}">${d}</button>`;
-            }).join('');
-        }
-        function selectDay(d) { currentDay = d; renderDayPicker(); renderStory(); }
-        function renderStory() {
-            const s = Object.assign({}, STORIES[currentDay - 1], storyEdits[currentDay] || {});
-            document.getElementById('story-title').textContent = s.title;
-            document.getElementById('story-headline').value = s.headline;
-            document.getElementById('story-body').value = s.body;
-            document.getElementById('story-cta').value = s.cta;
-            document.getElementById('story-bg').value = s.bg;
-            document.getElementById('story-visual').textContent = s.visual;
-            const p = document.getElementById('story-preview');
-            p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 guaros-bubbles-bg text-white p-6 flex flex-col justify-between text-center`;
-            p.innerHTML = `<div class="font-display font-bold text-lg">${esc(s.headline)}</div><div class="text-xs opacity-90">${esc(s.body)}</div><div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold">${esc(s.cta)}</div>`;
-        }
-        function onStoryEdit() {
-            storyEdits[currentDay] = { headline: document.getElementById('story-headline').value, body: document.getElementById('story-body').value, cta: document.getElementById('story-cta').value, bg: document.getElementById('story-bg').value };
-            renderStory();
-        }
-
-        function downloadStoryImage() {
-            const elem = document.getElementById('story-preview');
-            showToast('Generando imagen PNG...');
-            html2canvas(elem, { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `story-guaros-vet-dia-${currentDay}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                showToast('¡Imagen descargada!');
-            });
         }
 
         // UTILS
@@ -564,19 +709,22 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
             renderPlans();
             renderDayPicker();
             renderStory();
+            renderCarouselSlide();
+
             ['story-headline', 'story-body', 'story-cta', 'story-bg'].forEach(id => document.getElementById(id).addEventListener('input', onStoryEdit));
-            
+            ['c-kicker', 'c-title', 'c-sub'].forEach(id => document.getElementById(id).addEventListener('input', onCarouselEdit));
+
             document.getElementById('wa-tutor').addEventListener('input', () => {
                 const tutor = document.getElementById('wa-tutor').value || 'Amigo(a)';
                 const pet = document.getElementById('wa-pet').value || 'tu mascota';
                 document.getElementById('script-wa-fase3').textContent = `¡Hola ${tutor}! Te escribo de Guaros Vet para recordarte el plan de salud preventivo para ${pet}. Quedan pocos cupos con el bono de apertura. ¿Te ayudo a activarlo hoy?`;
             });
             document.getElementById('script-wa-fase3').textContent = `¡Hola! Te escribo de Guaros Vet para recordarte el plan de salud preventivo. Quedan pocos cupos con el bono de apertura. ¿Te ayudo a activarlo hoy?`;
-            
+
             document.getElementById('objections').innerHTML = `
                 <div class="p-3 bg-slate-50 border rounded-xl text-xs space-y-1"><strong>"Está muy caro"</strong><br>Recuérdales que prevenir enfermedades letales siempre es más económico que una terapia intensiva de emergencia.</div>
                 <div class="p-3 bg-slate-50 border rounded-xl text-xs space-y-1"><strong>"Mi mascota se ve sana"</strong><br>Explícales que los virus no avisan y el esquema completo (1 puppy, 4 séxtuples y 2 antirrábicas) la mantiene inmunizada todo el año.</div>`;
-            
+
             document.getElementById('palette').innerHTML = `
                 <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#0B2545] mb-2"></div><p class="text-xs font-bold">Azul Navy</p><p class="text-[10px] font-mono text-slate-500">#0B2545</p></div>
                 <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#00A3E0] mb-2"></div><p class="text-xs font-bold">Cian Guaros</p><p class="text-[10px] font-mono text-slate-500">#00A3E0</p></div>
