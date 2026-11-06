@@ -1,322 +1,498 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guaros Vet Suite | Panel de Gestión y Marca</title>
+    <title>Guaros Vet Suite | Panel de Gestión y Marketing</title>
+    <meta name="description" content="Suite digital de Guaros Vet (Barquisimeto, Lara): estrategia de lanzamiento, generador de Stories, catálogo completo de planes preventivos y estética canina/felina.">
+    <link rel="icon" type="image/png" href="img/guaros-vet-logo.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- html2canvas para generación y descarga real de imágenes HD -->
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Fredoka', 'sans-serif'],
-                    },
                     colors: {
-                        vetBlue: '#0284c7',
-                        vetDark: '#0f172a',
-                        vetGreen: '#10b981',
+                        brandNavy: 'var(--color-navy, #0B2545)',
+                        brandCyan: 'var(--color-cyan, #00A3E0)',
+                        brandOrange: 'var(--color-orange, #FF7A00)',
+                        brandPurple: 'var(--color-purple, #8E24AA)',
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
                     }
                 }
             }
         }
     </script>
+    <style>
+        :root {
+            --color-navy: #0B2545;
+            --color-cyan: #00A3E0;
+            --color-orange: #FF7A00;
+            --color-purple: #8E24AA;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #F4F6F9; }
+        .font-display { font-family: 'Fredoka', sans-serif; }
+        .insta-slide-aspect { aspect-ratio: 4 / 5; }
+        .insta-story-aspect { aspect-ratio: 9 / 16; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--color-cyan); border-radius: 4px; }
+        .guaros-bubbles-bg {
+            background-color: var(--color-navy);
+            background-image:
+                radial-gradient(circle at 15% 20%, transparent 20px, var(--color-cyan) 21px, var(--color-cyan) 32px, transparent 33px),
+                radial-gradient(circle at 85% 15%, transparent 25px, #ffffff 26px, #ffffff 40px, transparent 41px),
+                radial-gradient(circle at 50% 85%, var(--color-cyan) 0, var(--color-cyan) 60px, transparent 61px);
+        }
+        .guaros-bubbles-light {
+            background-color: #E2E8F0;
+            background-image:
+                radial-gradient(circle at 10% 30%, transparent 25px, var(--color-cyan) 26px, var(--color-cyan) 40px, transparent 41px),
+                radial-gradient(circle at 90% 20%, transparent 30px, #ffffff 31px, #ffffff 50px, transparent 51px);
+        }
+        .sunset-gradient { background: linear-gradient(160deg, #6B4FA0 0%, var(--color-purple) 25%, var(--color-orange) 70%, #FFB347 100%); }
+        .toast-show { opacity: 1 !important; transform: translate(-50%, 0) !important; }
+        .fade-in { animation: fadeIn .25s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 h-full font-sans antialiased selection:bg-vetBlue selection:text-white">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <div class="min-h-full flex flex-col">
-        <!-- HEADER -->
-        <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-vetBlue flex items-center justify-center font-heading text-xl font-bold shadow-lg shadow-vetBlue/30 text-white">GV</div>
-                    <div>
-                        <h1 class="font-heading font-bold text-lg text-white tracking-wide">Guaros Vet Suite</h1>
-                        <p class="text-xs text-slate-400">Dr. Carlos Enrique Rodríguez • Barquisimeto</p>
-                    </div>
+    <!-- HEADER / NAVEGACIÓN ESTÉTICA -->
+    <header class="bg-brandNavy text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 flex items-center justify-center relative overflow-hidden bg-white rounded-full p-0.5 shadow-inner">
+                    <img src="img/guaros-vet-logo.png" alt="Guaros Vet Logo" class="max-w-full max-h-full object-contain scale-[1.5]" onerror="this.src='img/guaros-vet-logo.png'">
                 </div>
-                <!-- NAVIGATION TABS -->
-                <nav class="flex space-x-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
-                    <button onclick="switchTab('brand')" id="tab-brand" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-semibold bg-vetBlue text-white shadow-md transition">Banco de Marca</button>
-                    <button onclick="switchTab('ig')" id="tab-ig" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Generador IG & IA</button>
-                    <button onclick="switchTab('plans')" id="tab-plans" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Planes & Cuotas</button>
-                </nav>
+                <div>
+                    <h1 class="font-display font-bold text-lg tracking-wide flex items-center gap-2">
+                        <span>GUAROS VET</span>
+                        <span class="text-[9px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Suite Pro</span>
+                    </h1>
+                    <p class="text-[10px] text-slate-300 hidden sm:block">Barquisimeto, Lara · Dr. Carlos Enrique Rodríguez</p>
+                </div>
             </div>
-        </header>
 
-        <!-- MAIN CONTAINER -->
-        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            <!-- Navegación Minimalista -->
+            <nav class="hidden md:flex space-x-1">
+                <button onclick="switchTab('plans')" id="nav-plans" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 bg-brandCyan text-brandNavy font-bold shadow-md">
+                    <i class="fa-solid fa-layer-group"></i> Catálogo de Planes
+                </button>
+                <button onclick="switchTab('stories')" id="nav-stories" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-circle-play text-cyan-400"></i> Stories & IA
+                </button>
+                <button onclick="switchTab('phase3')" id="nav-phase3" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-bullseye text-orange-300"></i> Cierre & WA
+                </button>
+                <button onclick="switchTab('brand')" id="nav-brand" class="nav-btn px-3 py-2 rounded-xl font-medium text-xs transition-all flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-palette"></i> Banco de Marca
+                </button>
+            </nav>
 
-            <!-- SECCIÓN 1: BANCO DE BRANDING & IDENTIDAD VISUAL (Página Inicial) -->
-            <section id="sec-brand" class="tab-content space-y-6">
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
-                    <div class="flex items-center justify-between mb-6">
+            <!-- Menú Móvil -->
+            <div class="md:hidden">
+                <select id="mobile-nav" onchange="switchTab(this.value)" class="bg-slate-800 text-white text-xs px-3 py-2 rounded-xl border border-slate-700 font-medium focus:outline-none">
+                    <option value="plans">🏷️ Catálogo de Planes</option>
+                    <option value="stories">📱 Generador Stories</option>
+                    <option value="phase3">🎯 Cierre y WhatsApp</option>
+                    <option value="brand">🎨 Banco de Marca</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+
+        <!-- TAB 1: PLANES Y COTIZADOR (Oficial según PDF) -->
+        <section id="tab-plans" class="tab-content space-y-6">
+            <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
+                <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brandCyan text-brandNavy font-bold rounded-full text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-shield-dog"></i> Módulo Comercial & Clínico
+                    </span>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Catálogo Oficial de Planes Guaros Vet</h2>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        Modifica los precios y valores en tiempo real. Envía fichas limpias y estéticas directamente a tus clientes por WhatsApp con un solo clic.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Filtros por categoría -->
+            <div class="flex flex-wrap gap-2 items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                <span class="text-xs font-bold text-[#0B2545] mr-2"><i class="fa-solid fa-filter text-[#00A3E0]"></i> Filtrar categoría:</span>
+                <button onclick="filterPlans('all')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-[#0B2545] text-white transition">Todos</button>
+                <button onclick="filterPlans('preventiva')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Preventiva</button>
+                <button onclick="filterPlans('felina')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Felina</button>
+                <button onclick="filterPlans('maternidad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Maternidad</button>
+                <button onclick="filterPlans('estetica')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Estética Canina (Razas)</button>
+                <button onclick="filterPlans('seguridad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Identificación y Seguridad</button>
+            </div>
+
+            <!-- Grid de Planes -->
+            <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- TAB 2: STORIES & IA -->
+        <section id="tab-stories" class="tab-content space-y-6 hidden">
+            <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
+                <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brandCyan text-brandNavy font-bold rounded-full text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-circle-play"></i> Generador de Historias IG
+                    </span>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Calendario de 14 Días para Instagram</h2>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        Previsualiza, edita y descarga tus historias en formato PNG con calidad profesional listas para Canva o tu teléfono.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-bold text-xs text-[#0B2545]">Selecciona el día de campaña</p>
+                    <p class="text-[11px] text-slate-500"><span id="stories-done-count">0</span>/14 publicadas</p>
+                </div>
+                <div id="day-picker" class="grid grid-cols-7 sm:grid-cols-14 gap-2"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-4 flex flex-col items-center gap-3">
+                    <div class="w-full max-w-[280px]">
+                        <div id="story-preview" class="insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 fade-in"></div>
+                    </div>
+                    <button onclick="downloadStoryImage()" class="w-full max-w-[280px] py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download text-sm"></i> Descargar Story (PNG HD)
+                    </button>
+                </div>
+
+                <div class="lg:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-start justify-between gap-3 border-b pb-3 border-slate-100">
                         <div>
-                            <h2 class="font-heading text-2xl font-bold text-white">Banco de Marca e Identidad Visual</h2>
-                            <p class="text-sm text-slate-400">Genera, previsualiza y descarga los recursos gráficos oficiales de Guaros Vet en Alta Definición.</p>
+                            <p id="story-phase" class="text-[10px] font-bold uppercase tracking-wider"></p>
+                            <h3 id="story-title" class="font-display font-bold text-lg text-[#0B2545]"></h3>
                         </div>
+                        <label class="flex items-center gap-2 text-[11px] font-semibold text-slate-600 cursor-pointer shrink-0">
+                            <input type="checkbox" id="story-done" class="w-4 h-4 accent-emerald-600"> Publicada
+                        </label>
                     </div>
 
-                    <!-- CARDS DE MARCA -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- LOGO OFICIAL (FONDO BLANCO) -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-vetBlue/50 transition shadow-lg">
-                            <div>
-                                <div id="asset-logo-white" class="bg-white rounded-xl p-6 flex flex-col items-center justify-center h-44 mb-4 shadow-inner">
-                                    <div class="w-14 h-14 rounded-2xl bg-[#0284c7] flex items-center justify-center font-heading text-2xl font-bold text-white mb-2 shadow-md">GV</div>
-                                    <span class="font-heading font-bold text-slate-900 text-2xl tracking-tight">GUAROS VET</span>
-                                    <span class="text-[10px] font-medium text-slate-500 uppercase tracking-widest mt-0.5">Clínica & Salud Preventiva</span>
-                                </div>
-                                <h3 class="font-semibold text-white mb-1">Logo Oficial (Fondo Blanco)</h3>
-                                <p class="text-xs text-slate-400 mb-4">PNG listo para membretes, presupuestos y consentimientos clínicos.</p>
-                            </div>
-                            <button onclick="downloadAsset('asset-logo-white', 'GuarosVet-Logo-Blanco.png')" class="w-full py-2.5 bg-vetBlue hover:bg-vetBlue/90 text-white font-medium rounded-lg text-sm transition shadow-md shadow-vetBlue/20 flex items-center justify-center space-x-2">
-                                <span>⬇ Descargar PNG HD</span>
-                            </button>
-                        </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <label class="text-[11px] font-semibold text-slate-600 sm:col-span-2">Titular de la Story
+                            <textarea id="story-headline" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl text-sm font-display"></textarea>
+                        </label>
+                        <label class="text-[11px] font-semibold text-slate-600 sm:col-span-2">Texto de apoyo
+                            <textarea id="story-body" rows="3" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs"></textarea>
+                        </label>
+                        <label class="text-[11px] font-semibold text-slate-600">Sticker / CTA
+                            <input id="story-cta" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                        <label class="text-[11px] font-semibold text-slate-600">Diseño de Fondo
+                            <select id="story-bg" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                                <option value="navy">Burbujas Navy</option>
+                                <option value="light">Burbujas Claro</option>
+                                <option value="sunset">Atardecer</option>
+                                <option value="urgent">Urgencia (Rojo)</option>
+                            </select>
+                        </label>
+                    </div>
 
-                        <!-- ISOTIPO TRANSPARENTE -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-vetBlue/50 transition shadow-lg">
-                            <div>
-                                <div id="asset-logo-dark" class="bg-slate-900 rounded-xl p-6 flex flex-col items-center justify-center h-44 mb-4 border border-dashed border-slate-700">
-                                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-vetBlue to-vetGreen flex items-center justify-center font-heading text-2xl font-bold text-white mb-2 shadow-lg shadow-vetBlue/30">GV</div>
-                                    <span class="font-heading font-bold text-white text-2xl tracking-tight">GUAROS VET</span>
-                                    <span class="text-[10px] font-medium text-vetGreen uppercase tracking-widest mt-0.5">Barquisimeto • Lara</span>
-                                </div>
-                                <h3 class="font-semibold text-white mb-1">Isotipo Corporativo (Fondo Oscuro)</h3>
-                                <p class="text-xs text-slate-400 mb-4">Optimizado para overlays de Reels, historias y contenido de Instagram.</p>
-                            </div>
-                            <button onclick="downloadAsset('asset-logo-dark', 'GuarosVet-Isotipo-Dark.png')" class="w-full py-2.5 bg-vetBlue hover:bg-vetBlue/90 text-white font-medium rounded-lg text-sm transition shadow-md shadow-vetBlue/20 flex items-center justify-center space-x-2">
-                                <span>⬇ Descargar PNG HD</span>
-                            </button>
-                        </div>
+                    <div class="p-3 bg-slate-50 border rounded-xl space-y-1">
+                        <p class="font-bold text-[11px] text-[#0B2545]"><i class="fa-solid fa-camera text-[#00A3E0]"></i> Indicación visual:</p>
+                        <p id="story-visual" class="text-[11px] text-slate-600"></p>
+                    </div>
 
-                        <!-- TARJETA DE PALETA & TIPOGRAFÍA -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-vetBlue/50 transition shadow-lg">
-                            <div>
-                                <h3 class="font-semibold text-white mb-3">Especificaciones de Marca</h3>
-                                <div class="space-y-3 mb-4">
-                                    <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-7 h-7 rounded bg-[#0284c7] shadow"></div>
-                                            <span class="text-xs text-slate-300 font-medium">Azul Clínico</span>
-                                        </div>
-                                        <span class="text-xs text-slate-500 font-mono">#0284C7</span>
-                                    </div>
-                                    <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-7 h-7 rounded bg-[#10b981] shadow"></div>
-                                            <span class="text-xs text-slate-300 font-medium">Verde Preventivo</span>
-                                        </div>
-                                        <span class="text-xs text-slate-500 font-mono">#10B981</span>
-                                    </div>
-                                </div>
-                                <div class="p-3 bg-slate-900 rounded-lg border border-slate-800 text-xs space-y-1">
-                                    <p class="text-slate-400"><strong class="text-white">Tipografía Primaria:</strong> Fredoka (Títulos)</p>
-                                    <p class="text-slate-400"><strong class="text-white">Tipografía Secundaria:</strong> Inter (Lectura)</p>
-                                </div>
-                            </div>
-                            <div class="mt-4 text-xs text-center text-vetGreen py-2 bg-vetGreen/10 rounded-lg border border-vetGreen/20 font-medium">
-                                ✓ Estándar de Agencia Validado
-                            </div>
-                        </div>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <button onclick="copyStory()" class="px-4 py-2 bg-[#0B2545] text-white font-bold rounded-xl text-xs hover:opacity-90"><i class="fa-solid fa-copy"></i> Copiar texto</button>
+                        <button onclick="resetStory()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs hover:bg-slate-200"><i class="fa-solid fa-rotate-left"></i> Restaurar</button>
+                        <button onclick="selectDay(Math.min(14, currentDay + 1))" class="px-4 py-2 bg-[#00A3E0] text-[#0B2545] font-bold rounded-xl text-xs hover:opacity-90 ml-auto">Siguiente día <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- SECCIÓN 2: GESTOR DE INSTAGRAM & MOTOR IA -->
-            <section id="sec-ig" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
-                    <div class="mb-6">
-                        <h2 class="font-heading text-2xl font-bold text-white">Gestor de Historias e Instagram (Motor IA)</h2>
-                        <p class="text-sm text-slate-400">Generador de copys persuasivos, ganchos de alta retención y estrategias por fases de lanzamiento.</p>
-                    </div>
+        <!-- TAB 3: CIERRE Y WHATSAPP -->
+        <section id="tab-phase3" class="tab-content space-y-6 hidden">
+            <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
+                <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600 text-white font-bold rounded-full text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-fire"></i> Fase de Conversión y Seguimiento
+                    </span>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Central de Cierre por WhatsApp</h2>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        Controla los cupos disponibles de tu cohorte y envía mensajes personalizados instantáneos a los tutores con botones directos.
+                    </p>
+                </div>
+            </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- MOTOR DE GANCHOS (HOOKS) -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-4">
-                            <h3 class="font-heading text-lg font-bold text-white flex items-center space-x-2">
-                                <span>⚡ Generador de Ganchos Virales</span>
-                            </h3>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-2">Selecciona la temática del post:</label>
-                                <select id="hook-topic" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-vetBlue">
-                                    <option value="puppy">Vacunación de Cachorros (Protocolo Real)</option>
-                                    <option value="emergency">Prevención de Urgencias Médicas</option>
-                                    <option value="quo">Financiamiento de Salud / Pagos Flexibles</option>
-                                </select>
-                            </div>
-                            <button onclick="generateHooks()" class="w-full py-2 bg-vetBlue hover:bg-vetBlue/90 text-white font-medium rounded-lg text-sm transition">
-                                Generar Ganchos de Alta Conversión
-                            </button>
-                            <div id="hook-output" class="p-4 bg-slate-900 rounded-xl border border-slate-800 min-h-[140px] text-xs space-y-3">
-                                <p class="text-slate-500 italic text-center pt-8">Selecciona un tema y presiona generar.</p>
-                            </div>
-                        </div>
-
-                        <!-- GENERADOR DE COPIES DE LANZAMIENTO -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-4">
-                            <h3 class="font-heading text-lg font-bold text-white">📝 Copy Estratégico para Instagram</h3>
-                            <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs leading-relaxed text-slate-300 relative font-sans">
-                                <div class="bg-vetBlue/20 text-vetBlue border border-vetBlue/30 px-2.5 py-1 rounded-md text-[10px] font-bold inline-block mb-3">
-                                    PRIMEROS 125 CARACTERES VISIBLES EN FEED
-                                </div>
-                                <p id="copy-text" class="whitespace-pre-line">¿Sabías que un esquema de vacunación incompleto deja indefenso a tu cachorro frente a virus letales? 🩺🐕
-
-En Guaros Vet diseñamos un protocolo preventivo estricto y sin margen de error: 1 dosis puppy, 4 séxtuples y 2 antirrábicas para garantizar una inmunidad sólida durante su primer año de vida. 
-
-La prevención es mil veces más económica que una emergencia en terapia intensiva. 
-
-📍 Estamos en Barquisimeto, Estado Lara. 
-👇 Escríbenos directamente al enlace de nuestro perfil para asegurar el cupo del plan de salud de tu peludito.
-
-#GuarosVet #MedicinaVeterinaria #Barquisimeto #SaludCanina #VeterinariosVenezuela</p>
-                            </div>
-                            <button onclick="copyToClipboard('copy-text')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg text-sm transition border border-slate-700">
-                                Copiar Copy al Portapapeles
-                            </button>
-                        </div>
+            <!-- Tracker de Cupos -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div class="flex-1">
+                    <p class="font-display font-bold text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-ticket text-orange-500"></i> Contador de cupos de la cohorte</p>
+                    <div class="mt-3 h-3 bg-slate-100 rounded-full overflow-hidden"><div id="cupos-bar" class="h-full bg-gradient-to-r from-[#00A3E0] via-orange-500 to-red-600 transition-all" style="width:0%"></div></div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <label class="text-[11px] text-slate-500">Total
+                        <input id="cupos-total" type="number" min="1" value="20" class="block w-16 mt-1 px-2 py-1 border rounded-xl text-sm font-bold text-[#0B2545]">
+                    </label>
+                    <label class="text-[11px] text-slate-500">Vendidos
+                        <input id="cupos-vendidos" type="number" min="0" value="16" class="block w-16 mt-1 px-2 py-1 border rounded-xl text-sm font-bold text-[#0B2545]">
+                    </label>
+                    <div class="text-center px-4 py-2 bg-orange-50 border border-orange-200 rounded-xl">
+                        <p class="font-display font-bold text-2xl text-orange-600" id="cupos-restantes">4</p>
+                        <p class="text-[10px] text-orange-800 font-bold uppercase">Restantes</p>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- SECCIÓN 3: PROTOCOLO CLÍNICO & CALCULADORA DE PLANES -->
-            <section id="sec-plans" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
-                    <div class="mb-6">
-                        <h2 class="font-heading text-2xl font-bold text-white">Catálogo de Salud Preventiva & Cotizador</h2>
-                        <p class="text-sm text-slate-400">Esquema médico oficial de cachorros y simulador financiero de cuotas.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-display font-bold text-base text-[#0B2545]">Generador de Script de Seguimiento 1:1</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="text-[11px] font-semibold text-slate-600">Nombre del tutor
+                            <input id="wa-tutor" type="text" placeholder="Ej. María" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                        <label class="text-[11px] font-semibold text-slate-600">Nombre de la mascota
+                            <input id="wa-pet" type="text" placeholder="Ej. Rocky" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
                     </div>
-
-                    <!-- PROTOCOLO CLÍNICO -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 mb-6">
-                        <h3 class="font-heading text-lg font-bold text-white mb-4">Protocolo de Salud Preventiva (Cachorros)</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 text-center">
-                                <span class="text-4xl font-heading font-bold text-vetBlue">1</span>
-                                <h4 class="font-semibold text-white mt-2">Dosis Puppy</h4>
-                                <p class="text-xs text-slate-400 mt-1">Inmunización temprana inicial</p>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 text-center">
-                                <span class="text-4xl font-heading font-bold text-vetGreen">4</span>
-                                <h4 class="font-semibold text-white mt-2">Dosis Séxtuples</h4>
-                                <p class="text-xs text-slate-400 mt-1">Protección sistémica completa</p>
-                            </div>
-                            <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 text-center">
-                                <span class="text-4xl font-heading font-bold text-amber-500">2</span>
-                                <h4 class="font-semibold text-white mt-2">Dosis Antirrábicas</h4>
-                                <p class="text-xs text-slate-400 mt-1">Refuerzo legal y sanitario</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-xs text-[#0B2545]">Mensaje listo para enviar:</span>
+                            <div class="flex gap-1.5">
+                                <button onclick="copyToClipboardText(document.getElementById('script-wa-fase3').innerText)" class="px-2.5 py-1 bg-emerald-600 text-white font-bold rounded-lg text-[10px] hover:bg-emerald-700"><i class="fa-solid fa-copy"></i> Copiar</button>
+                                <button onclick="openWhatsApp(document.getElementById('script-wa-fase3').innerText, WA_NUMBER)" class="px-2.5 py-1 bg-[#25D366] text-white font-bold rounded-lg text-[10px]"><i class="fa-brands fa-whatsapp"></i> Abrir WA</button>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- SIMULADOR FINANCIERO -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 space-y-4">
-                        <h3 class="font-heading text-lg font-bold text-white">Simulador de Cuotas & Financiamiento</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Monto Total del Plan ($USD)</label>
-                                <input type="number" id="plan-total" value="120" oninput="calculateQuota()" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-vetBlue">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Inicial (40%)</label>
-                                <input type="text" id="plan-initial" readonly class="w-full bg-slate-900/50 border border-slate-800 rounded-lg px-3 py-2 text-sm text-vetGreen font-bold" value="$48.00">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">4 Cuotas Quincenales</label>
-                                <input type="text" id="plan-quota" readonly class="w-full bg-slate-900/50 border border-slate-800 rounded-lg px-3 py-2 text-sm text-vetBlue font-bold" value="$18.00 / quincena">
-                            </div>
-                        </div>
+                        <div id="script-wa-fase3" class="p-3.5 bg-slate-50 border rounded-xl text-[11px] text-slate-700 font-mono whitespace-pre-line leading-relaxed"></div>
                     </div>
                 </div>
-            </section>
 
-        </main>
+                <div class="lg:col-span-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-display font-bold text-base text-[#0B2545]">Manejador de Objeciones Frecuentes</h3>
+                    <div id="objections" class="space-y-2"></div>
+                </div>
+            </div>
+        </section>
 
-        <!-- FOOTER -->
-        <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-12 text-center text-xs text-slate-500">
-            Guaros Vet Suite • Desarrollado para la gestión de salud veterinaria de alto rendimiento en Barquisimeto.
-        </footer>
+        <!-- TAB 4: BANCO DE MARCA -->
+        <section id="tab-brand" class="tab-content space-y-6 hidden">
+            <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
+                <div class="max-w-3xl space-y-2 relative z-10 bg-[#0B2545]/85 p-6 rounded-2xl backdrop-blur-md border border-white/10">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brandPurple text-white font-bold rounded-full text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-palette"></i> Identidad Visual
+                    </span>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Banco de Marca y Activos</h2>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        Logos oficiales limpios, paleta corporativa y acceso directo a tus piezas para mantener la coherencia gráfica.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-display font-bold text-base text-[#0B2545]">Logo Oficial (PNG Local)</h3>
+                    <div class="aspect-square rounded-2xl bg-slate-50 border flex items-center justify-center p-4">
+                        <img src="img/guaros-vet-logo.png" alt="Logo Guaros Vet" class="max-h-full object-contain">
+                    </div>
+                    <a href="img/guaros-vet-logo.png" download="guaros-vet-logo.png" class="block text-center py-2.5 bg-[#0B2545] text-white font-bold rounded-xl text-xs hover:opacity-90"><i class="fa-solid fa-download"></i> Descargar Logo PNG</a>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-display font-bold text-base text-[#0B2545]">Paleta de Colores Corporativa</h3>
+                    <div id="palette" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-[11px] text-slate-400 py-6">
+        Guaros Vet · Carrera 17 entre 45 y 46, Barquisimeto, Lara · 0426-1601079 · @mv.carlosriguez
+    </footer>
+
+    <!-- Toast de Notificación -->
+    <div id="toast" class="fixed bottom-6 left-1/2 z-[70] px-4 py-2.5 bg-[#0B2545] text-white text-xs font-bold rounded-xl shadow-xl opacity-0 pointer-events-none transition-all" style="transform: translate(-50%, 12px);">
+        <i class="fa-solid fa-check text-emerald-400"></i> <span id="toast-msg">¡Copiado!</span>
     </div>
 
-    <!-- JAVASCRIPT LÓGICO -->
+    <!-- SCRIPT DE LA APLICACIÓN -->
     <script>
-        // CAMBIO DE PESTAÑAS
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-vetBlue', 'text-white', 'shadow-md');
-                btn.classList.add('text-slate-400');
+        const WA_NUMBER = '584261601079';
+
+        // DATOS DE PLANES OFICIALES SEGÚN PDF
+        const PLANS = [
+            { id: 'cachorro', category: 'preventiva', name: 'Guaros Puppy (1er Año)', icon: 'fa-dog', color: '#00A3E0', stage: '2 a 12 meses', price: 160, items: ['1 puppy, séxtuples y refuerzos / rabia', 'Desparasitación y controles', 'Ajuste para pacientes >10kg'] },
+            { id: 'adulto', category: 'preventiva', name: 'Guaros Adulto (1-6 Años)', icon: 'fa-shield-dog', color: '#0B2545', stage: '1 a 6 años', price: 90, items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta de control'] },
+            { id: 'senior', category: 'preventiva', name: 'Guaros Senior (7+ Años)', icon: 'fa-heart-pulse', color: '#8E24AA', stage: '7+ años', price: 155, items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta especializada'] },
+            { id: 'cat', category: 'felina', name: 'Plan Guaros Cat (Anual)', icon: 'fa-cat', color: '#FF7A00', stage: 'Exclusivo felinos <5kg', price: 85, items: ['1 Triple Felina (Rortvac)', '1 Antirrábica anual', 'Protocolo quirúrgico mín. invasión'] },
+            { id: 'cat-renova', category: 'felina', name: 'Guaros Cat (Renovación)', icon: 'fa-cat-space', color: '#0284c7', stage: 'Refuerzo anual', price: 45, items: ['1 Triple Felina (Rortvac) + 1 Rabia', 'Plan de refuerzo preventivo'] },
+            { id: 'mat-basico', category: 'maternidad', name: 'Plan Materno Básico', icon: 'fa-paw', color: '#db2777', stage: 'Gestación y parto', price: 175, items: ['4 Consultas de control', '2 Ecosonogramas', 'Desparasitaciones'] },
+            { id: 'mat-vip', category: 'maternidad', name: 'Plan Materno VIP', icon: 'fa-star', color: '#9333ea', stage: 'VIP Integral', price: 290, items: ['6 Consultas de control', '3 Ecosonogramas', 'Perfil de laboratorio completo'] },
+            { id: 'spa-pug', category: 'estetica', name: 'Spa Impecable Mensual (Pug/Bulldog)', icon: 'fa-bath', color: '#f59e0b', stage: 'Visitas quincenales', price: 36, items: ['1 Peluquería Full', '1 Baño de mantenimiento'] },
+            { id: 'spa-pom', category: 'estetica', name: 'Spa Impecable (Pomeranian)', icon: 'fa-scissors', color: '#10b981', stage: 'Razas pequeñas', price: 40, items: ['1 Peluqueria Full', '1 Baño especializado'] },
+            { id: 'spa-golden', category: 'estetica', name: 'Spa Impecable (Golden/Pastor)', icon: 'fa-dog', color: '#3b82f6', stage: 'Razas grandes', price: 60, items: ['1 Peluqueria Full', '1 Baño profundo'] },
+            { id: 'id-microchip', category: 'seguridad', name: 'Plan Guaros ID (Microchip)', icon: 'fa-microchip', color: '#475569', stage: 'Identificación oficial', price: 22, items: ['1 Microchip con carnet de identificación', 'Registro oficial'] }
+        ];
+
+        let planPrices = {};
+        const getPrice = (p) => planPrices[p.id] ?? p.price;
+
+        function renderPlans(filter = 'all') {
+            const grid = document.getElementById('plans-grid');
+            const filtered = filter === 'all' ? PLANS : PLANS.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map(p => {
+                const currentPrice = getPrice(p);
+                return `
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition hover:shadow-md">
+                    <div class="p-4 text-white flex items-center justify-between" style="background:${p.color}">
+                        <div>
+                            <h3 class="font-display font-bold text-lg">${esc(p.name)}</h3>
+                            <p class="text-[10px] opacity-90">${esc(p.stage)}</p>
+                        </div>
+                        <i class="fa-solid ${p.icon} text-2xl opacity-80"></i>
+                    </div>
+                    <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <label class="text-[10px] text-slate-400 font-bold uppercase">Precio Oficial (USD)</label>
+                            <div class="flex items-center gap-1 font-display font-bold text-3xl text-[#0B2545]">$<input type="number" min="0" value="${currentPrice}" onchange="updatePrice('${p.id}', this.value)" class="w-28 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]"></div>
+                        </div>
+                        <ul class="text-[11px] text-slate-600 space-y-1.5 flex-1">${p.items.map(i => `<li class="flex gap-2"><i class="fa-solid fa-check text-[#00A3E0] mt-0.5"></i>${esc(i)}</li>`).join('')}</ul>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                            <button onclick="copyPlanCard('${p.id}')" class="px-2 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl text-[11px] hover:bg-slate-200 transition"><i class="fa-solid fa-copy"></i> Copiar ficha</button>
+                            <button onclick="sendPlanWhatsApp('${p.id}')" class="px-2 py-2 bg-[#25D366] text-white font-bold rounded-xl text-[11px] hover:brightness-95 transition"><i class="fa-brands fa-whatsapp"></i> Enviar WA</button>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function filterPlans(cat) {
+            document.querySelectorAll('.plan-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-[#0B2545]', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
             });
-
-            document.getElementById('sec-' + tabId).classList.remove('hidden');
-            const activeBtn = document.getElementById('tab-' + tabId);
-            activeBtn.classList.add('bg-vetBlue', 'text-white', 'shadow-md');
-            activeBtn.classList.remove('text-slate-400');
+            event.target.classList.add('bg-[#0B2545]', 'text-white');
+            event.target.classList.remove('bg-slate-100', 'text-slate-700');
+            renderPlans(cat);
         }
 
-        // DESCARGA REAL DE IMÁGENES HD CON HTML2CANVAS
-        function downloadAsset(elementId, filename) {
-            const el = document.getElementById(elementId);
-            html2canvas(el, { scale: 3, backgroundColor: null }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = filename;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+        function updatePrice(id, val) {
+            planPrices[id] = Math.max(0, parseFloat(val) || 0);
+            showToast('Precio actualizado');
+        }
+
+        function planText(id) {
+            const p = PLANS.find(x => x.id === id);
+            return `🐾 *${p.name} · Guaros Vet*
+Categoría: ${p.stage}
+
+Incluye:
+${p.items.map(i => '✅ ' + i).join('\n')}
+
+💵 Inversión: $${getPrice(p)}
+
+📍 Carrera 17 entre 45 y 46, Barquisimeto
+📲 0426-1601079`;
+        }
+
+        function copyPlanCard(id) { copyToClipboardText(planText(id)); }
+        function sendPlanWhatsApp(id) { openWhatsApp(planText(id), WA_NUMBER); }
+
+        // GESTIÓN DE TABS
+        const TABS = ['plans', 'stories', 'phase3', 'brand'];
+        function switchTab(tab) {
+            TABS.forEach(t => {
+                document.getElementById('tab-' + t).classList.toggle('hidden', t !== tab);
+                const btn = document.getElementById('nav-' + t);
+                if (btn) {
+                    const active = t === tab;
+                    btn.classList.toggle('bg-brandCyan', active);
+                    btn.classList.toggle('text-brandNavy', active);
+                    btn.classList.toggle('font-bold', active);
+                    btn.classList.toggle('shadow-md', active);
+                    btn.classList.toggle('text-slate-300', !active);
+                }
             });
+            document.getElementById('mobile-nav').value = tab;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // GENERADOR DE GANCHOS VIRALES
-        function generateHooks() {
-            const topic = document.getElementById('hook-topic').value;
-            const output = document.getElementById('hook-output');
+        // STORIES & OBJECTIONS SETUP
+        const STORIES = Array.from({length: 14}, (_, i) => ({
+            phase: i < 4 ? 1 : i < 8 ? 2 : 3,
+            title: `Día ${i + 1} de Campaña`,
+            headline: `¡Protege a tu mascota con Guaros Vet! 🐾`,
+            body: `Conoce nuestros planes preventivos diseñados para cada etapa de su vida en Barquisimeto.`,
+            cta: `Escríbenos por WhatsApp`,
+            bg: i % 2 === 0 ? 'navy' : 'light',
+            visual: `Foto clínica o video explicativo del día ${i + 1}.`
+        }));
+        let currentDay = 1, storyEdits = {}, storiesDone = {};
 
-            let hooks = [];
-            if(topic === 'puppy') {
-                hooks = [
-                    "🔴 <strong>96/100:</strong> \"Si crees que con una sola vacuna tu cachorro ya está protegido, estás cometiendo un error mortal.\"",
-                    "🟡 <strong>91/100:</strong> \"El protocolo preventivo real exige 1 puppy, 4 séxtuples y 2 antirrábicas. ¿Tu veterinario te lo explicó así?\"",
-                    "🟢 <strong>88/100:</strong> \"Evita cuentas de miles de dólares en emergencias vacunando bien a tu mascota desde el día 1.\""
-                ];
-            } else if(topic === 'emergency') {
-                hooks = [
-                    "🔴 <strong>95/100:</strong> \"3 síntomas silenciosos que indican que tu perro necesita atención clínica urgente.\"",
-                    "🟡 <strong>90/100:</strong> \"No esperes a que sea tarde: la prevención en salud animal salva vidas en Barquisimeto.\""
-                ];
-            } else {
-                hooks = [
-                    "🔴 <strong>97/100:</strong> \"Protege a tu mascota hoy y paga en cómodas cuotas quincenales sin complicaciones.\"",
-                    "🟡 <strong>92/100:</strong> \"La salud de tu peludito no puede esperar: conoce nuestro plan financiado en Guaros Vet.\""
-                ];
-            }
-
-            output.innerHTML = hooks.map(h => `<div class="p-2 bg-slate-950 rounded border border-slate-800 text-slate-200">${h}</div>`).join('');
+        function renderDayPicker() {
+            document.getElementById('day-picker').innerHTML = STORIES.map((s, i) => {
+                const d = i + 1, active = d === currentDay;
+                return `<button onclick="selectDay(${d})" class="h-10 rounded-xl font-display font-bold text-xs transition border-2 ${active ? 'bg-[#00A3E0] text-[#0B2545] border-[#00A3E0] shadow-md' : 'bg-white text-[#0B2545] border-slate-200'}">${d}</button>`;
+            }).join('');
+        }
+        function selectDay(d) { currentDay = d; renderDayPicker(); renderStory(); }
+        function renderStory() {
+            const s = Object.assign({}, STORIES[currentDay - 1], storyEdits[currentDay] || {});
+            document.getElementById('story-title').textContent = s.title;
+            document.getElementById('story-headline').value = s.headline;
+            document.getElementById('story-body').value = s.body;
+            document.getElementById('story-cta').value = s.cta;
+            document.getElementById('story-bg').value = s.bg;
+            document.getElementById('story-visual').textContent = s.visual;
+            const p = document.getElementById('story-preview');
+            p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 guaros-bubbles-bg text-white p-6 flex flex-col justify-between text-center`;
+            p.innerHTML = `<div class="font-display font-bold text-lg">${esc(s.headline)}</div><div class="text-xs opacity-90">${esc(s.body)}</div><div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold">${esc(s.cta)}</div>`;
+        }
+        function onStoryEdit() {
+            storyEdits[currentDay] = { headline: document.getElementById('story-headline').value, body: document.getElementById('story-body').value, cta: document.getElementById('story-cta').value, bg: document.getElementById('story-bg').value };
+            renderStory();
         }
 
-        // COPIAR TEXTO
-        function copyToClipboard(id) {
-            const text = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("¡Copy copiado al portapapeles exitosamente!");
+        // UTILS
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            t.classList.add('toast-show');
+            setTimeout(() => t.classList.remove('toast-show'), 1800);
+        }
+        function copyToClipboardText(text) { navigator.clipboard.writeText(text).then(() => showToast('¡Copiado!')); }
+        function openWhatsApp(text, num) { window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank'); }
+        const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        // INIT
+        (function() {
+            renderPlans();
+            renderDayPicker();
+            renderStory();
+            ['story-headline', 'story-body', 'story-cta', 'story-bg'].forEach(id => document.getElementById(id).addEventListener('input', onStoryEdit));
+            document.getElementById('wa-tutor').addEventListener('input', () => {
+                document.getElementById('script-wa-fase3').textContent = `¡Hola ${document.getElementById('wa-tutor').value || 'Amigo(a)'}! Te escribo de Guaros Vet para recordarte el plan de salud preventivo para ${document.getElementById('wa-pet').value || 'tu mascota'}. ¿Te ayudo a activarlo hoy?`;
             });
-        }
-
-        // CALCULADORA DE CUOTAS
-        function calculateQuota() {
-            const total = parseFloat(document.getElementById('plan-total').value) || 0;
-            const initial = total * 0.40;
-            const remaining = total - initial;
-            const quota = remaining / 4;
-
-            document.getElementById('plan-initial').value = `$${initial.toFixed(2)}`;
-            document.getElementById('plan-quota').value = `$${quota.toFixed(2)} / quincena`;
-        }
+            document.getElementById('script-wa-fase3').textContent = `¡Hola! Te escribo de Guaros Vet para recordarte el plan de salud preventivo. ¿Te ayudo a activarlo hoy?`;
+            document.getElementById('objections').innerHTML = `<div class="p-3 bg-slate-50 border rounded-xl text-xs"><strong>"Está caro"</strong><br>Recuérdales que prevenir siempre es más económico que una emergencia veterinaria.</div>`;
+            document.getElementById('palette').innerHTML = `
+                <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#0B2545] mb-2"></div><p class="text-xs font-bold">Azul Navy</p><p class="text-[10px] font-mono text-slate-500">#0B2545</p></div>
+                <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#00A3E0] mb-2"></div><p class="text-xs font-bold">Cian Guaros</p><p class="text-[10px] font-mono text-slate-500">#00A3E0</p></div>
+                <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#FF7A00] mb-2"></div><p class="text-xs font-bold">Naranja</p><p class="text-[10px] font-mono text-slate-500">#FF7A00</p></div>`;
+        })();
     </script>
 </body>
 </html>
