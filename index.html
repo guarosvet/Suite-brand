@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,6 +48,7 @@
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: var(--color-cyan); border-radius: 4px; }
+        
         .guaros-bubbles-bg {
             background-color: var(--color-navy);
             background-image:
@@ -61,6 +63,7 @@
                 radial-gradient(circle at 90% 20%, transparent 30px, #ffffff 31px, #ffffff 50px, transparent 51px);
         }
         .sunset-gradient { background: linear-gradient(160deg, #6B4FA0 0%, var(--color-purple) 25%, var(--color-orange) 70%, #FFB347 100%); }
+        .urgent-gradient { background: linear-gradient(160deg, #991b1b 0%, #dc2626 50%, #f97316 100%); }
         .toast-show { opacity: 1 !important; transform: translate(-50%, 0) !important; }
         .fade-in { animation: fadeIn .25s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -78,7 +81,7 @@
                 <div>
                     <h1 class="font-display font-bold text-lg tracking-wide flex items-center gap-2">
                         <span>GUAROS VET</span>
-                        <span class="text-[9px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Suite IA</span>
+                        <span class="text-[9px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Suite Pro</span>
                     </h1>
                     <p class="text-[10px] text-slate-300 hidden sm:block">Barquisimeto, Lara · Dr. Carlos Enrique Rodríguez</p>
                 </div>
@@ -128,20 +131,27 @@
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Catálogo Oficial de Planes Guaros Vet</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Modifica precios en tiempo real y comparte fichas profesionales por WhatsApp.
+                        Edita precios y detalles de contenido en tiempo real, calcula modalidades de pago internas y comparte fichas completas por WhatsApp en un clic.
                     </p>
                 </div>
             </div>
 
-            <!-- Filtros por categoría -->
-            <div class="flex flex-wrap gap-2 items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                <span class="text-xs font-bold text-[#0B2545] mr-2"><i class="fa-solid fa-filter text-[#00A3E0]"></i> Filtrar:</span>
-                <button onclick="filterPlans('all')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-[#0B2545] text-white transition">Todos</button>
-                <button onclick="filterPlans('preventiva')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Preventiva</button>
-                <button onclick="filterPlans('felina')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Felina</button>
-                <button onclick="filterPlans('maternidad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Maternidad</button>
-                <button onclick="filterPlans('estetica')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Estética Razas</button>
-                <button onclick="filterPlans('seguridad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Guaros ID</button>
+            <!-- Selector de Modalidad de Pago y Filtros -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-[#0B2545]"><i class="fa-solid fa-credit-card text-orange-500"></i> Modalidad de Pago:</span>
+                    <div id="payment-options" class="flex gap-1.5"></div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-xs font-bold text-[#0B2545]"><i class="fa-solid fa-filter text-[#00A3E0]"></i> Filtrar:</span>
+                    <button onclick="filterPlans('all')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-[#0B2545] text-white transition">Todos</button>
+                    <button onclick="filterPlans('preventiva')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Preventiva</button>
+                    <button onclick="filterPlans('felina')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Salud Felina</button>
+                    <button onclick="filterPlans('maternidad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Maternidad</button>
+                    <button onclick="filterPlans('estetica')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Estética Razas</button>
+                    <button onclick="filterPlans('seguridad')" class="plan-filter-btn px-3 py-1.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Guaros ID</button>
+                </div>
             </div>
 
             <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
@@ -156,7 +166,7 @@
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Generador Automático de 14 Días con Hook IA</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Cada día genera automáticamente ganchos persuasivos adaptados para maximizar la retención y conversión en Instagram.
+                        Personaliza tus Stories, cambia estilos de fondo, marca cuáles han sido publicadas y genera descargas HD en PNG.
                     </p>
                 </div>
             </div>
@@ -164,8 +174,13 @@
             <!-- Panel de Control IA para Stories -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <p class="font-display font-bold text-sm text-[#0B2545]">Selecciona el Día de Campaña (1 al 14)</p>
-                    <p class="text-[11px] text-slate-500">Haz clic en cualquier día para cargar su estructura generada por IA.</p>
+                    <div class="flex items-center gap-3">
+                        <p class="font-display font-bold text-sm text-[#0B2545]">Selecciona el Día de Campaña</p>
+                        <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                            <span id="stories-done-count">0</span>/14 Publicadas
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Haz clic en cualquier día para cargar su estructura generada por IA.</p>
                 </div>
                 <button onclick="generateAllStoriesAI()" class="px-4 py-2 bg-gradient-to-r from-brandCyan to-brandNavy text-white font-bold rounded-xl text-xs shadow-md hover:opacity-90 transition flex items-center gap-2">
                     <i class="fa-solid fa-brain"></i> Regenerar los 14 Días con IA
@@ -206,10 +221,10 @@
                             <input id="story-cta" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
                         </label>
                         <label class="text-[11px] font-semibold text-slate-600">Estilo de Fondo
-                            <select id="story-bg" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                            <select id="story-bg" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-semibold">
                                 <option value="navy">Burbujas Navy</option>
                                 <option value="light">Burbujas Claro</option>
-                                <option value="sunset">Atardecer</option>
+                                <option value="sunset">Atardecer (Logo)</option>
                                 <option value="urgent">Urgencia (Rojo)</option>
                             </select>
                         </label>
@@ -411,9 +426,13 @@
     <!-- SCRIPT DE LA APLICACIÓN -->
     <script>
         const WA_NUMBER = '584261601079';
+        const PAYMENT_MODALITIES = [
+            { id: 'guaros-vet', name: 'Guaros Vet (50% y 50%)', split: [0.5, 0.5], label: '50% inicial + 50% final' },
+            { id: 'guaros-pets', name: 'Guaros Pets (40% - 30% - 30%)', split: [0.4, 0.3, 0.3], label: '40% inicial + 30% + 30%' }
+        ];
 
-        // PLANES OFICIALES SEGÚN PDF
-        const PLANS = [
+        // PLANES OFICIALES
+        const INITIAL_PLANS = [
             { id: 'cachorro', category: 'preventiva', name: 'Guaros Puppy (1er Año)', icon: 'fa-dog', color: '#00A3E0', stage: '2 a 12 meses', price: 160, items: ['1 puppy, 4 séxtuples y 2 antirrábicas', 'Desparasitaciones y controles', 'Ajuste de precio para pacientes >10kg'] },
             { id: 'adulto', category: 'preventiva', name: 'Guaros Adulto (1-6 Años)', icon: 'fa-shield-dog', color: '#0B2545', stage: '1 a 6 años', price: 90, items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta de control'] },
             { id: 'senior', category: 'preventiva', name: 'Guaros Senior (7+ Años)', icon: 'fa-heart-pulse', color: '#8E24AA', stage: '7+ años', price: 155, items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta especializada'] },
@@ -421,19 +440,46 @@
             { id: 'cat-renova', category: 'felina', name: 'Guaros Cat (Renovación)', icon: 'fa-cat-space', color: '#0284c7', stage: 'Refuerzo anual', price: 45, items: ['1 Triple Felina (Rortvac) + 1 Rabia', 'Plan de refuerzo preventivo'] },
             { id: 'mat-basico', category: 'maternidad', name: 'Plan Materno Básico', icon: 'fa-paw', color: '#db2777', stage: 'Gestación y parto', price: 175, items: ['4 Consultas de control', '2 Ecosonogramas', 'Desparasitaciones'] },
             { id: 'mat-vip', category: 'maternidad', name: 'Plan Materno VIP', icon: 'fa-star', color: '#9333ea', stage: 'VIP Integral', price: 290, items: ['6 Consultas de control', '3 Ecosonogramas', 'Perfil de laboratorio completo'] },
-            { id: 'spa-pug', category: 'estetica', name: 'Spa Impecable Mensual (Pug/Bulldog)', icon: 'fa-bath', color: '#f59e0b', stage: 'Visitas quincenales', price: 36, items: ['1 Peluquería Full', '1 Baño de mantenimiento'] },
+            { id: 'spa-pug', category: 'estetica', name: 'Spa Impecable (Pug/Bulldog)', icon: 'fa-bath', color: '#f59e0b', stage: 'Visitas quincenales', price: 36, items: ['1 Peluquería Full', '1 Baño de mantenimiento'] },
             { id: 'spa-pom', category: 'estetica', name: 'Spa Impecable (Pomeranian)', icon: 'fa-scissors', color: '#10b981', stage: 'Razas pequeñas', price: 40, items: ['1 Peluqueria Full', '1 Baño especializado'] },
             { id: 'spa-golden', category: 'estetica', name: 'Spa Impecable (Golden/Pastor)', icon: 'fa-dog', color: '#3b82f6', stage: 'Razas grandes', price: 60, items: ['1 Peluqueria Full', '1 Baño profundo'] },
             { id: 'id-microchip', category: 'seguridad', name: 'Plan Guaros ID (Microchip)', icon: 'fa-microchip', color: '#475569', stage: 'Identificación oficial', price: 22, items: ['1 Microchip con carnet de identificación', 'Registro oficial'] }
         ];
 
-        let planPrices = {};
-        const getPrice = (p) => planPrices[p.id] ?? p.price;
+        // PERSISTENCIA
+        const store = {
+            get(k, d) { try { const v = localStorage.getItem('gv-' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+            set(k, v) { try { localStorage.setItem('gv-' + k, JSON.stringify(v)); } catch {} }
+        };
+
+        let PLANS = store.get('plans-custom', INITIAL_PLANS);
+        let selectedModalityId = store.get('modality-id', 'guaros-vet');
+        let currentFilter = 'all';
+
+        const fmt = (n) => '$' + (Math.round(n * 100) / 100).toLocaleString('es-VE', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+
+        function renderPaymentOptions() {
+            document.getElementById('payment-options').innerHTML = PAYMENT_MODALITIES.map(m => 
+                `<button onclick="setPaymentModality('${m.id}')" class="px-2.5 py-1 rounded-lg text-xs font-bold border transition ${m.id === selectedModalityId ? 'bg-[#0B2545] text-white border-[#0B2545]' : 'bg-white text-slate-600 hover:bg-slate-50'}">${m.name}</button>`
+            ).join('');
+        }
+
+        function setPaymentModality(id) {
+            selectedModalityId = id;
+            store.set('modality-id', id);
+            renderPaymentOptions();
+            renderPlans(currentFilter);
+        }
 
         function renderPlans(filter = 'all') {
+            currentFilter = filter;
             const grid = document.getElementById('plans-grid');
             const filtered = filter === 'all' ? PLANS : PLANS.filter(p => p.category === filter);
-            grid.innerHTML = filtered.map(p => `
+            const activeModality = PAYMENT_MODALITIES.find(m => m.id === selectedModalityId) || PAYMENT_MODALITIES[0];
+
+            grid.innerHTML = filtered.map(p => {
+                const installments = activeModality.split.map((ratio, idx) => `${fmt(p.price * ratio)} (${ratio * 100}%)`).join(' / ');
+                return `
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition hover:shadow-md">
                     <div class="p-4 text-white flex items-center justify-between" style="background:${p.color}">
                         <div>
@@ -445,15 +491,29 @@
                     <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
                         <div>
                             <label class="text-[10px] text-slate-400 font-bold uppercase">Precio Oficial (USD)</label>
-                            <div class="flex items-center gap-1 font-display font-bold text-3xl text-[#0B2545]">$<input type="number" min="0" value="${getPrice(p)}" onchange="updatePrice('${p.id}', this.value)" class="w-28 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]"></div>
+                            <div class="flex items-center gap-1 font-display font-bold text-3xl text-[#0B2545]">
+                                $<input type="number" min="0" value="${p.price}" onchange="updatePrice('${p.id}', this.value)" class="w-28 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]">
+                            </div>
+                            <p class="text-xs text-orange-600 font-bold mt-1.5 flex items-center gap-1">
+                                <i class="fa-solid fa-credit-card"></i> ${activeModality.name}: ${installments}
+                            </p>
                         </div>
-                        <ul class="text-[11px] text-slate-600 space-y-1.5 flex-1">${p.items.map(i => `<li class="flex gap-2"><i class="fa-solid fa-check text-[#00A3E0] mt-0.5"></i>${esc(i)}</li>`).join('')}</ul>
-                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase">Servicios Incluidos:</span>
+                                <button onclick="editPlanItems('${p.id}')" class="text-[10px] text-[#00A3E0] font-bold hover:underline"><i class="fa-solid fa-pen"></i> Editar ítems</button>
+                            </div>
+                            <ul class="text-[11px] text-slate-600 space-y-1.5 flex-1">${p.items.map(i => `<li class="flex gap-2"><i class="fa-solid fa-check text-[#00A3E0] mt-0.5"></i><span>${esc(i)}</span></li>`).join('')}</ul>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100">
                             <button onclick="copyPlanCard('${p.id}')" class="px-2 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl text-[11px] hover:bg-slate-200 transition"><i class="fa-solid fa-copy"></i> Copiar ficha</button>
                             <button onclick="sendPlanWhatsApp('${p.id}')" class="px-2 py-2 bg-[#25D366] text-white font-bold rounded-xl text-[11px] hover:brightness-95 transition"><i class="fa-brands fa-whatsapp"></i> Enviar WA</button>
                         </div>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
         }
 
         function filterPlans(cat) {
@@ -467,19 +527,45 @@
         }
 
         function updatePrice(id, val) {
-            planPrices[id] = Math.max(0, parseFloat(val) || 0);
-            showToast('Precio actualizado');
+            const plan = PLANS.find(x => x.id === id);
+            if(plan) {
+                plan.price = Math.max(0, parseFloat(val) || 0);
+                store.set('plans-custom', PLANS);
+                renderPlans(currentFilter);
+                showToast('Precio actualizado');
+            }
+        }
+
+        function editPlanItems(id) {
+            const plan = PLANS.find(x => x.id === id);
+            if(!plan) return;
+            const currentText = plan.items.join('\n');
+            const newText = prompt(`Edita los servicios de "${plan.name}" (uno por línea):`, currentText);
+            if (newText !== null) {
+                const items = newText.split('\n').map(s => s.trim()).filter(Boolean);
+                if (items.length > 0) {
+                    plan.items = items;
+                    store.set('plans-custom', PLANS);
+                    renderPlans(currentFilter);
+                    showToast('Plan modificado con éxito');
+                }
+            }
         }
 
         function planText(id) {
             const p = PLANS.find(x => x.id === id);
+            const activeModality = PAYMENT_MODALITIES.find(m => m.id === selectedModalityId) || PAYMENT_MODALITIES[0];
+            const installments = activeModality.split.map((ratio, idx) => `Pago ${idx + 1}: ${fmt(p.price * ratio)} (${ratio * 100}%)`).join('\n');
+
             return `🐾 *${p.name} · Guaros Vet*
 Categoría: ${p.stage}
 
 Incluye:
 ${p.items.map(i => '✅ ' + i).join('\n')}
 
-💵 Inversión: $${getPrice(p)}
+💵 Inversión Total: $${p.price}
+💳 *Modalidad de Pago (${activeModality.name})*:
+${installments}
 
 📍 Carrera 17 entre 45 y 46, Barquisimeto
 📲 0426-1601079`;
@@ -489,7 +575,7 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
         function sendPlanWhatsApp(id) { openWhatsApp(planText(id), WA_NUMBER); }
 
         // MOTOR IA DE STORIES (14 DÍAS)
-        let STORIES = Array.from({length: 14}, (_, i) => ({
+        const INITIAL_STORIES = Array.from({length: 14}, (_, i) => ({
             phase: i < 4 ? 1 : i < 8 ? 2 : 3,
             title: `Día ${i + 1} de Campaña`,
             headline: `¿Sabías que un chequeo a tiempo salva la vida de tu mascota? 🩺`,
@@ -498,6 +584,11 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
             bg: i % 2 === 0 ? 'navy' : 'light',
             visual: `Selfie o video corto en consultorio explicando el beneficio del día ${i + 1}.`
         }));
+
+        let STORIES = store.get('stories-data', INITIAL_STORIES);
+        let storiesDone = store.get('stories-done', {});
+        let storyEdits = store.get('stories-edits', {});
+        let currentDay = store.get('story-day', 1);
 
         function generateAllStoriesAI() {
             const hooksAI = [
@@ -521,38 +612,92 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
                 headline: hooksAI[i] || s.headline,
                 body: `Estrategia IA Día ${i + 1}: Enfoque en educación y prevención veterinaria sin margen de error.`
             }));
+            store.set('stories-data', STORIES);
             renderDayPicker();
             renderStory();
-            showToast('¡14 Stories generadas con IA exitosamente!');
+            showToast('¡14 Stories generadas con IA!');
         }
-
-        let currentDay = 1, storyEdits = {};
 
         function renderDayPicker() {
             document.getElementById('day-picker').innerHTML = STORIES.map((s, i) => {
-                const d = i + 1, active = d === currentDay;
-                return `<button onclick="selectDay(${d})" class="h-10 rounded-xl font-display font-bold text-xs transition border-2 ${active ? 'bg-[#00A3E0] text-[#0B2545] border-[#00A3E0] shadow-md' : 'bg-white text-[#0B2545] border-slate-200'}">${d}</button>`;
+                const d = i + 1, active = d === currentDay, done = storiesDone[d];
+                return `<button onclick="selectDay(${d})" class="relative h-10 rounded-xl font-display font-bold text-xs transition border-2 ${active ? 'bg-[#00A3E0] text-[#0B2545] border-[#00A3E0] shadow-md scale-105' : 'bg-white text-[#0B2545] border-slate-200 hover:bg-slate-50'}">
+                    ${d}${done ? '<i class="fa-solid fa-circle-check absolute -top-1.5 -right-1.5 text-emerald-500 bg-white rounded-full text-xs"></i>' : ''}
+                </button>`;
             }).join('');
+            document.getElementById('stories-done-count').textContent = Object.values(storiesDone).filter(Boolean).length;
         }
 
-        function selectDay(d) { currentDay = d; renderDayPicker(); renderStory(); }
+        function selectDay(d) {
+            currentDay = d;
+            store.set('story-day', d);
+            renderDayPicker();
+            renderStory();
+        }
+
+        function bgClass(bg) {
+            return {
+                navy: 'guaros-bubbles-bg text-white',
+                light: 'guaros-bubbles-light text-[#0B2545]',
+                sunset: 'sunset-gradient text-white',
+                urgent: 'urgent-gradient text-white'
+            }[bg] || 'guaros-bubbles-bg text-white';
+        }
 
         function renderStory() {
-            const s = Object.assign({}, STORIES[currentDay - 1], storyEdits[currentDay] || {});
+            const base = STORIES[currentDay - 1];
+            const s = Object.assign({}, base, storyEdits[currentDay] || {});
+            
+            document.getElementById('story-phase').textContent = `Fase ${s.phase} · Día ${currentDay}`;
             document.getElementById('story-title').textContent = s.title;
             document.getElementById('story-headline').value = s.headline;
             document.getElementById('story-body').value = s.body;
             document.getElementById('story-cta').value = s.cta;
             document.getElementById('story-bg').value = s.bg;
             document.getElementById('story-visual').textContent = s.visual;
+            document.getElementById('story-done').checked = !!storiesDone[currentDay];
+
+            const light = s.bg === 'light';
             const p = document.getElementById('story-preview');
-            p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 guaros-bubbles-bg text-white p-6 flex flex-col justify-between text-center`;
-            p.innerHTML = `<div class="font-display font-bold text-lg">${esc(s.headline)}</div><div class="text-xs opacity-90">${esc(s.body)}</div><div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold">${esc(s.cta)}</div>`;
+            p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 ${bgClass(s.bg)} p-5 flex flex-col justify-between text-center fade-in`;
+            p.innerHTML = `
+                <div class="flex justify-between items-center text-[10px] font-bold">
+                    <span class="flex items-center gap-1">
+                        <img src="img/guaros-vet-logo.png" class="w-5 h-5 object-contain bg-white rounded-full p-0.5" alt="">
+                        guarosvet
+                    </span>
+                    <span class="${light ? 'bg-slate-300/80 text-[#0B2545]' : 'bg-black/30 text-white'} px-2 py-0.5 rounded-full text-[9px]">Día ${currentDay}</span>
+                </div>
+                <div class="space-y-3 my-auto">
+                    <div class="font-display font-bold text-lg leading-snug drop-shadow ${light ? 'bg-white/85 text-[#0B2545]' : 'bg-[#0B2545]/70'} rounded-2xl p-3">${esc(s.headline)}</div>
+                    <div class="text-xs ${light ? 'text-slate-700 bg-white/70' : 'text-slate-100 bg-black/20'} rounded-xl p-2">${esc(s.body)}</div>
+                </div>
+                <div class="bg-white text-[#0B2545] py-2 px-3 rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-link text-[#00A3E0]"></i> ${esc(s.cta)}
+                </div>`;
         }
 
         function onStoryEdit() {
-            storyEdits[currentDay] = { headline: document.getElementById('story-headline').value, body: document.getElementById('story-body').value, cta: document.getElementById('story-cta').value, bg: document.getElementById('story-bg').value };
+            storyEdits[currentDay] = {
+                headline: document.getElementById('story-headline').value,
+                body: document.getElementById('story-body').value,
+                cta: document.getElementById('story-cta').value,
+                bg: document.getElementById('story-bg').value
+            };
+            store.set('stories-edits', storyEdits);
             renderStory();
+        }
+
+        function resetStory() {
+            delete storyEdits[currentDay];
+            store.set('stories-edits', storyEdits);
+            renderStory();
+            showToast('Story restaurada a su versión original');
+        }
+
+        function copyStory() {
+            const s = Object.assign({}, STORIES[currentDay - 1], storyEdits[currentDay] || {});
+            copyToClipboardText(`${s.headline}\n\n${s.body}\n\n👉 ${s.cta}`);
         }
 
         function downloadStoryImage() {
@@ -674,6 +819,16 @@ Escribe PLAN al DM o WhatsApp 0426-1601079 🐾
             copyToClipboardText(caption);
         }
 
+        // FASE 3 - CUPOS
+        function updateCupos() {
+            const total = Math.max(1, parseInt(document.getElementById('cupos-total').value) || 1);
+            const sold = Math.min(total, Math.max(0, parseInt(document.getElementById('cupos-vendidos').value) || 0));
+            const left = total - sold;
+            store.set('cupos', { total, sold });
+            document.getElementById('cupos-restantes').textContent = left;
+            document.getElementById('cupos-bar').style.width = (sold / total * 100) + '%';
+        }
+
         // GESTIÓN DE TABS
         const TABS = ['plans', 'stories', 'carousel', 'phase3', 'brand'];
         function switchTab(tab) {
@@ -706,30 +861,10 @@ Escribe PLAN al DM o WhatsApp 0426-1601079 🐾
 
         // INIT
         (function() {
+            renderPaymentOptions();
             renderPlans();
             renderDayPicker();
             renderStory();
             renderCarouselSlide();
-
-            ['story-headline', 'story-body', 'story-cta', 'story-bg'].forEach(id => document.getElementById(id).addEventListener('input', onStoryEdit));
-            ['c-kicker', 'c-title', 'c-sub'].forEach(id => document.getElementById(id).addEventListener('input', onCarouselEdit));
-
-            document.getElementById('wa-tutor').addEventListener('input', () => {
-                const tutor = document.getElementById('wa-tutor').value || 'Amigo(a)';
-                const pet = document.getElementById('wa-pet').value || 'tu mascota';
-                document.getElementById('script-wa-fase3').textContent = `¡Hola ${tutor}! Te escribo de Guaros Vet para recordarte el plan de salud preventivo para ${pet}. Quedan pocos cupos con el bono de apertura. ¿Te ayudo a activarlo hoy?`;
-            });
-            document.getElementById('script-wa-fase3').textContent = `¡Hola! Te escribo de Guaros Vet para recordarte el plan de salud preventivo. Quedan pocos cupos con el bono de apertura. ¿Te ayudo a activarlo hoy?`;
-
-            document.getElementById('objections').innerHTML = `
-                <div class="p-3 bg-slate-50 border rounded-xl text-xs space-y-1"><strong>"Está muy caro"</strong><br>Recuérdales que prevenir enfermedades letales siempre es más económico que una terapia intensiva de emergencia.</div>
-                <div class="p-3 bg-slate-50 border rounded-xl text-xs space-y-1"><strong>"Mi mascota se ve sana"</strong><br>Explícales que los virus no avisan y el esquema completo (1 puppy, 4 séxtuples y 2 antirrábicas) la mantiene inmunizada todo el año.</div>`;
-
-            document.getElementById('palette').innerHTML = `
-                <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#0B2545] mb-2"></div><p class="text-xs font-bold">Azul Navy</p><p class="text-[10px] font-mono text-slate-500">#0B2545</p></div>
-                <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#00A3E0] mb-2"></div><p class="text-xs font-bold">Cian Guaros</p><p class="text-[10px] font-mono text-slate-500">#00A3E0</p></div>
-                <div class="p-3 bg-slate-50 rounded-xl border"><div class="h-10 rounded-lg bg-[#FF7A00] mb-2"></div><p class="text-xs font-bold">Naranja</p><p class="text-[10px] font-mono text-slate-500">#FF7A00</p></div>`;
-        })();
-    </script>
-</body>
-</html>
+<!-- ... existing code -->
+```
