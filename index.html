@@ -6,15 +6,11 @@
     <title>Guaros Vet - Suite Digital Completa & Banco de Identidad Canva</title>
     <meta name="description" content="Suite digital de Guaros Vet (Barquisimeto, Lara): estrategia de lanzamiento de 14 días, generador de Stories, catálogo de planes y banco de identidad Canva.">
     <link rel="icon" type="image/png" href="img/guaros-vet-logo.png">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Fredoka & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- html2canvas para descargas de imágenes HD -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
@@ -81,7 +77,7 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- TOP HEADER / BRAND BAR -->
+    <!-- TOP HEADER -->
     <header class="bg-brandNavy text-white sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -90,30 +86,19 @@
                 </div>
                 <div>
                     <h1 class="font-display font-bold text-xl tracking-wide flex items-center gap-2">
-                        <span id="header-brand-name">GUAROS VET</span>
+                        <span>GUAROS VET</span>
                         <span class="text-[10px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Lara</span>
                     </h1>
                     <p class="text-[11px] text-slate-300 hidden sm:block">Estrategia Integral 14 Días + Recursos Visuales Canva</p>
                 </div>
             </div>
 
-            <!-- Navigation Tabs -->
             <nav class="hidden md:flex space-x-1">
-                <button onclick="switchTab('phase3')" id="nav-phase3" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-bullseye text-orange-300"></i> Fase 3: Cierre
-                </button>
-                <button onclick="switchTab('phase2')" id="nav-phase2" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-rocket text-orange-400"></i> Fase 2: Anuncio
-                </button>
-                <button onclick="switchTab('stories')" id="nav-stories" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle-play text-cyan-400"></i> Stories (14 Días)
-                </button>
-                <button onclick="switchTab('plans')" id="nav-plans" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-layer-group"></i> Planes
-                </button>
-                <button onclick="switchTab('brand')" id="nav-brand" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-palette"></i> Banco Marca & Canva
-                </button>
+                <button onclick="switchTab('phase3')" id="nav-phase3" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5"><i class="fa-solid fa-bullseye text-orange-300"></i> Fase 3: Cierre</button>
+                <button onclick="switchTab('phase2')" id="nav-phase2" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5"><i class="fa-solid fa-rocket text-orange-400"></i> Fase 2: Anuncio</button>
+                <button onclick="switchTab('stories')" id="nav-stories" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5"><i class="fa-solid fa-circle-play text-cyan-400"></i> Stories (14 Días)</button>
+                <button onclick="switchTab('plans')" id="nav-plans" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5"><i class="fa-solid fa-layer-group"></i> Planes</button>
+                <button onclick="switchTab('brand')" id="nav-brand" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5"><i class="fa-solid fa-palette"></i> Banco Marca & Canva</button>
             </nav>
 
             <div class="md:hidden flex items-center">
@@ -128,7 +113,7 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
+    <!-- MAIN CONTAINER -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
 
         <!-- TAB FASE 3 -->
@@ -242,9 +227,9 @@
                         <div class="w-full max-w-[260px] shrink-0 space-y-3">
                             <div id="carousel-slide" class="insta-slide-aspect rounded-2xl overflow-hidden shadow-lg relative"></div>
                             <div class="flex items-center justify-between">
-                                <button onclick="moveSlide(-1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button onclick="moveSlide(-1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]"><i class="fa-solid fa-chevron-left"></i></button>
                                 <div id="carousel-dots" class="flex gap-1.5"></div>
-                                <button onclick="moveSlide(1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+                                <button onclick="moveSlide(1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]"><i class="fa-solid fa-chevron-right"></i></button>
                             </div>
                             <button onclick="downloadCarouselSlide()" class="w-full py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 shadow-md transition flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-download"></i> Descargar Lámina HD (PNG)
@@ -266,7 +251,7 @@
             </div>
         </section>
 
-        <!-- TAB STORIES (14 DÍAS EXACTOS) -->
+        <!-- TAB STORIES -->
         <section id="tab-stories" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -343,7 +328,7 @@
             </div>
         </section>
 
-        <!-- TAB PLANES & QUO EXACTO -->
+        <!-- TAB PLANES & QUO -->
         <section id="tab-plans" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -357,7 +342,6 @@
                 </div>
             </div>
 
-            <!-- Selector de modelos QUO exactos -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center gap-4">
                 <p class="font-bold text-xs text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-credit-card text-orange-500"></i> Esquema QUO:</p>
                 <div id="quo-options" class="flex gap-2"></div>
@@ -367,7 +351,7 @@
             <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
         </section>
 
-        <!-- TAB BRAND & PIEZAS CANVA -->
+        <!-- TAB BRAND -->
         <section id="tab-brand" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -440,7 +424,6 @@
           items: ['Triple felina + rabia', 'Desparasitación interna y externa', '3 consultas de control', 'Perfil de laboratorio anual'] }
     ];
 
-    // Esquemas QUO exactos requeridos (Guaros Vet y Guaros Pets)
     const QUO_MODELS = [
         { id: 'guaros-vet', name: 'Guaros Vet (50% / 50%)', calc: (p) => `Inicial 50% ($${(p*0.5).toFixed(2)}) + 50% a los 15 días ($${(p*0.5).toFixed(2)})` },
         { id: 'guaros-pets', name: 'Guaros Pets (40% / 30% / 30%)', calc: (p) => `Inicial 40% ($${(p*0.4).toFixed(2)}) + 30% a los 15d ($${(p*0.3).toFixed(2)}) + 30% a los 30d ($${(p*0.3).toFixed(2)})` }
@@ -496,7 +479,6 @@
         set(k, v) { try { localStorage.setItem('gv-' + k, JSON.stringify(v)); } catch {} }
     };
     const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const img = (file, w) => `img/${file}`;
 
     let toastTimer;
     function showToast(msg) {
@@ -531,7 +513,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // FASE 3
     function getCupos() {
         const total = Math.max(1, parseInt($('cupos-total').value) || 1);
         const sold = Math.min(total, Math.max(0, parseInt($('cupos-vendidos').value) || 0));
@@ -560,10 +541,15 @@
             </details>`).join('');
     }
 
-    // FASE 2 CARRUSEL
+    function renderFaq() {
+        if ($('faq-list')) {
+            $('faq-list').innerHTML = FAQ.map(f => `<div class="p-2.5 bg-slate-50 rounded-xl border"><p class="font-bold text-[#0B2545]">${esc(f.q)}</p><p class="text-slate-600">${esc(f.a)}</p></div>`).join('');
+        }
+    }
+
     let slideIdx = 0;
     function bgClass(bg) {
-        return { navy: 'guaros-bubbles-bg text-white', light: 'guaros-bubbles-light text-[#0B2545]', sunset: 'sunset-gradient text-white', urgent: 'bg-gradient-to-br from-red-700 to-red-500 text-white' }[bg] || 'guaros-bubbles-bg text-white';
+        return { navy: 'guaros-bubbles-bg text-white', light: 'guaros-bubbles-light text-[#0B2545]', sunset: 'sunset-gradient text-white', urgent: 'urgent-gradient text-white' }[bg] || 'guaros-bubbles-bg text-white';
     }
     function renderSlide() {
         const s = SLIDES[slideIdx], light = s.bg === 'light';
@@ -594,7 +580,6 @@
         });
     }
 
-    // STORIES (14 DÍAS + DESCARGA HD)
     let currentDay = 1, storyEdits = store.get('story-edits', {}), storiesDone = store.get('stories-done', {});
     function storyData(d) { return Object.assign({}, STORIES[d - 1], storyEdits[d] || {}); }
     function fillCupos(t) { return String(t).replace(/\{cupos\}/g, getCupos().left); }
@@ -653,7 +638,6 @@
         });
     }
 
-    // PLANES & QUO EXACTO
     let planPrices = store.get('plan-prices', {});
     const fmt = (n) => '$' + (Math.round(n * 100) / 100).toLocaleString('es-VE', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
 
@@ -686,8 +670,8 @@
                     </div>
                 </div>
                 <div class="p-4 bg-slate-50 border-t border-slate-100 grid grid-cols-2 gap-2">
-                    <button onclick="copyToClipboardText(planMessage('${p.id}'))" class="py-2 bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] hover:bg-slate-300"><i class="fa-solid fa-copy"></i> Copiar ficha</button>
-                    <button onclick="openWhatsApp(planMessage('${p.id}'))" class="py-2 bg-[#25D366] text-white font-bold rounded-lg text-[11px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Enviar WA</button>
+                    <button onclick="copyToClipboardText(planMessage('${p.id}'))" class="py-2 bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] hover:bg-slate-300"><i class="fa-solid fa-copy"></i> Copiar</button>
+                    <button onclick="openWhatsApp(planMessage('${p.id}'))" class="py-2 bg-[#25D366] text-white font-bold rounded-lg text-[11px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Enviar</button>
                 </div>
             </div>`;
         }).join('');
@@ -717,7 +701,6 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
 📲 0426-1601079`;
     }
 
-    // GALLERY
     function renderGallery() {
         $('gallery').innerHTML = GALLERY.map(g => `
             <button onclick="openLightbox('${g.file}', '${esc(g.title)}')" class="group text-left">
@@ -742,7 +725,6 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
         $('lightbox').classList.add('hidden'); $('lightbox').classList.remove('flex');
     }
 
-    // INIT
     (function init() {
         const c = store.get('cupos', null);
         if (c) { $('cupos-total').value = c.total; $('cupos-vendidos').value = c.sold; }
