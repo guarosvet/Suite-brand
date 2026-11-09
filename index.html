@@ -53,7 +53,6 @@
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: var(--color-cyan); border-radius: 4px; }
-        
         .guaros-bubbles-bg {
             background-color: var(--color-navy);
             background-image:
@@ -72,12 +71,7 @@
                 radial-gradient(circle at 60% 90%, var(--color-cyan) 0, var(--color-cyan) 80px, transparent 81px),
                 radial-gradient(circle at 25% 80%, #ffffff 0, #ffffff 25px, transparent 26px);
         }
-        .sunset-gradient {
-            background: linear-gradient(160deg, #6B4FA0 0%, var(--color-purple) 25%, var(--color-orange) 70%, #FFB347 100%);
-        }
-        .urgent-gradient {
-            background: linear-gradient(160deg, #991b1b 0%, #dc2626 50%, #991b1b 100%);
-        }
+        .sunset-gradient { background: linear-gradient(160deg, #6B4FA0 0%, var(--color-purple) 25%, var(--color-orange) 70%, #FFB347 100%); }
         .whitespace-pre-line { white-space: pre-line; }
         .toast-show { opacity: 1 !important; transform: translate(-50%, 0) !important; }
         .fade-in { animation: fadeIn .25s ease-out; }
@@ -114,30 +108,29 @@
                     <i class="fa-solid fa-circle-play text-cyan-400"></i> Stories (14 Días)
                 </button>
                 <button onclick="switchTab('plans')" id="nav-plans" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-layer-group"></i> Planes & QUO
+                    <i class="fa-solid fa-layer-group"></i> Planes
                 </button>
                 <button onclick="switchTab('brand')" id="nav-brand" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-palette"></i> Banco Marca & Canva
                 </button>
             </nav>
 
-            <!-- Mobile Navigation -->
             <div class="md:hidden flex items-center">
                 <select id="mobile-nav" onchange="switchTab(this.value)" class="bg-slate-800 text-white text-xs px-3 py-2 rounded-lg border border-slate-700 max-w-[11rem]">
-                    <option value="phase3">🎯 Fase 3: Conversión & Cierre (Días 9-14)</option>
-                    <option value="phase2">🚀 Fase 2: El Anuncio (Días 5-8)</option>
-                    <option value="stories">📱 Generador Historias IG (14 Días)</option>
-                    <option value="plans">🏷️ Catálogo de Planes & QUO</option>
-                    <option value="brand">🎨 Banco Identidad Canva & Logo Limpio</option>
+                    <option value="phase3">🎯 Fase 3: Cierre (Días 9-14)</option>
+                    <option value="phase2">🚀 Fase 2: Anuncio (Días 5-8)</option>
+                    <option value="stories">📱 Stories (14 Días)</option>
+                    <option value="plans">🏷️ Catálogo de Planes</option>
+                    <option value="brand">🎨 Banco Identidad Canva</option>
                 </select>
             </div>
         </div>
     </header>
 
     <!-- MAIN CONTENT CONTAINER -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        <!-- TAB FASE 3: CONVERSIÓN, SEGUIMIENTO Y CIERRE -->
+        <!-- TAB FASE 3 -->
         <section id="tab-phase3" class="tab-content space-y-8">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/30">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -151,11 +144,9 @@
                 </div>
             </div>
 
-            <!-- Cupos tracker -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row sm:items-center gap-4">
                 <div class="flex-1">
                     <p class="font-display font-bold text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-ticket text-orange-500"></i> Contador de cupos de la cohorte</p>
-                    <p class="text-[11px] text-slate-500">Ajusta los cupos vendidos y los textos de escasez se actualizan solos. Se guarda en este navegador.</p>
                     <div class="mt-3 h-3 bg-slate-100 rounded-full overflow-hidden"><div id="cupos-bar" class="h-full bg-gradient-to-r from-[#00A3E0] via-orange-500 to-red-600 transition-all" style="width:0%"></div></div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -179,7 +170,7 @@
                             <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-bold font-display flex items-center justify-center text-[10px]">D9-10</span>
                             <div>
                                 <h3 class="font-display font-bold text-lg text-[#0B2545]">Días 9 y 10: Seguimiento 1 a 1</h3>
-                                <p class="text-[11px] text-slate-500">Cierre por WhatsApp Directo · Plantilla Personalizada</p>
+                                <p class="text-[11px] text-slate-500">Cierre por WhatsApp Directo</p>
                             </div>
                         </div>
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[10px]">CHAT 1:1</span>
@@ -198,18 +189,14 @@
                         <div class="flex justify-between items-center gap-2">
                             <span class="font-bold text-xs text-[#0B2545]">Script de Seguimiento directo:</span>
                             <div class="flex gap-1.5">
-                                <button onclick="copyToClipboardText(document.getElementById('script-wa-fase3').innerText)" class="px-2.5 py-1 bg-emerald-600 text-white font-bold rounded-lg text-[10px] hover:bg-emerald-700">
-                                    <i class="fa-solid fa-copy"></i> Copiar
-                                </button>
-                                <button onclick="openWhatsAppFree(document.getElementById('script-wa-fase3').innerText)" class="px-2.5 py-1 bg-[#25D366] text-white font-bold rounded-lg text-[10px] hover:brightness-95">
-                                    <i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp
-                                </button>
+                                <button onclick="copyToClipboardText(document.getElementById('script-wa-fase3').innerText)" class="px-2.5 py-1 bg-emerald-600 text-white font-bold rounded-lg text-[10px] hover:bg-emerald-700"><i class="fa-solid fa-copy"></i> Copiar</button>
+                                <button onclick="openWhatsApp(document.getElementById('script-wa-fase3').innerText)" class="px-2.5 py-1 bg-[#25D366] text-white font-bold rounded-lg text-[10px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Abrir en WA</button>
                             </div>
                         </div>
                         <div id="script-wa-fase3" class="p-3.5 bg-slate-50 border rounded-xl text-[11px] text-slate-700 leading-relaxed font-mono whitespace-pre-line"></div>
                     </div>
 
-                    <div class="space-y-2 pt-2">
+                    <div class="space-y-2">
                         <p class="font-bold text-xs text-[#0B2545] flex items-center gap-1.5"><i class="fa-solid fa-comments text-[#00A3E0]"></i> Respuestas rápidas a objeciones</p>
                         <div id="objections" class="space-y-2"></div>
                     </div>
@@ -217,19 +204,14 @@
 
                 <div class="lg:col-span-6 space-y-6">
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                        <div class="flex items-center justify-between border-b pb-3 border-slate-100">
-                            <h3 class="font-display font-bold text-lg text-[#0B2545]">Días 11 al 14: Escasez y Cierre</h3>
-                            <span class="px-2.5 py-1 bg-orange-100 text-orange-800 font-bold rounded-full text-[10px]">URGENCIA</span>
-                        </div>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Usa la pestaña <strong>Stories</strong> para previsualizar y descargar directamente las piezas gráficas de cierre en alta definición.
-                        </p>
+                        <h3 class="font-display font-bold text-lg text-[#0B2545]">Días 11 al 14: Escasez y Cierre</h3>
+                        <p class="text-xs text-slate-600">Utiliza la pestaña <strong>Stories (14 Días)</strong> para previsualizar y descargar tus diseños listos.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB FASE 2: EL ANUNCIO -->
+        <!-- TAB FASE 2 -->
         <section id="tab-phase2" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -238,7 +220,7 @@
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Lanzamiento Oficial & Alianza QUO</h2>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Revelación formal del Plan de Salud Preventiva de Guaros Vet. Activa el bono de apertura y ofrece facilidades de pago en cuotas.
+                        Revelación formal del Plan de Salud Preventiva de Guaros Vet.
                     </p>
                 </div>
             </div>
@@ -253,17 +235,17 @@
                                 <p class="text-[11px] text-slate-500">Post Instagram 4:5 · 5 diapositivas</p>
                             </div>
                         </div>
-                        <span class="px-2.5 py-1 bg-cyan-100 text-[#0B2545] font-bold rounded-full text-[10px]">REVELACIÓN</span>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-5 items-center">
                         <div class="w-full max-w-[260px] shrink-0 space-y-3">
                             <div id="carousel-slide" class="insta-slide-aspect rounded-2xl overflow-hidden shadow-lg relative"></div>
                             <div class="flex items-center justify-between">
-                                <button onclick="moveSlide(-1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button onclick="moveSlide(-1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
                                 <div id="carousel-dots" class="flex gap-1.5"></div>
-                                <button onclick="moveSlide(1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]"><i class="fa-solid fa-chevron-right"></i></button>
+                                <button onclick="moveSlide(1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0B2545]" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
                             </div>
+                            <!-- BOTÓN DE DESCARGA HD EN CARRUSEL -->
                             <button onclick="downloadCarouselSlide()" class="w-full py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 shadow-md transition flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-download"></i> Descargar Lámina HD (PNG)
                             </button>
@@ -278,22 +260,22 @@
                 <div class="lg:col-span-6 space-y-6">
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                         <h3 class="font-display font-bold text-lg text-[#0B2545]">Estrategia Días 6 al 8</h3>
-                        <p class="text-xs text-slate-600">Usa las opciones de financiamiento QUO en tus publicaciones y Stories.</p>
+                        <div class="space-y-2 text-[11px]" id="faq-list"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB STORIES (14 DÍAS PRE-CARGADOS + DESCARGA) -->
+        <!-- TAB STORIES (14 DÍAS EXACTOS DE TU CÓDIGO + BOTÓN DESCARGA PNG HD) -->
         <section id="tab-stories" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#00A3E0] text-[#0B2545] font-bold rounded-full text-xs uppercase tracking-wider shadow-md">
                         <i class="fa-solid fa-circle-play"></i> Generador de Historias IG · 14 Días
                     </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Tu calendario de Stories, listo para descargar</h2>
+                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Tu calendario de Stories, listo para Canva</h2>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Selecciona un día, visualiza tu diseño en formato 9:16 tal como lo redactaste y descárgalo directamente en PNG HD para publicar.
+                        Elige un día, previsualiza la Story en formato 9:16, personaliza el texto, cópialo o descárgalo directamente en PNG HD.
                     </p>
                 </div>
             </div>
@@ -311,6 +293,7 @@
                     <div class="w-full max-w-[300px]">
                         <div id="story-preview" class="insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 fade-in"></div>
                     </div>
+                    <!-- BOTÓN DE DESCARGA HD EN STORIES -->
                     <button onclick="downloadStoryImage()" class="w-full max-w-[300px] py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-download text-sm"></i> Descargar Story (PNG HD)
                     </button>
@@ -361,31 +344,31 @@
             </div>
         </section>
 
-        <!-- TAB PLANES & QUO EXACTO -->
+        <!-- TAB PLANES & QUO EXACTO SOLICITADO -->
         <section id="tab-plans" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-[#0B2545] font-bold rounded-full text-xs uppercase tracking-wider shadow-md">
-                        <i class="fa-solid fa-layer-group"></i> Catálogo de Planes & Financiamiento QUO
+                        <i class="fa-solid fa-layer-group"></i> Catálogo de Planes · IG / WhatsApp
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Plan de Salud Preventiva</h2>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Selecciona el tipo de financiamiento QUO (Guaros Vet o Guaros Pets) para calcular automáticamente el desglose de cuotas.
+                        Selecciona el modelo QUO deseado para calcular automáticamente los porcentajes e intervalos de pago.
                     </p>
                 </div>
             </div>
 
-            <!-- Selector de Modelo QUO -->
+            <!-- Selector de modelos QUO exactos -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center gap-4">
                 <p class="font-bold text-xs text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-credit-card text-orange-500"></i> Esquema QUO:</p>
                 <div id="quo-options" class="flex gap-2"></div>
-                <p class="text-[10px] text-slate-400 ml-auto">Haz clic sobre el precio anual de cualquier plan para editarlo en vivo.</p>
+                <p class="text-[10px] text-slate-400 ml-auto">Haz clic sobre el precio anual para editarlo en vivo.</p>
             </div>
 
             <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
         </section>
 
-        <!-- TAB BRAND & CANVA -->
+        <!-- TAB BRAND -->
         <section id="tab-brand" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
@@ -395,9 +378,8 @@
                     <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Todo lo de tu marca, en un solo lugar</h2>
                 </div>
             </div>
-            <!-- Contenido de Marca original -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h3 class="font-display font-bold text-lg text-[#0B2545] mb-2">Galería de recursos Canva</h3>
+                <h3 class="font-display font-bold text-lg text-[#0B2545] mb-3">Piezas Canva</h3>
                 <div id="gallery" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"></div>
             </div>
         </section>
@@ -432,15 +414,6 @@
         { icon: 'fa-solid fa-id-card', label: 'RIF', value: 'V-24.157.658-9' }
     ];
 
-    const DEFAULT_PALETTE = [
-        { key: 'navy', name: 'Azul Noche', hex: '#0B2545', use: 'Texto, fondos principales' },
-        { key: 'cyan', name: 'Cian Guaros', hex: '#00A3E0', use: 'Burbujas, acentos, botones' },
-        { key: 'orange', name: 'Naranja Atardecer', hex: '#FF7A00', use: 'Promos, urgencia suave' },
-        { key: 'purple', name: 'Morado Lara', hex: '#8E24AA', use: 'Detalles del logo' },
-        { key: 'bg', name: 'Gris Claro', hex: '#F8F9FA', use: 'Fondos limpios', fixed: true },
-        { key: 'gray', name: 'Gris Neutro', hex: '#8E8E93', use: 'Texto secundario', fixed: true }
-    ];
-
     const GALLERY = [
         { file: 'post-azul-beige.jpg', title: 'Nuestros Servicios', type: 'post' },
         { file: 'post-vacunas.png', title: '¿Vacunas al día?', type: 'post' },
@@ -468,7 +441,7 @@
           items: ['Triple felina + rabia', 'Desparasitación interna y externa', '3 consultas de control', 'Perfil de laboratorio anual'] }
     ];
 
-    // Esquemas QUO exactos solicitados
+    // Esquemas QUO exactos requeridos (Guaros Vet y Guaros Pets)
     const QUO_MODELS = [
         { id: 'guaros-vet', name: 'Guaros Vet (50% / 50%)', calc: (p) => `Inicial 50% ($${(p*0.5).toFixed(2)}) + 50% a los 15 días ($${(p*0.5).toFixed(2)})` },
         { id: 'guaros-pets', name: 'Guaros Pets (40% / 30% / 30%)', calc: (p) => `Inicial 40% ($${(p*0.4).toFixed(2)}) + 30% a los 15d ($${(p*0.3).toFixed(2)}) + 30% a los 30d ($${(p*0.3).toFixed(2)})` }
@@ -512,7 +485,6 @@
         { phase: 3, title: 'Cierre', headline: 'HOY cerramos inscripciones ⏰', body: 'No dejes la salud de tu peludito para la emergencia.', cta: 'Escribe PLAN', bg: 'urgent', visual: 'Reloj' },
         { phase: 3, title: 'Gracias', headline: '¡Gracias, Barquisimeto! 💙', body: 'Primera cohorte completa.', cta: '🐾', bg: 'sunset', visual: 'Collage final' }
     ];
-
     const PHASES = {
         1: { name: 'Fase 1 · Conciencia', color: '#8E24AA' },
         2: { name: 'Fase 2 · Anuncio', color: '#FF7A00' },
@@ -537,7 +509,7 @@
     function copyToClipboardText(text) {
         navigator.clipboard.writeText(text.trim()).then(() => showToast('¡Copiado al portapapeles!'));
     }
-    function openWhatsAppFree(text) {
+    function openWhatsApp(text) {
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text.trim())}`, '_blank');
     }
 
@@ -589,10 +561,10 @@
             </details>`).join('');
     }
 
-    // FASE 2 CAROUSEL
+    // FASE 2 CARRUSEL
     let slideIdx = 0;
     function bgClass(bg) {
-        return { navy: 'guaros-bubbles-bg text-white', light: 'guaros-bubbles-light text-[#0B2545]', sunset: 'sunset-gradient text-white', urgent: 'urgent-gradient text-white' }[bg] || 'guaros-bubbles-bg text-white';
+        return { navy: 'guaros-bubbles-bg text-white', light: 'guaros-bubbles-light text-[#0B2545]', sunset: 'sunset-gradient text-white', urgent: 'bg-gradient-to-br from-red-700 to-red-500 text-white' }[bg] || 'guaros-bubbles-bg text-white';
     }
     function renderSlide() {
         const s = SLIDES[slideIdx], light = s.bg === 'light';
@@ -623,7 +595,7 @@
         });
     }
 
-    // STORIES
+    // STORIES (14 DÍAS + DESCARGA HD)
     let currentDay = 1, storyEdits = store.get('story-edits', {}), storiesDone = store.get('stories-done', {});
     function storyData(d) { return Object.assign({}, STORIES[d - 1], storyEdits[d] || {}); }
     function fillCupos(t) { return String(t).replace(/\{cupos\}/g, getCupos().left); }
@@ -665,9 +637,7 @@
         store.set('story-edits', storyEdits);
         renderStoryPreview();
     }
-    function resetStory() {
-        delete storyEdits[currentDay]; store.set('story-edits', storyEdits); renderStory(); showToast('Story restaurada');
-    }
+    function resetStory() { delete storyEdits[currentDay]; store.set('story-edits', storyEdits); renderStory(); showToast('Story restaurada'); }
     function copyStory() {
         const s = storyData(currentDay);
         copyToClipboardText(`${fillCupos(s.headline)}\n\n${fillCupos(s.body)}\n\n👉 ${fillCupos(s.cta)}`);
@@ -718,7 +688,7 @@
                 </div>
                 <div class="p-4 bg-slate-50 border-t border-slate-100 grid grid-cols-2 gap-2">
                     <button onclick="copyToClipboardText(planMessage('${p.id}'))" class="py-2 bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] hover:bg-slate-300"><i class="fa-solid fa-copy"></i> Copiar ficha</button>
-                    <button onclick="openWhatsAppFree(planMessage('${p.id}'))" class="py-2 bg-[#25D366] text-white font-bold rounded-lg text-[11px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Enviar</button>
+                    <button onclick="openWhatsApp(planMessage('${p.id}'))" class="py-2 bg-[#25D366] text-white font-bold rounded-lg text-[11px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Enviar WA</button>
                 </div>
             </div>`;
         }).join('');
@@ -748,7 +718,7 @@ ${p.items.map(i => '✅ ' + i).join('\n')}
 📲 0426-1601079`;
     }
 
-    // BRAND & GALLERY
+    // GALLERY
     function renderGallery() {
         $('gallery').innerHTML = GALLERY.map(g => `
             <button onclick="openLightbox('${g.file}', '${esc(g.title)}')" class="group text-left">
