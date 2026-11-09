@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guaros Vet - Suite Digital Completa & Banco de Identidad</title>
+    <title>Guaros Vet - Suite Digital Completa & Banco de Identidad Canva</title>
     <meta name="description" content="Suite digital de Guaros Vet (Barquisimeto, Lara): estrategia de lanzamiento de 14 días, generador de Stories, catálogo de planes y banco de identidad Canva.">
     <link rel="icon" type="image/png" href="img/guaros-vet-logo.png">
     <!-- Tailwind CSS -->
@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- html2canvas para descargas PNG -->
+    <!-- html2canvas para descargas de imágenes HD -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
@@ -23,8 +23,11 @@
                     colors: {
                         brandNavy: 'var(--color-navy, #0B2545)',
                         brandCyan: 'var(--color-cyan, #00A3E0)',
+                        brandCyanLight: '#E6F6FC',
                         brandOrange: 'var(--color-orange, #FF7A00)',
                         brandPurple: 'var(--color-purple, #8E24AA)',
+                        brandBg: '#F8F9FA',
+                        brandCard: '#FFFFFF'
                     },
                     fontFamily: {
                         display: ['Fredoka', 'sans-serif'],
@@ -40,6 +43,8 @@
             --color-cyan: #00A3E0;
             --color-orange: #FF7A00;
             --color-purple: #8E24AA;
+            --color-bg: #F8F9FA;
+            --color-gray: #8E8E93;
         }
         body { font-family: 'Inter', sans-serif; background-color: #F4F6F9; }
         .font-display { font-family: 'Fredoka', sans-serif; }
@@ -54,14 +59,18 @@
             background-image:
                 radial-gradient(circle at 15% 20%, transparent 20px, var(--color-cyan) 21px, var(--color-cyan) 32px, transparent 33px),
                 radial-gradient(circle at 85% 15%, transparent 25px, #ffffff 26px, #ffffff 40px, transparent 41px),
-                radial-gradient(circle at 50% 85%, var(--color-cyan) 0, var(--color-cyan) 60px, transparent 61px);
+                radial-gradient(circle at 50% 85%, var(--color-cyan) 0, var(--color-cyan) 60px, transparent 61px),
+                radial-gradient(circle at 70% 35%, var(--color-cyan) 0, var(--color-cyan) 18px, transparent 19px),
+                radial-gradient(circle at 30% 70%, #ffffff 0, #ffffff 22px, transparent 23px);
+            background-size: 100% 100%;
         }
         .guaros-bubbles-light {
             background-color: #E2E8F0;
             background-image:
                 radial-gradient(circle at 10% 30%, transparent 25px, var(--color-cyan) 26px, var(--color-cyan) 40px, transparent 41px),
-                radial-gradient(circle at 90% 20%, transparent 30px, #ffffff 31px, #ffffff 50px, transparent 51px);
-            color: #0B2545 !important;
+                radial-gradient(circle at 90% 20%, transparent 30px, #ffffff 31px, #ffffff 50px, transparent 51px),
+                radial-gradient(circle at 60% 90%, var(--color-cyan) 0, var(--color-cyan) 80px, transparent 81px),
+                radial-gradient(circle at 25% 80%, #ffffff 0, #ffffff 25px, transparent 26px);
         }
         .sunset-gradient {
             background: linear-gradient(160deg, #6B4FA0 0%, var(--color-purple) 25%, var(--color-orange) 70%, #FFB347 100%);
@@ -81,15 +90,15 @@
     <header class="bg-brandNavy text-white sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 flex items-center justify-center relative overflow-hidden bg-white rounded-full p-0.5 shadow-inner">
-                    <img src="img/guaros-vet-logo.png" alt="Guaros Vet Logo" class="max-w-full max-h-full object-contain scale-[1.6]" onerror="this.src='img/guaros-vet-logo.png'">
+                <div class="w-12 h-12 flex items-center justify-center relative overflow-hidden bg-white rounded-full p-0.5">
+                    <img src="img/guaros-vet-logo.png" alt="Guaros Vet Logo" class="max-w-full max-h-full object-contain scale-[1.6]" onerror="this.src='img/guaros-vet-logo.png';">
                 </div>
                 <div>
                     <h1 class="font-display font-bold text-xl tracking-wide flex items-center gap-2">
-                        <span>GUAROS VET</span>
-                        <span class="text-[10px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Suite Pro</span>
+                        <span id="header-brand-name">GUAROS VET</span>
+                        <span class="text-[10px] bg-brandCyan text-brandNavy font-extrabold px-2 py-0.5 rounded-full uppercase">Lara</span>
                     </h1>
-                    <p class="text-[11px] text-slate-300 hidden sm:block">Barquisimeto, Lara · Dr. Carlos Enrique Rodríguez</p>
+                    <p class="text-[11px] text-slate-300 hidden sm:block">Estrategia Integral 14 Días + Recursos Visuales Canva</p>
                 </div>
             </div>
 
@@ -108,18 +117,18 @@
                     <i class="fa-solid fa-layer-group"></i> Planes & QUO
                 </button>
                 <button onclick="switchTab('brand')" id="nav-brand" class="nav-btn px-3 py-2 rounded-lg font-medium text-xs lg:text-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-palette"></i> Banco de Archivos
+                    <i class="fa-solid fa-palette"></i> Banco Marca & Canva
                 </button>
             </nav>
 
             <!-- Mobile Navigation -->
             <div class="md:hidden flex items-center">
                 <select id="mobile-nav" onchange="switchTab(this.value)" class="bg-slate-800 text-white text-xs px-3 py-2 rounded-lg border border-slate-700 max-w-[11rem]">
-                    <option value="phase3">🎯 Fase 3: Conversión & Cierre</option>
-                    <option value="phase2">🚀 Fase 2: El Anuncio</option>
-                    <option value="stories">📱 Stories & Contenido (14 Días)</option>
+                    <option value="phase3">🎯 Fase 3: Conversión & Cierre (Días 9-14)</option>
+                    <option value="phase2">🚀 Fase 2: El Anuncio (Días 5-8)</option>
+                    <option value="stories">📱 Generador Historias IG (14 Días)</option>
                     <option value="plans">🏷️ Catálogo de Planes & QUO</option>
-                    <option value="brand">📁 Banco de Archivos & Marca</option>
+                    <option value="brand">🎨 Banco Identidad Canva & Logo Limpio</option>
                 </select>
             </div>
         </div>
@@ -137,7 +146,7 @@
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">La Recta Final del Lanzamiento</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                        Acelera el cierre 1 a 1 por WhatsApp, resuelve objeciones y gestiona los cupos restantes de tu cohorte en Barquisimeto.
+                        El mercado ya conoce el plan y el valor de la prevención. En esta fase aceleramos el cierre 1 a 1 por WhatsApp, resolvemos objeciones y agotamos los últimos cupos de la primera cohorte.
                     </p>
                 </div>
             </div>
@@ -146,6 +155,7 @@
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row sm:items-center gap-4">
                 <div class="flex-1">
                     <p class="font-display font-bold text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-ticket text-orange-500"></i> Contador de cupos de la cohorte</p>
+                    <p class="text-[11px] text-slate-500">Ajusta los cupos vendidos y los textos de escasez se actualizan solos. Se guarda en este navegador.</p>
                     <div class="mt-3 h-3 bg-slate-100 rounded-full overflow-hidden"><div id="cupos-bar" class="h-full bg-gradient-to-r from-[#00A3E0] via-orange-500 to-red-600 transition-all" style="width:0%"></div></div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -168,8 +178,8 @@
                         <div class="flex items-center gap-2">
                             <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-bold font-display flex items-center justify-center text-[10px]">D9-10</span>
                             <div>
-                                <h3 class="font-display font-bold text-lg text-[#0B2545]">Seguimiento 1 a 1</h3>
-                                <p class="text-[11px] text-slate-500">Cierre por WhatsApp Directo</p>
+                                <h3 class="font-display font-bold text-lg text-[#0B2545]">Días 9 y 10: Seguimiento 1 a 1</h3>
+                                <p class="text-[11px] text-slate-500">Cierre por WhatsApp Directo · Plantilla Personalizada</p>
                             </div>
                         </div>
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[10px]">CHAT 1:1</span>
@@ -212,7 +222,7 @@
                             <span class="px-2.5 py-1 bg-orange-100 text-orange-800 font-bold rounded-full text-[10px]">URGENCIA</span>
                         </div>
                         <p class="text-xs text-slate-600 leading-relaxed">
-                            Utiliza el generador de Stories en la pestaña superior para publicar las alertas de últimos cupos con los botones de descarga directa en PNG.
+                            Usa la pestaña <strong>Stories</strong> para previsualizar y descargar directamente las piezas gráficas de cierre en alta definición.
                         </p>
                     </div>
                 </div>
@@ -228,7 +238,7 @@
                     </span>
                     <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Lanzamiento Oficial & Alianza QUO</h2>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Revelación formal del Plan de Salud Preventiva de Guaros Vet con el carrusel interactivo y descargas en HD.
+                        Revelación formal del Plan de Salud Preventiva de Guaros Vet. Activa el bono de apertura y ofrece facilidades de pago en cuotas.
                     </p>
                 </div>
             </div>
@@ -239,10 +249,11 @@
                         <div class="flex items-center gap-2">
                             <span class="w-8 h-8 rounded-xl bg-[#00A3E0] text-[#0B2545] font-bold font-display flex items-center justify-center text-sm">D5</span>
                             <div>
-                                <h3 class="font-display font-bold text-lg text-[#0B2545]">Carrusel de Lanzamiento</h3>
+                                <h3 class="font-display font-bold text-lg text-[#0B2545]">Día 5: Carrusel de Lanzamiento</h3>
                                 <p class="text-[11px] text-slate-500">Post Instagram 4:5 · 5 diapositivas</p>
                             </div>
                         </div>
+                        <span class="px-2.5 py-1 bg-cyan-100 text-[#0B2545] font-bold rounded-full text-[10px]">REVELACIÓN</span>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-5 items-center">
@@ -267,24 +278,22 @@
                 <div class="lg:col-span-6 space-y-6">
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                         <h3 class="font-display font-bold text-lg text-[#0B2545]">Estrategia Días 6 al 8</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Usa las opciones de financiamiento QUO y resuelve dudas frecuentes mediante las cajas de preguntas en Instagram.
-                        </p>
+                        <p class="text-xs text-slate-600">Usa las opciones de financiamiento QUO en tus publicaciones y Stories.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB STORIES & CONTENIDO CON SUBIDA VISUAL -->
+        <!-- TAB STORIES (14 DÍAS PRE-CARGADOS + DESCARGA) -->
         <section id="tab-stories" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#00A3E0] text-[#0B2545] font-bold rounded-full text-xs uppercase tracking-wider shadow-md">
                         <i class="fa-solid fa-circle-play"></i> Generador de Historias IG · 14 Días
                     </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Calendario de Stories & Subida de Fotos</h2>
+                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Tu calendario de Stories, listo para descargar</h2>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Selecciona tu día, carga una foto local de tu paciente o producto, previsualiza en formato 9:16 y descarga en PNG HD al instante.
+                        Selecciona un día, visualiza tu diseño en formato 9:16 tal como lo redactaste y descárgalo directamente en PNG HD para publicar.
                     </p>
                 </div>
             </div>
@@ -294,21 +303,15 @@
                     <p class="font-bold text-xs text-[#0B2545]">Selecciona el día</p>
                     <p class="text-[11px] text-slate-500"><span id="stories-done-count">0</span>/14 publicadas</p>
                 </div>
-                <div id="day-picker" class="grid grid-cols-7 sm:grid-cols-14 gap-2"></div>
+                <div id="day-picker" class="grid grid-cols-7 sm:grid-cols-14 gap-2" style="grid-template-columns: repeat(auto-fill, minmax(2.75rem, 1fr));"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 <div class="lg:col-span-4 flex flex-col items-center gap-3">
-                    <div class="w-full max-w-[280px]">
+                    <div class="w-full max-w-[300px]">
                         <div id="story-preview" class="insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 fade-in"></div>
                     </div>
-                    
-                    <label class="w-full max-w-[280px] py-2 px-4 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-xs cursor-pointer text-center flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-image"></i> Subir Foto de Paciente / Producto
-                        <input type="file" accept="image/*" class="hidden" onchange="uploadStoryCustomImg(event)">
-                    </label>
-
-                    <button onclick="downloadStoryImage()" class="w-full max-w-[280px] py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
+                    <button onclick="downloadStoryImage()" class="w-full max-w-[300px] py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-download text-sm"></i> Descargar Story (PNG HD)
                     </button>
                 </div>
@@ -335,13 +338,18 @@
                             <input id="story-cta" type="text" class="mt-1 w-full px-3 py-2 border rounded-lg text-xs font-normal">
                         </label>
                         <label class="text-[11px] font-semibold text-slate-600">Estilo de fondo
-                            <select id="story-bg" class="mt-1 w-full px-3 py-2 border rounded-lg text-xs font-normal" onchange="onStoryBgChange(this.value)">
+                            <select id="story-bg" class="mt-1 w-full px-3 py-2 border rounded-lg text-xs font-normal">
                                 <option value="navy">Burbujas Navy</option>
                                 <option value="light">Burbujas Claro</option>
                                 <option value="sunset">Atardecer (logo)</option>
                                 <option value="urgent">Urgencia (rojo)</option>
                             </select>
                         </label>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 border rounded-xl space-y-1">
+                        <p class="font-bold text-[11px] text-[#0B2545]"><i class="fa-solid fa-camera text-[#00A3E0]"></i> Indicación visual</p>
+                        <p id="story-visual" class="text-[11px] text-slate-600"></p>
                     </div>
 
                     <div class="flex flex-wrap gap-2">
@@ -353,64 +361,44 @@
             </div>
         </section>
 
-        <!-- TAB PLANES & QUO -->
+        <!-- TAB PLANES & QUO EXACTO -->
         <section id="tab-plans" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-[#0B2545] font-bold rounded-full text-xs uppercase tracking-wider shadow-md">
                         <i class="fa-solid fa-layer-group"></i> Catálogo de Planes & Financiamiento QUO
                     </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Planes de Salud Preventiva Guaros Vet</h2>
+                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Plan de Salud Preventiva</h2>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Edita precios, agrega o elimina servicios y exámenes, descarga la ficha en PNG HD o compártela por WhatsApp seleccionando cualquier chat.
+                        Selecciona el tipo de financiamiento QUO (Guaros Vet o Guaros Pets) para calcular automáticamente el desglose de cuotas.
                     </p>
                 </div>
             </div>
 
+            <!-- Selector de Modelo QUO -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center gap-4">
-                <p class="font-bold text-xs text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-credit-card text-orange-500"></i> Cuotas QUO:</p>
+                <p class="font-bold text-xs text-[#0B2545] flex items-center gap-2"><i class="fa-solid fa-credit-card text-orange-500"></i> Esquema QUO:</p>
                 <div id="quo-options" class="flex gap-2"></div>
-                <p class="text-[10px] text-slate-400 ml-auto">Edita directamente los montos y servicios de cada plan.</p>
+                <p class="text-[10px] text-slate-400 ml-auto">Haz clic sobre el precio anual de cualquier plan para editarlo en vivo.</p>
             </div>
 
             <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"></div>
         </section>
 
-        <!-- TAB BRAND & ARCHIVOS -->
+        <!-- TAB BRAND & CANVA -->
         <section id="tab-brand" class="tab-content space-y-8 hidden">
             <div class="guaros-bubbles-bg text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border border-cyan-500/20">
                 <div class="max-w-3xl space-y-3 relative z-10 bg-[#0B2545]/80 p-5 rounded-2xl backdrop-blur-sm border border-white/10">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#8E24AA] text-white font-bold rounded-full text-xs uppercase tracking-wider shadow-md">
-                        <i class="fa-solid fa-palette"></i> Banco de Archivos & Marca
+                        <i class="fa-solid fa-palette"></i> Banco de Identidad & Canva
                     </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Repositorio Local & Identidad Visual</h2>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Sube fotos de pacientes, productos o elementos de marca para tenerlos disponibles en tu flujo de trabajo.
-                    </p>
+                    <h2 class="font-display font-bold text-2xl sm:text-4xl text-white">Todo lo de tu marca, en un solo lugar</h2>
                 </div>
             </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="font-display font-bold text-lg text-[#0B2545]">Logo Oficial Guaros Vet</h3>
-                    <div class="aspect-square rounded-xl bg-white border flex items-center justify-center p-3">
-                        <img src="img/guaros-vet-logo.png" alt="Logo Guaros Vet" class="max-h-full object-contain">
-                    </div>
-                    <a href="img/guaros-vet-logo.png" download="guaros-vet-logo.png" class="block text-center py-2.5 bg-[#0B2545] text-white font-bold rounded-xl text-xs hover:opacity-90"><i class="fa-solid fa-download"></i> Descargar Logo PNG</a>
-                </div>
-
-                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h3 class="font-display font-bold text-lg text-[#0B2545]">Galería de Archivos Subidos</h3>
-                        <label class="px-3 py-1.5 bg-[#00A3E0] text-[#0B2545] font-bold rounded-xl text-xs cursor-pointer hover:opacity-90">
-                            <i class="fa-solid fa-upload"></i> Subir Archivos
-                            <input type="file" multiple accept="image/*" class="hidden" onchange="handleBrandFileUpload(event)">
-                        </label>
-                    </div>
-                    <div id="brand-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3 min-h-[160px] p-3 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
-                        <p class="text-xs text-slate-400 col-span-full text-center my-auto">Sube fotos de pacientes o productos para usarlas en tus historias.</p>
-                    </div>
-                </div>
+            <!-- Contenido de Marca original -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h3 class="font-display font-bold text-lg text-[#0B2545] mb-2">Galería de recursos Canva</h3>
+                <div id="gallery" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"></div>
             </div>
         </section>
     </main>
@@ -419,6 +407,17 @@
         Guaros Vet · Carrera 17 entre 45 y 46, Barquisimeto, Lara · 0426-1601079 · @mv.carlosriguez
     </footer>
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 bg-black/80 z-[60] hidden items-center justify-center p-4" onclick="closeLightbox(event)">
+        <div class="max-w-md w-full space-y-3">
+            <img id="lightbox-img" src="" alt="" class="w-full max-h-[75vh] object-contain rounded-xl bg-white">
+            <div class="flex justify-between items-center">
+                <p id="lightbox-title" class="text-white text-sm font-bold"></p>
+                <a id="lightbox-dl" href="#" download class="px-3 py-1.5 bg-[#00A3E0] text-[#0B2545] font-bold rounded-lg text-xs"><i class="fa-solid fa-download"></i> Descargar</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast -->
     <div id="toast" class="fixed bottom-6 left-1/2 z-[70] px-4 py-2.5 bg-[#0B2545] text-white text-xs font-bold rounded-xl shadow-xl opacity-0 pointer-events-none transition-all" style="transform: translate(-50%, 12px);">
         <i class="fa-solid fa-check text-emerald-400"></i> <span id="toast-msg">Copiado</span>
@@ -426,10 +425,67 @@
 
     <script>
     const WA_NUMBER = '584261601079';
+    const CONTACT = [
+        { icon: 'fa-brands fa-whatsapp', label: 'WhatsApp', value: '+58 426-1601079' },
+        { icon: 'fa-brands fa-instagram', label: 'Instagram', value: '@mv.carlosriguez' },
+        { icon: 'fa-solid fa-location-dot', label: 'Dirección', value: 'Carrera 17 entre 45 y 46, Barquisimeto, Lara' },
+        { icon: 'fa-solid fa-id-card', label: 'RIF', value: 'V-24.157.658-9' }
+    ];
+
+    const DEFAULT_PALETTE = [
+        { key: 'navy', name: 'Azul Noche', hex: '#0B2545', use: 'Texto, fondos principales' },
+        { key: 'cyan', name: 'Cian Guaros', hex: '#00A3E0', use: 'Burbujas, acentos, botones' },
+        { key: 'orange', name: 'Naranja Atardecer', hex: '#FF7A00', use: 'Promos, urgencia suave' },
+        { key: 'purple', name: 'Morado Lara', hex: '#8E24AA', use: 'Detalles del logo' },
+        { key: 'bg', name: 'Gris Claro', hex: '#F8F9FA', use: 'Fondos limpios', fixed: true },
+        { key: 'gray', name: 'Gris Neutro', hex: '#8E8E93', use: 'Texto secundario', fixed: true }
+    ];
+
+    const GALLERY = [
+        { file: 'post-azul-beige.jpg', title: 'Nuestros Servicios', type: 'post' },
+        { file: 'post-vacunas.png', title: '¿Vacunas al día?', type: 'post' },
+        { file: 'post-lila-amarillo.jpg', title: '¿Vacunas al día? (v2)', type: 'post' },
+        { file: 'post-viajes-1.png', title: 'Viajes al exterior 1/2', type: 'post' },
+        { file: 'post-viajes-2.png', title: 'Viajes al exterior 2/2', type: 'post' },
+        { file: 'carrusel-amarillo-1.png', title: 'Peluquería Canina 1', type: 'post' },
+        { file: 'carrusel-amarillo-2.png', title: 'Peluquería Canina 2', type: 'post' },
+        { file: 'carrusel-amarillo-3.png', title: 'Peluquería Canina 3', type: 'post' },
+        { file: 'story-servicios.jpg', title: 'Tu mascota segura', type: 'story' },
+        { file: 'story-agenda-abierta.jpg', title: 'Agenda Abierta', type: 'story' },
+        { file: 'carpeta-viaje.png', title: 'Carpeta de Viaje', type: 'impreso' },
+        { file: 'guaros-vet-logo-fondo.jpg', title: 'Logo Guaros Vet', type: 'marca' },
+        { file: 'patron-burbujas.jpg', title: 'Patrón burbujas', type: 'marca' }
+    ];
+
+    const PLANS = [
+        { id: 'cachorro', name: 'Plan Cachorro', icon: 'fa-dog', color: '#00A3E0', stage: '2 a 12 meses', price: 180,
+          items: ['Esquema completo de vacunas', 'Desparasitación mensual', '4 consultas de control', 'Asesoría de nutrición y crianza'] },
+        { id: 'adulto', name: 'Plan Adulto', icon: 'fa-shield-dog', color: '#0B2545', stage: '1 a 7 años', price: 220, featured: true,
+          items: ['Vacunas anuales de refuerzo', 'Desparasitación trimestral', '3 consultas de control', 'Perfil de laboratorio anual', 'Limpieza de oídos y uñas'] },
+        { id: 'senior', name: 'Plan Senior', icon: 'fa-heart-pulse', color: '#8E24AA', stage: '7+ años', price: 300,
+          items: ['Vacunas anuales de refuerzo', '4 consultas de control', '2 perfiles de laboratorio', 'Evaluación cardiológica básica', 'Control de peso y articulaciones'] },
+        { id: 'gato', name: 'Plan Felino', icon: 'fa-cat', color: '#FF7A00', stage: 'Todas las edades', price: 190,
+          items: ['Triple felina + rabia', 'Desparasitación interna y externa', '3 consultas de control', 'Perfil de laboratorio anual'] }
+    ];
+
+    // Esquemas QUO exactos solicitados
+    const QUO_MODELS = [
+        { id: 'guaros-vet', name: 'Guaros Vet (50% / 50%)', calc: (p) => `Inicial 50% ($${(p*0.5).toFixed(2)}) + 50% a los 15 días ($${(p*0.5).toFixed(2)})` },
+        { id: 'guaros-pets', name: 'Guaros Pets (40% / 30% / 30%)', calc: (p) => `Inicial 40% ($${(p*0.4).toFixed(2)}) + 30% a los 15d ($${(p*0.3).toFixed(2)}) + 30% a los 30d ($${(p*0.3).toFixed(2)})` }
+    ];
+    let currentQuoModel = 'guaros-vet';
+
     const OBJECTIONS = [
-        { q: '"Está caro"', a: 'Te entiendo. Por eso lo puedes fraccionar con QUO en cuotas quincenales: queda en menos de lo que cuesta un snack a la semana, y te evitas una emergencia que puede costar mucho más.' },
-        { q: '"Mi mascota está sana"', a: '¡Qué bueno! Justamente el plan es para que siga así. Muchas enfermedades no dan síntomas al inicio; el perfil de laboratorio nos ayuda a detectar a tiempo.' },
-        { q: '"Lo pienso y te aviso"', a: '¡Claro! Solo te comento que el bono de apertura (inscripción exonerada + laboratorio inicial) es solo para esta primera cohorte y quedan pocos cupos. ¿Te reservo uno mientras lo piensas?' }
+        { q: '"Está caro"', a: 'Te entiendo. Por eso lo puedes fraccionar con QUO en cómodas partes y te evitas una emergencia que puede costar mucho más.' },
+        { q: '"Mi mascota está sana"', a: '¡Qué bueno! Justamente el plan es para que siga así. Muchas enfermedades no dan síntomas al inicio.' },
+        { q: '"Lo pienso y te aviso"', a: '¡Claro! Solo te comento que el bono de apertura es solo para esta primera cohorte y quedan pocos cupos.' }
+    ];
+
+    const FAQ = [
+        { q: '¿Aplica para gatos?', a: 'Sí, tenemos el Plan Felino adaptado a sus necesidades.' },
+        { q: '¿Qué pasa si mi mascota se enferma?', a: 'Los afiliados tienen prioridad en agenda y seguimiento por WhatsApp.' },
+        { q: '¿Cómo funciona QUO?', a: 'Eliges tu plan y lo pagas fraccionado mediante los esquemas de Guaros Vet o Guaros Pets.' },
+        { q: '¿Cuánto dura el plan?', a: '12 meses desde la fecha de activación.' }
     ];
 
     const SLIDES = [
@@ -437,7 +493,7 @@
         { bg: 'light', kicker: 'EL PROBLEMA', title: 'Las emergencias llegan sin avisar', sub: '…y casi siempre a medianoche', note: 'Concientización preventiva' },
         { bg: 'navy', kicker: 'LA SOLUCIÓN', title: 'Cuidarlo antes de que se enferme', sub: 'Consultas · Vacunas · Laboratorio', note: 'Beneficios clínicos' },
         { bg: 'sunset', kicker: 'BONO APERTURA', title: 'Inscripción gratis + laboratorio inicial', sub: 'Solo primera cohorte', note: 'Oferta de lanzamiento' },
-        { bg: 'navy', kicker: 'PAGA CÓMODO', title: 'Cuotas quincenales con QUO', sub: 'Escribe PLAN al DM · 0426-1601079', note: 'Cierre con llamada a la acción' }
+        { bg: 'navy', kicker: 'PAGA CÓMODO', title: 'Financiamiento con QUO', sub: 'Escribe PLAN al DM · 0426-1601079', note: 'Cierre con llamada a la acción' }
     ];
 
     const STORIES = [
@@ -446,7 +502,7 @@
         { phase: 1, title: 'Detrás de cámaras', headline: 'Así es un día en Guaros Vet 🩺', body: 'Vacunas, controles, laboratorio y peluditos felices.', cta: 'Ubicación: Barquisimeto', bg: 'sunset', visual: 'Clips del día' },
         { phase: 1, title: 'Adelanto', headline: 'Mañana les cuento algo que vengo preparando hace meses 👀', body: 'Cuidar a tu mascota será más fácil.', cta: 'Cuenta regresiva', bg: 'navy', visual: 'Carpeta o sobre' },
         { phase: 2, title: 'Lanzamiento', headline: 'Llegó el Plan de Salud Preventiva 🎉', body: 'Consultas, vacunas y laboratorio en un solo plan anual.', cta: 'Escríbeme por WhatsApp', bg: 'sunset', visual: 'Carrusel de presentación' },
-        { phase: 2, title: 'Alianza QUO', headline: 'Págalo en cuotas quincenales con QUO 💳', body: 'Sin sustos ni pagos grandes de una sola vez.', cta: 'Escribe PLAN', bg: 'navy', visual: 'App QUO' },
+        { phase: 2, title: 'Alianza QUO', headline: 'Págalo fraccionado con QUO 💳', body: 'Sin sustos ni pagos grandes de una sola vez.', cta: 'Escribe PLAN', bg: 'navy', visual: 'App QUO' },
         { phase: 2, title: 'Preguntas', headline: 'Pregúntame lo que quieras del plan 👇', body: 'Respondo todas hoy en la noche.', cta: 'Caja de preguntas', bg: 'light', visual: 'Foto con mascota' },
         { phase: 2, title: 'Inscritos', headline: '¡Bienvenidos a la primera cohorte! 🐾', body: 'Ellos ya tienen su año protegido.', cta: '¿Y el tuyo?', bg: 'navy', visual: 'Mascotas inscritas' },
         { phase: 3, title: 'Seguimiento', headline: '¿Me escribiste y no te respondí? 🙈', body: 'Contesto uno a uno. Escríbeme de nuevo.', cta: 'WhatsApp', bg: 'light', visual: 'Selfie' },
@@ -463,27 +519,13 @@
         3: { name: 'Fase 3 · Cierre', color: '#DC2626' }
     };
 
-    let PLANS = [
-        { id: 'cachorro', name: 'Guaros Puppy (1er Año)', icon: 'fa-dog', color: '#00A3E0', stage: '2 a 12 meses', price: 160, obs: 'Ajuste de precio para pacientes >10kg', featured: true,
-          items: ['1 vacuna puppy', '4 vacunas séxtuples', '2 vacunas antirrábicas', 'Controles y desparasitaciones'] },
-        { id: 'adulto', name: 'Guaros Adulto (1-6 Años)', icon: 'fa-shield-dog', color: '#0B2545', stage: '1 a 6 años', price: 90, obs: 'Ajuste de precio para pacientes >10kg',
-          items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta de control'] },
-        { id: 'senior', name: 'Guaros Senior (7+ Años)', icon: 'fa-heart-pulse', color: '#8E24AA', stage: '7+ años', price: 155, obs: 'El costo de ecos/exámenes depende de terceros',
-          items: ['2 Vacunas anuales', '1 Profilaxis dental', '1 Consulta especializada'] },
-        { id: 'cat', name: 'Plan Guaros Cat (Anual)', icon: 'fa-cat', color: '#FF7A00', stage: 'Exclusivo felinos <5kg', price: 85, obs: 'Incluye protocolo quirúrgico de mínima invasión',
-          items: ['1 Triple Felina (Rortvac)', '1 Antirrábica anual', 'Evaluación quirúrgica'] }
-    ];
-    const QUO_OPTIONS = [4, 6, 12];
-    let planPrices = {}, quoN = 4;
-    const getPrice = (p) => planPrices[p.id] ?? p.price;
-    const fmt = (n) => '$' + (Math.round(n * 100) / 100).toLocaleString('es-VE', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
-
     const $ = (id) => document.getElementById(id);
     const store = {
         get(k, d) { try { const v = localStorage.getItem('gv-' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
         set(k, v) { try { localStorage.setItem('gv-' + k, JSON.stringify(v)); } catch {} }
     };
     const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const img = (file, w) => `img/${file}`;
 
     let toastTimer;
     function showToast(msg) {
@@ -493,17 +535,7 @@
         toastTimer = setTimeout(() => $('toast').classList.remove('toast-show'), 1800);
     }
     function copyToClipboardText(text) {
-        const done = () => showToast('¡Copiado al portapapeles!');
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text.trim()).then(done).catch(() => fallbackCopy(text, done));
-        } else fallbackCopy(text, done);
-    }
-    function fallbackCopy(text, cb) {
-        const ta = document.createElement('textarea');
-        ta.value = text.trim(); ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); cb(); } catch { showToast('No se pudo copiar'); }
-        ta.remove();
+        navigator.clipboard.writeText(text.trim()).then(() => showToast('¡Copiado al portapapeles!'));
     }
     function openWhatsAppFree(text) {
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text.trim())}`, '_blank');
@@ -536,18 +568,15 @@
     }
     function updateCupos() {
         const c = getCupos();
+        store.set('cupos', { total: c.total, sold: c.sold });
         $('cupos-restantes').textContent = c.left;
         $('cupos-bar').style.width = (c.sold / c.total * 100) + '%';
+        document.querySelectorAll('.cupos-num').forEach(el => el.textContent = c.left);
     }
     function updateWaScript() {
         const tutor = $('wa-tutor').value.trim() || '[Nombre del Tutor]';
         const pet = $('wa-pet').value.trim() || '[Nombre de la mascota]';
-        $('script-wa-fase3').textContent =
-`¡Hola ${tutor}! 👋 Espero que estés muy bien.
-Estuve revisando los registros en Guaros Vet y recordé que me preguntaste por el Plan de Salud Preventiva para ${pet}.
-Te cuento que ya estamos por cerrar los cupos de esta primera cohorte con el beneficio de apertura (exoneración de inscripción + perfil de laboratorio inicial). 🩺
-Puedes fraccionar el pago de forma cómoda en cuotas quincenales con la app QUO. 💳
-¿Te ayudo a activar su cupo hoy? 🐾`;
+        $('script-wa-fase3').textContent = `¡Hola ${tutor}! 👋 Espero que estés muy bien.\n\nEstuve revisando los registros de la semana en Guaros Vet y recordé que me preguntaste por el Plan de Salud Preventiva para ${pet}.\n\nTe cuento que ya estamos por cerrar los cupos de esta primera cohorte con el beneficio de apertura (exoneración de inscripción + perfil de laboratorio inicial). 🩺\n\n¿Te ayudo a activar su cupo hoy para dejarlo protegido de una vez? 🐾`;
     }
     function renderObjections() {
         $('objections').innerHTML = OBJECTIONS.map((o, i) => `
@@ -594,7 +623,7 @@ Puedes fraccionar el pago de forma cómoda en cuotas quincenales con la app QUO.
         });
     }
 
-    // STORIES & SUBIDA DE FOTOS
+    // STORIES
     let currentDay = 1, storyEdits = store.get('story-edits', {}), storiesDone = store.get('stories-done', {});
     function storyData(d) { return Object.assign({}, STORIES[d - 1], storyEdits[d] || {}); }
     function fillCupos(t) { return String(t).replace(/\{cupos\}/g, getCupos().left); }
@@ -610,22 +639,12 @@ Puedes fraccionar el pago de forma cómoda en cuotas quincenales con la app QUO.
         $('stories-done-count').textContent = Object.values(storiesDone).filter(Boolean).length;
     }
     function renderStoryPreview() {
-        const s = storyData(currentDay), light = s.bg === 'light', p = $('story-preview');
-        p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 bg-style-${s.bg} text-white p-6 flex flex-col justify-between text-center`;
-        
-        if (s.customImg) {
-            p.style.backgroundImage = `url(${s.customImg})`;
-            p.style.backgroundSize = 'cover';
-            p.style.backgroundPosition = 'center';
-            p.innerHTML = `<div class="font-display font-bold text-lg drop-shadow-md bg-black/50 p-3 rounded-xl">${esc(fillCupos(s.headline))}</div><div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold shadow-lg">${esc(fillCupos(s.cta))}</div>`;
-        } else {
-            p.style.backgroundImage = '';
-            p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 ${bgClass(s.bg)} p-6 flex flex-col justify-between text-center`;
-            p.innerHTML = `
-                <div class="font-display font-bold text-lg">${esc(fillCupos(s.headline))}</div>
-                <div class="text-xs opacity-90">${esc(fillCupos(s.body))}</div>
-                <div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold shadow-md">${esc(fillCupos(s.cta))}</div>`;
-        }
+        const s = storyData(currentDay), p = $('story-preview');
+        p.className = `insta-story-aspect rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-slate-900 ${bgClass(s.bg)} p-6 flex flex-col justify-between text-center`;
+        p.innerHTML = `
+            <div class="font-display font-bold text-lg">${esc(fillCupos(s.headline))}</div>
+            <div class="text-xs opacity-90">${esc(fillCupos(s.body))}</div>
+            <div class="bg-white text-[#0B2545] py-2 rounded-xl text-xs font-bold shadow-md">${esc(fillCupos(s.cta))}</div>`;
     }
     function renderStory() {
         const s = storyData(currentDay), ph = PHASES[s.phase];
@@ -636,38 +655,18 @@ Puedes fraccionar el pago de forma cómoda en cuotas quincenales con la app QUO.
         $('story-body').value = s.body;
         $('story-cta').value = s.cta;
         $('story-bg').value = s.bg;
+        $('story-visual').textContent = s.visual;
         $('story-done').checked = !!storiesDone[currentDay];
         renderStoryPreview();
     }
-    function selectDay(d) { currentDay = d; renderDayPicker(); renderStory(); }
+    function selectDay(d) { currentDay = d; store.set('story-day', d); renderDayPicker(); renderStory(); }
     function onStoryEdit() {
-        storyEdits[currentDay] = { ...(storyEdits[currentDay]||{}), headline: $('story-headline').value, body: $('story-body').value, cta: $('story-cta').value, bg: $('story-bg').value };
+        storyEdits[currentDay] = { headline: $('story-headline').value, body: $('story-body').value, cta: $('story-cta').value, bg: $('story-bg').value };
         store.set('story-edits', storyEdits);
         renderStoryPreview();
     }
-    function onStoryBgChange(val) {
-        storyEdits[currentDay] = { ...(storyEdits[currentDay]||{}), bg: val, customImg: null };
-        store.set('story-edits', storyEdits);
-        renderStory();
-    }
-    function uploadStoryCustomImg(evt) {
-        const file = evt.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                storyEdits[currentDay] = { ...(storyEdits[currentDay]||{}), customImg: e.target.result };
-                store.set('story-edits', storyEdits);
-                renderStory();
-                showToast('Foto cargada para esta Story');
-            }
-            reader.readAsDataURL(file);
-        }
-    }
     function resetStory() {
-        delete storyEdits[currentDay];
-        store.set('story-edits', storyEdits);
-        renderStory();
-        showToast('Story restaurada');
+        delete storyEdits[currentDay]; store.set('story-edits', storyEdits); renderStory(); showToast('Story restaurada');
     }
     function copyStory() {
         const s = storyData(currentDay);
@@ -685,138 +684,109 @@ Puedes fraccionar el pago de forma cómoda en cuotas quincenales con la app QUO.
         });
     }
 
-    // PLANES & QUO
+    // PLANES & QUO EXACTO
+    let planPrices = store.get('plan-prices', {});
+    const fmt = (n) => '$' + (Math.round(n * 100) / 100).toLocaleString('es-VE', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+
     function renderQuoOptions() {
-        $('quo-options').innerHTML = QUO_OPTIONS.map(n => `<button onclick="setQuo(${n})" class="px-3 py-1.5 rounded-lg text-xs font-bold border ${n === quoN ? 'bg-[#0B2545] text-white border-[#0B2545]' : 'bg-white text-slate-600 hover:bg-slate-50'}">${n} cuotas</button>`).join('');
+        $('quo-options').innerHTML = QUO_MODELS.map(m => `<button onclick="setQuoModel('${m.id}')" class="px-3 py-1.5 rounded-lg text-xs font-bold border ${m.id === currentQuoModel ? 'bg-[#0B2545] text-white border-[#0B2545]' : 'bg-white text-slate-600 hover:bg-slate-50'}">${m.name}</button>`).join('');
     }
-    function setQuo(n) { quoN = n; renderQuoOptions(); renderPlans(); }
+    function setQuoModel(id) { currentQuoModel = id; renderQuoOptions(); renderPlans(); }
 
     function renderPlans() {
+        const model = QUO_MODELS.find(m => m.id === currentQuoModel);
         $('plans-grid').innerHTML = PLANS.map(p => {
             const currentPrice = planPrices[p.id] ?? p.price;
-            const biweekly = (currentPrice / quoN).toFixed(2);
+            const quoText = model.calc(currentPrice);
             return `
-            <div id="plan-card-${p.id}" class="bg-white rounded-2xl shadow-sm border ${p.featured ? 'border-[#00A3E0] ring-2 ring-[#00A3E0]/30' : 'border-slate-200'} overflow-hidden flex flex-col justify-between">
+            <div class="bg-white rounded-2xl shadow-sm border ${p.featured ? 'border-[#00A3E0] ring-2 ring-[#00A3E0]/30' : 'border-slate-200'} overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="p-4 text-white relative" style="background:${p.color}">
+                    <div class="p-5 text-white relative" style="background:${p.color}">
                         ${p.featured ? '<span class="absolute top-3 right-3 text-[9px] font-extrabold bg-white text-[#0B2545] px-2 py-0.5 rounded-full">MÁS ELEGIDO</span>' : ''}
                         <i class="fa-solid ${p.icon} text-2xl opacity-90"></i>
-                        <input type="text" value="${esc(p.name)}" onchange="updatePlanField('${p.id}', 'name', this.value)" class="bg-transparent font-display font-bold text-lg mt-2 w-full focus:outline-none focus:border-b border-white">
+                        <h3 class="font-display font-bold text-xl mt-2">${esc(p.name)}</h3>
                         <p class="text-[11px] opacity-80">${esc(p.stage)}</p>
                     </div>
                     <div class="p-5 space-y-4">
                         <div>
                             <label class="text-[10px] text-slate-400 font-bold uppercase">Precio anual (USD)</label>
-                            <div class="flex items-center gap-1 font-display font-bold text-2xl text-[#0B2545]">$<input type="number" min="0" value="${currentPrice}" onchange="updatePlanField('${p.id}', 'price', parseFloat(this.value)||0)" class="w-24 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]"></div>
-                            <p class="text-xs text-orange-600 font-bold mt-1"><i class="fa-solid fa-credit-card"></i> ${quoN} cuotas de $${biweekly}</p>
+                            <div class="flex items-center gap-1 font-display font-bold text-3xl text-[#0B2545]">$<input type="number" min="0" value="${currentPrice}" onchange="setPrice('${p.id}', this.value)" class="w-24 bg-transparent border-b border-dashed border-slate-300 focus:outline-none focus:border-[#00A3E0]"></div>
+                            <p class="text-[11px] text-orange-600 font-bold mt-1 leading-snug"><i class="fa-solid fa-credit-card"></i> ${quoText}</p>
                         </div>
-                        <div>
-                            <input type="text" value="${esc(p.obs)}" onchange="updatePlanField('${p.id}', 'obs', this.value)" class="w-full text-[11px] text-slate-500 bg-slate-50 px-2 py-1 rounded border focus:outline-none">
-                        </div>
-                        <ul class="space-y-1.5">
-                            ${p.items.map((item, idx) => `
-                                <li class="flex items-center gap-1 text-xs text-slate-700">
-                                    <i class="fa-solid fa-check text-[#00A3E0] text-[10px]"></i>
-                                    <input type="text" value="${esc(item)}" onchange="updatePlanItem('${p.id}', ${idx}, this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#00A3E0] focus:outline-none py-0.5">
-                                    <button onclick="removePlanItem('${p.id}', ${idx})" class="text-red-400 hover:text-red-600 text-[10px] px-1"><i class="fa-solid fa-trash"></i></button>
-                                </li>
-                            `).join('')}
-                        </ul>
-                        <button onclick="addPlanItem('${p.id}')" class="text-[10px] font-bold text-[#00A3E0] hover:underline">+ Agregar ítem o examen</button>
+                        <ul class="text-[11px] text-slate-600 space-y-1.5">${p.items.map(i => `<li class="flex gap-2"><i class="fa-solid fa-check text-[#00A3E0] mt-0.5"></i>${esc(i)}</li>`).join('')}</ul>
                     </div>
                 </div>
-                <div class="p-3 bg-slate-50 border-t border-slate-100 grid grid-cols-3 gap-1.5">
-                    <button onclick="copyPlanText('${p.id}')" class="py-2 bg-slate-200 text-slate-700 font-bold rounded-lg text-[10px] hover:bg-slate-300"><i class="fa-solid fa-copy"></i> Texto</button>
-                    <button onclick="downloadPlanCardImage('${p.id}')" class="py-2 bg-emerald-600 text-white font-bold rounded-lg text-[10px] hover:bg-emerald-700"><i class="fa-solid fa-image"></i> Ficha PNG</button>
-                    <button onclick="sendPlanWhatsApp('${p.id}')" class="py-2 bg-[#25D366] text-white font-bold rounded-lg text-[10px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Enviar</button>
+                <div class="p-4 bg-slate-50 border-t border-slate-100 grid grid-cols-2 gap-2">
+                    <button onclick="copyToClipboardText(planMessage('${p.id}'))" class="py-2 bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] hover:bg-slate-300"><i class="fa-solid fa-copy"></i> Copiar ficha</button>
+                    <button onclick="openWhatsAppFree(planMessage('${p.id}'))" class="py-2 bg-[#25D366] text-white font-bold rounded-lg text-[11px] hover:brightness-95"><i class="fa-brands fa-whatsapp"></i> Enviar</button>
                 </div>
             </div>`;
         }).join('');
     }
 
-    function updatePlanField(id, field, val) {
-        const p = PLANS.find(x => x.id === id);
-        if(p) {
-            if(field === 'price') planPrices[id] = val;
-            else p[field] = val;
-            renderPlans();
-            showToast('Plan actualizado');
-        }
-    }
-    function updatePlanItem(id, idx, val) {
-        const p = PLANS.find(x => x.id === id);
-        if(p) { p.items[idx] = val; showToast('Servicio modificado'); }
-    }
-    function addPlanItem(id) {
-        const p = PLANS.find(x => x.id === id);
-        if(p) { p.items.push('Nuevo examen o servicio'); renderPlans(); }
-    }
-    function removePlanItem(id, idx) {
-        const p = PLANS.find(x => x.id === id);
-        if(p) { p.items.splice(idx, 1); renderPlans(); }
+    function setPrice(id, v) {
+        planPrices[id] = Math.max(0, parseFloat(v) || 0);
+        store.set('plan-prices', planPrices);
+        renderPlans();
     }
 
-    function getPlanFormattedText(id) {
+    function planMessage(id) {
         const p = PLANS.find(x => x.id === id);
         const currentPrice = planPrices[id] ?? p.price;
-        const biweekly = (currentPrice / quoN).toFixed(2);
+        const model = QUO_MODELS.find(m => m.id === currentQuoModel);
         return `🐾 *${p.name} · Guaros Vet*
 Etapa: ${p.stage}
 
 Incluye:
 ${p.items.map(i => '✅ ' + i).join('\n')}
 
-💵 Precio anual: $${currentPrice}
-💳 Con QUO: ${quoN} cuotas quincenales de $${biweekly}
-ℹ️ ${p.obs}
+💵 Precio anual: ${fmt(currentPrice)}
+💳 QUO (${model.name}): ${model.calc(currentPrice)}
 
 🎁 Bono de apertura: inscripción exonerada + perfil de laboratorio inicial.
 📍 Carrera 17 entre 45 y 46, Barquisimeto
-📲 Consultas: 0426-1601079`;
+📲 0426-1601079`;
     }
 
-    function copyPlanText(id) { copyToClipboardText(getPlanFormattedText(id)); }
-    function sendPlanWhatsApp(id) { openWhatsAppFree(getPlanFormattedText(id)); }
-    function downloadPlanCardImage(id) {
-        const card = $(`plan-card-${id}`);
-        showToast('Generando ficha PNG...');
-        html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
-            const a = document.createElement('a');
-            a.download = `plan-guaros-vet-${id}.png`;
-            a.href = canvas.toDataURL('image/png');
-            a.click();
-            showToast('¡Ficha descargada!');
-        });
+    // BRAND & GALLERY
+    function renderGallery() {
+        $('gallery').innerHTML = GALLERY.map(g => `
+            <button onclick="openLightbox('${g.file}', '${esc(g.title)}')" class="group text-left">
+                <div class="rounded-xl overflow-hidden bg-slate-100 border ${g.type === 'story' ? 'insta-story-aspect' : 'insta-slide-aspect'}">
+                    <img src="img/${g.file}" alt="${esc(g.title)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition">
+                </div>
+                <p class="text-[11px] font-bold text-[#0B2545] mt-1.5">${esc(g.title)}</p>
+                <p class="text-[10px] text-slate-400 capitalize">${g.type}</p>
+            </button>`).join('');
     }
-
-    // BANCO DE ARCHIVOS
-    function handleBrandFileUpload(evt) {
-        const files = evt.target.files, gallery = $('brand-gallery');
-        if (gallery.querySelector('p')) gallery.innerHTML = '';
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const div = document.createElement('div');
-                div.className = 'aspect-square rounded-xl overflow-hidden border bg-white shadow-sm relative group';
-                div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
-                gallery.appendChild(div);
-            }
-            reader.readAsDataURL(file);
-        });
-        showToast('Archivos subidos al banco');
+    function openLightbox(file, title) {
+        $('lightbox-img').src = 'img/' + file;
+        $('lightbox-img').alt = title;
+        $('lightbox-title').textContent = title;
+        $('lightbox-dl').href = 'img/' + file;
+        $('lightbox-dl').setAttribute('download', file);
+        $('lightbox').classList.remove('hidden'); $('lightbox').classList.add('flex');
+    }
+    function closeLightbox(e) {
+        if (e && e.target.closest('a')) return;
+        if (e && e.target !== $('lightbox') && e.target.tagName === 'IMG') return;
+        $('lightbox').classList.add('hidden'); $('lightbox').classList.remove('flex');
     }
 
     // INIT
     (function init() {
+        const c = store.get('cupos', null);
+        if (c) { $('cupos-total').value = c.total; $('cupos-vendidos').value = c.sold; }
         ['cupos-total', 'cupos-vendidos'].forEach(id => $(id).addEventListener('input', updateCupos));
         ['wa-tutor', 'wa-pet'].forEach(id => $(id).addEventListener('input', updateWaScript));
-        ['story-headline', 'story-body', 'story-cta'].forEach(id => $(id).addEventListener('input', onStoryEdit));
+        ['story-headline', 'story-body', 'story-cta', 'story-bg'].forEach(id => $(id).addEventListener('input', onStoryEdit));
         $('story-done').addEventListener('change', e => { storiesDone[currentDay] = e.target.checked; store.set('stories-done', storiesDone); renderDayPicker(); });
 
         updateWaScript(); renderObjections();
         renderSlide(); renderFaq();
         currentDay = store.get('story-day', 1); renderDayPicker(); renderStory();
         renderQuoOptions(); renderPlans();
+        renderGallery();
         updateCupos();
         switchTab(location.hash.slice(1) || 'phase3');
     })();
