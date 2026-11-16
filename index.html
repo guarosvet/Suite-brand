@@ -664,7 +664,7 @@
 
     <script>
     // =========================================================================
-    // CONFIGURACIÓN SUPABASE CLOUD (YA CONFIGURADA PARA TI)
+    // CONFIGURACIÓN SUPABASE CLOUD
     // =========================================================================
     const SUPABASE_URL = 'https://hlphbjqlwyxszenhtzwr.supabase.co'; 
     const SUPABASE_ANON_KEY = 'sb_publishable_tMF3r-yovr6TyBP9Zp-CQQ_qfna3hP8'; 
@@ -819,8 +819,18 @@
         }
     }
 
+    // CARGA INICIAL Y PERSISTENCIA DE SESIÓN
     window.addEventListener('DOMContentLoaded', async () => {
         await initCloudData();
+        const savedSession = localStorage.getItem('gv_session');
+        if (savedSession) {
+            try {
+                currentSession = JSON.parse(savedSession);
+                launchMainApp();
+            } catch(e) {
+                localStorage.removeItem('gv_session');
+            }
+        }
     });
 
     function buildDeterministicPetCode(petName, species, tutorCi) {
@@ -935,6 +945,7 @@
         window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(waMsg)}`, '_blank');
 
         currentSession = { role: 'tutor', patientId: newPatientObj.id };
+        localStorage.setItem('gv_session', JSON.stringify(currentSession));
         launchMainApp();
         showToast('¡Historia Clínica guardada en la nube!');
     }
@@ -948,12 +959,14 @@
             return showToast('Usuario o contraseña incorrectos');
         }
         currentSession = { role: 'tutor', patientId: found.id };
+        localStorage.setItem('gv_session', JSON.stringify(currentSession));
         launchMainApp();
         showToast(`Bienvenido, ${found.tutorName}`);
     }
 
     function enterGuestCatalog() {
         currentSession = { role: 'guest', patientId: null };
+        localStorage.setItem('gv_session', JSON.stringify(currentSession));
         launchMainApp();
     }
 
@@ -963,6 +976,7 @@
         const pwd = $('admin-login-pass').value.trim();
         if (usr === 'carlosvet' && pwd === 'GuarosVet2026*') {
             currentSession = { role: 'admin', patientId: null };
+            localStorage.setItem('gv_session', JSON.stringify(currentSession));
             launchMainApp();
             showToast('Sesión Médica Iniciada · Nube Sincronizada');
         } else {
@@ -972,6 +986,7 @@
 
     function logoutSystem() {
         currentSession = null;
+        localStorage.removeItem('gv_session');
         cart = [];
         $('main-app').classList.add('hidden');
         $('auth-gateway').classList.remove('hidden');
