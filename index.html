@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guaros Vet · Portal Clínico WSAVA, Fidelización & Carnet Digital</title>
-    <meta name="description" content="Portal oficial de Guaros Vet en Barquisimeto: protocolos WSAVA, carnet con puntos de fidelización, carga de foto, agenda y carpeta de pacientes.">
+    <title>Guaros Vet · Portal Clínico, Historia Médica & Club de Fidelización</title>
+    <meta name="description" content="Portal oficial de Guaros Vet en Barquisimeto: registro de historia clínica, carnet digital QR, puntos de fidelización, protocolos WSAVA y gestión de planes.">
     <link rel="icon" type="image/png" href="img/guaros-vet-logo.png">
     
     <!-- Tailwind CSS -->
@@ -54,516 +54,615 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- BARRA SUPERIOR / HEADER -->
-    <header class="hero-gradient text-white sticky top-0 z-50 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 bg-white rounded-full p-1 flex items-center justify-center shadow-md overflow-hidden">
-                    <img id="brand-logo" src="https://sistemia-ia.netlify.app/logo/1181544670" onerror="this.src='img/guaros-vet-logo.png'" alt="Guaros Vet" class="w-full h-full object-contain">
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="font-display font-bold text-lg sm:text-xl tracking-wide">GUAROS VET</h1>
-                        <span class="text-[10px] bg-white/20 backdrop-blur-sm text-white font-bold px-2 py-0.5 rounded-full uppercase">Barquisimeto</span>
+    <!-- =====================================================================
+         1. DASHBOARD DE INICIO (LOGIN / REGISTRO HISTORIA CLÍNICA / ADMIN)
+         ===================================================================== -->
+    <div id="auth-gateway" class="min-h-screen hero-gradient flex items-center justify-center p-4">
+        <div class="bg-white max-w-4xl w-full rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+            <!-- Columna Izquierda: Identidad -->
+            <div class="lg:col-span-5 bg-brandNavy text-white p-8 flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="w-16 h-16 bg-white rounded-2xl p-1.5 shadow-lg flex items-center justify-center">
+                        <img src="https://sistemia-ia.netlify.app/logo/1181544670" onerror="this.src='img/guaros-vet-logo.png'" alt="Guaros Vet" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-[11px] text-cyan-100 hidden sm:block">Medicina Veterinaria Basada en Evidencia (WSAVA) · @mv.carlosriguez</p>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <!-- Botón de Acceso al Dashboard de Administrador -->
-                <button onclick="openAdminLoginModal()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white/15 hover:bg-white/25 border border-white/25 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-lock text-amber-300"></i>
-                    <span>Acceso Admin</span>
-                </button>
-                <a href="https://wa.me/584261601079" target="_blank" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#25D366] hover:brightness-95 text-white shadow flex items-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-sm"></i>
-                    <span class="hidden sm:inline">0426-1601079</span>
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- BANNER DE PROMOCIÓN ACTIVA -->
-    <div id="promo-banner" class="bg-amber-50 border-b border-amber-200 px-4 py-2.5 text-center">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 text-xs text-amber-900">
-            <span class="px-2 py-0.5 bg-brandOrange text-white font-extrabold rounded-full text-[10px] uppercase">Beneficio Activo</span>
-            <span>Obtén hasta un <strong id="banner-discount-text">20% OFF</strong> en Planes de Salud Preventiva y Spa reservando antes del <strong id="banner-date-text">2026-11-18</strong>.</span>
-            <button id="edit-promo-btn" onclick="editPromoSettings()" class="hidden text-brandPrimary underline font-bold ml-2"><i class="fa-solid fa-pen"></i> Editar banner</button>
-        </div>
-    </div>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
-
-        <!-- NAVEGACIÓN PRINCIPAL -->
-        <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-3">
-            <button onclick="switchSection('booking')" id="tab-btn-booking" class="sec-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
-                <i class="fa-solid fa-calendar-check"></i> Agendar & Cotizar
-            </button>
-            <button onclick="switchSection('wsava')" id="tab-btn-wsava" class="sec-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
-                <i class="fa-solid fa-syringe"></i> Protocolos WSAVA
-            </button>
-            <button onclick="switchSection('petcode')" id="tab-btn-petcode" class="sec-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
-                <i class="fa-solid fa-id-card-clip"></i> Carnet & Fidelización QR
-            </button>
-            <button onclick="switchSection('patients')" id="tab-btn-patients" class="sec-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
-                <i class="fa-solid fa-folder-open"></i> Carpeta de Pacientes
-            </button>
-            <button onclick="switchSection('plans')" id="tab-btn-plans" class="sec-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
-                <i class="fa-solid fa-shield-dog"></i> Planes & Spa (QUO)
-            </button>
-        </div>
-
-        <!-- SECCIÓN 1: AGENDAR CITA, CATÁLOGO Y COTIZADOR -->
-        <section id="sec-booking" class="sec-panel grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div class="lg:col-span-7 space-y-5">
-                <div class="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                        <h2 class="font-display font-bold text-2xl text-brandNavy">Servicios Clínicos & Estética</h2>
-                        <p class="text-xs text-slate-500">Selecciona uno o varios servicios para armar tu presupuesto y agendar directo en consultorio.</p>
+                        <span class="px-2.5 py-0.5 bg-brandCyan/20 text-cyan-300 text-[10px] font-extrabold uppercase tracking-wider rounded-full">Barquisimeto · Lara</span>
+                        <h1 class="font-display font-bold text-3xl mt-2">GUAROS VET</h1>
+                        <p class="text-xs text-slate-300 mt-1">Portal Clínico Digital, Carnet de Fidelización y Gestión de Salud Preventiva WSAVA.</p>
                     </div>
-                    <button id="btn-add-service" onclick="openServiceModal()" class="hidden px-3.5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs hover:brightness-110 shadow flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus"></i> Nuevo Servicio
+                </div>
+
+                <div class="space-y-3 text-xs text-slate-300 border-t border-white/15 pt-4">
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-id-card text-amber-400"></i> Carnet Digital QR y foto de tu mascota</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-star text-amber-400"></i> Acumula puntos y canjea consultas o baños gratis</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-calendar-check text-amber-400"></i> Seguimiento en tiempo real de tus planes y vacunas</p>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="switchAuthTab('admin')" class="w-full py-2.5 bg-white/10 hover:bg-white/20 text-amber-300 border border-amber-300/30 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-user-doctor"></i> Acceso Médico / Administración
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Formularios -->
+            <div class="lg:col-span-7 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+                <!-- Selector de Pestañas -->
+                <div class="flex gap-2 border-b border-slate-200 pb-3 mb-5">
+                    <button onclick="switchAuthTab('login')" id="auth-tab-login" class="px-4 py-2 rounded-xl text-xs font-bold bg-brandPrimary text-white shadow">Iniciar Sesión Tutor</button>
+                    <button onclick="switchAuthTab('register')" id="auth-tab-register" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Crear Cuenta + Historia</button>
+                    <button onclick="switchAuthTab('admin')" id="auth-tab-admin" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 hidden">Admin</button>
+                </div>
+
+                <!-- FORMULARIO 1: LOGIN TUTOR -->
+                <div id="auth-form-login" class="space-y-4">
+                    <div>
+                        <h2 class="font-display font-bold text-2xl text-brandNavy">Bienvenido de vuelta</h2>
+                        <p class="text-xs text-slate-500">Ingresa con el usuario y clave que creaste para tu mascota.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block text-xs font-semibold text-slate-700">Usuario o Cédula del Tutor *
+                            <input id="login-tutor-user" type="text" placeholder="Ej. maria.perez" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold">
+                        </label>
+                        <label class="block text-xs font-semibold text-slate-700">Contraseña *
+                            <input id="login-tutor-pass" type="password" placeholder="••••••••" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm">
+                        </label>
+                    </div>
+                    <button onclick="loginTutor()" class="w-full py-3 bg-brandPrimary hover:brightness-110 text-white font-bold rounded-xl text-sm shadow-lg transition">
+                        Entrar a mi Portal Guaros Vet
+                    </button>
+                    <div class="pt-2 text-center">
+                        <button onclick="enterGuestCatalog()" class="text-xs text-slate-500 hover:text-brandPrimary underline font-semibold">
+                            Explorar catálogo de servicios sin iniciar sesión
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO 2: REGISTRO HISTORIA CLÍNICA DEL TUTOR Y PACIENTE -->
+                <div id="auth-form-register" class="hidden space-y-4">
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-brandNavy">Apertura de Historia Clínica & Cuenta</h2>
+                        <p class="text-xs text-slate-500">Completa los datos requeridos para generar el expediente de tu mascota y tu usuario.</p>
+                    </div>
+
+                    <div class="bg-blue-50/70 p-3.5 rounded-2xl border border-blue-100 space-y-2.5">
+                        <p class="text-[11px] font-extrabold uppercase text-brandPrimary"><i class="fa-solid fa-user"></i> 1. Datos del Tutor y Acceso</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <label class="text-[11px] font-semibold text-slate-700">Nombre y Apellido del Tutor *
+                                <input id="reg-tutor-name" type="text" placeholder="Ej. María Pérez" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Cédula / ID *
+                                <input id="reg-tutor-ci" type="text" placeholder="Ej. V-24123456" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Teléfono WhatsApp *
+                                <input id="reg-tutor-phone" type="text" placeholder="Ej. 0414-5551234" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Dirección / Sector *
+                                <input id="reg-tutor-addr" type="text" placeholder="Ej. Nueva Segovia, Barquisimeto" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Usuario de Acceso *
+                                <input id="reg-username" type="text" placeholder="Ej. mariaperez" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs font-bold">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Crea tu Contraseña *
+                                <input id="reg-password" type="password" placeholder="Mínimo 4 caracteres" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs font-bold">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-100 space-y-2.5">
+                        <p class="text-[11px] font-extrabold uppercase text-brandOrange"><i class="fa-solid fa-paw"></i> 2. Ficha Clínica del Paciente</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <label class="text-[11px] font-semibold text-slate-700">Nombre de la Mascota *
+                                <input id="reg-pet-name" type="text" placeholder="Ej. Max" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs font-bold">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Especie *
+                                <select id="reg-pet-species" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                                    <option value="CAN">Canino (Perro)</option>
+                                    <option value="FEL">Felino (Gato)</option>
+                                    <option value="EXO">Exótico / Otro</option>
+                                </select>
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Raza y Color *
+                                <input id="reg-pet-breed" type="text" placeholder="Ej. Mestizo / Miel" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Sexo y Estado Reproductivo
+                                <select id="reg-pet-sex" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                                    <option value="Macho Entero">Macho Entero</option>
+                                    <option value="Macho Castrado">Macho Castrado</option>
+                                    <option value="Hembra Entera">Hembra Entera</option>
+                                    <option value="Hembra Esterilizada">Hembra Esterilizada</option>
+                                </select>
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Fecha de Nacimiento (Aprox.)
+                                <input id="reg-pet-dob" type="date" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Peso Actual (Kg)
+                                <input id="reg-pet-weight" type="number" step="0.1" placeholder="Ej. 12.5" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Última Vacuna (Fecha)
+                                <input id="reg-pet-vaccine" type="date" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Última Desparasitación
+                                <input id="reg-pet-deworm" type="date" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Código Microchip (Si posee)
+                                <input id="reg-pet-chip" type="text" placeholder="Opcional" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs font-mono">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Alergias / Patologías Previas
+                                <input id="reg-pet-allergies" type="text" placeholder="Ninguna conocida" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                        </div>
+                    </div>
+
+                    <button onclick="registerTutorAccount()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm shadow-lg transition">
+                        Crear Historia Clínica y Generar Carnet
                     </button>
                 </div>
 
-                <div class="flex flex-wrap gap-1.5" id="category-filters"></div>
-                <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                <!-- FORMULARIO 3: LOGIN ADMINISTRADOR -->
+                <div id="auth-form-admin" class="hidden space-y-4">
+                    <div>
+                        <h2 class="font-display font-bold text-2xl text-brandNavy">Panel de Control Médico</h2>
+                        <p class="text-xs text-slate-500">Acceso exclusivo para el Dr. Carlos Rodríguez (Edición de precios, carpeta de pacientes, aprobación de planes y bonos).</p>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block text-xs font-semibold text-slate-700">Usuario Administrador
+                            <input id="admin-login-user" type="text" value="carlosvet" class="mt-1 w-full px-3.5 py-2.5 border rounded-xl text-sm font-bold bg-slate-50">
+                        </label>
+                        <label class="block text-xs font-semibold text-slate-700">Clave de Administración
+                            <input id="admin-login-pass" type="password" placeholder="Ingresa la clave maestra" class="mt-1 w-full px-3.5 py-2.5 border rounded-xl text-sm font-bold">
+                        </label>
+                    </div>
+                    <button onclick="loginAdmin()" class="w-full py-3 bg-brandNavy hover:brightness-110 text-white font-bold rounded-xl text-sm shadow-lg transition">
+                        Ingresar como Administrador
+                    </button>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Resumen de Reserva -->
-            <div class="lg:col-span-5 bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-5 sticky top-20">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                    <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
-                        <i class="fa-solid fa-receipt text-brandPrimary"></i> Resumen de Reserva
-                    </h3>
-                    <span id="selected-count" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-brandPrimary">0 seleccionados</span>
+    <!-- =====================================================================
+         2. APLICACIÓN PRINCIPAL (VISTA TUTOR O VISTA ADMINISTRADOR)
+         ===================================================================== -->
+    <div id="main-app" class="hidden flex-1 flex flex-col">
+
+        <!-- HEADER -->
+        <header class="hero-gradient text-white sticky top-0 z-50 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-full p-1 flex items-center justify-center shadow-md overflow-hidden">
+                        <img src="https://sistemia-ia.netlify.app/logo/1181544670" onerror="this.src='img/guaros-vet-logo.png'" alt="Guaros Vet" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="font-display font-bold text-lg tracking-wide">GUAROS VET</h1>
+                            <span id="role-badge" class="text-[10px] bg-white/20 text-white font-bold px-2 py-0.5 rounded-full uppercase">Tutor</span>
+                        </div>
+                        <p id="header-user-greeting" class="text-[11px] text-cyan-100">Bienvenido al portal clínico</p>
+                    </div>
                 </div>
 
-                <div class="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
-                    <p class="text-[11px] font-extrabold uppercase tracking-wider text-brandPrimary flex items-center gap-1.5">
-                        <i class="fa-solid fa-paw"></i> Identificación del Paciente
-                    </p>
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <label class="text-[11px] font-semibold text-slate-600">Nombre de la Mascota *
-                            <input id="book-pet-name" type="text" placeholder="Ej. Max" oninput="syncPetCodeFromBooking()" class="mt-1 w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-brandNavy focus:outline-none focus:border-brandPrimary">
-                        </label>
-                        <label class="text-[11px] font-semibold text-slate-600">Especie
-                            <select id="book-pet-species" onchange="syncPetCodeFromBooking()" class="mt-1 w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold text-brandNavy">
-                                <option value="CAN">Canino (Perro)</option>
-                                <option value="FEL">Felino (Gato)</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <label class="text-[11px] font-semibold text-slate-600">Nombre del Tutor *
-                            <input id="book-tutor-name" type="text" placeholder="Ej. Carlos" oninput="syncPetCodeFromBooking()" class="mt-1 w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs">
-                        </label>
-                        <label class="text-[11px] font-semibold text-slate-600">Fecha deseada
-                            <input id="book-date" type="date" class="mt-1 w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs">
-                        </label>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <a href="https://wa.me/584261601079" target="_blank" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#25D366] hover:brightness-95 text-white shadow flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span class="hidden sm:inline">0426-1601079</span>
+                    </a>
+                    <button onclick="logoutSystem()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white/15 hover:bg-red-500 text-white border border-white/25 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                    </button>
+                </div>
+            </div>
+        </header>
 
-                    <div class="flex items-center justify-between bg-brandNavy text-white px-3.5 py-2.5 rounded-xl mt-2">
+        <!-- BANNER PROMOCIÓN / BONO FIDELIZACIÓN -->
+        <div id="promo-banner" class="bg-amber-50 border-b border-amber-200 px-4 py-2 text-center">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 text-xs text-amber-900">
+                <span class="px-2 py-0.5 bg-brandOrange text-white font-extrabold rounded-full text-[10px] uppercase">Club Guaros Vet</span>
+                <span id="promo-banner-text">Acumula <strong>5 puntos por cada US$ 1</strong> en servicios y canjea consultas, hematologías y baños gratis.</span>
+            </div>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+            <!-- NAVEGACIÓN DINÁMICA SEGÚN ROL -->
+            <div id="main-nav-tabs" class="flex flex-wrap gap-2 border-b border-slate-200 pb-3"></div>
+
+            <!-- ===============================================================
+                 TAB A: CATÁLOGO DE SERVICIOS & PRODUCTOS + COTIZADOR
+                 =============================================================== -->
+            <section id="sec-catalog" class="sec-panel hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                            <p class="text-[9px] uppercase tracking-wider text-cyan-300 font-bold">Código Único Paciente</p>
-                            <p id="live-pet-code" class="font-mono font-extrabold text-sm tracking-widest">GV-CAN-MAS-0000</p>
+                            <h2 class="font-display font-bold text-2xl text-brandNavy">Catálogo de Servicios y Productos</h2>
+                            <p class="text-xs text-slate-500">Cada servicio suma puntos proporcionales a tu carnet de fidelización.</p>
                         </div>
-                        <button onclick="copyToClipboard($('live-pet-code').innerText)" class="px-2.5 py-1 bg-white/15 hover:bg-white/25 rounded-lg text-[10px] font-bold">
-                            <i class="fa-solid fa-copy"></i> Copiar
+                        <button id="btn-admin-add-service" onclick="openServiceModal()" class="hidden px-3.5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs hover:brightness-110 shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Añadir Servicio / Producto
                         </button>
                     </div>
+
+                    <div class="flex flex-wrap gap-1.5" id="category-filters"></div>
+                    <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 </div>
 
-                <div id="cart-items" class="space-y-2 max-h-48 overflow-y-auto pr-1">
-                    <p class="text-xs text-slate-400 text-center py-4 italic">Aún no has seleccionado servicios del catálogo.</p>
-                </div>
-
-                <div class="border-t border-slate-100 pt-3 space-y-2 text-xs">
-                    <div class="flex justify-between text-slate-500">
-                        <span>Subtotal:</span>
-                        <span id="cart-subtotal" class="font-semibold">US$ 0.00</span>
-                    </div>
-                    <div class="flex items-center justify-between text-emerald-700">
-                        <label class="flex items-center gap-1.5 cursor-pointer font-semibold">
-                            <input type="checkbox" id="apply-promo-check" checked onchange="renderCart()" class="accent-brandPrimary w-3.5 h-3.5">
-                            <span>Aplicar Bono (<span id="cart-discount-pct">20</span>%):</span>
-                        </label>
-                        <span id="cart-discount-amt" class="font-bold">- US$ 0.00</span>
-                    </div>
-                    <div class="flex justify-between items-center text-base font-display font-bold text-brandNavy pt-2 border-t border-dashed border-slate-200">
-                        <span>Total Estimado:</span>
-                        <span id="cart-total" class="text-xl text-brandPrimary">US$ 0.00</span>
-                    </div>
-                </div>
-
-                <button onclick="sendBookingToWhatsApp()" class="w-full py-3.5 bg-[#25D366] hover:brightness-95 text-white font-bold rounded-2xl text-sm shadow-lg transition flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-lg"></i> Confirmar Reserva por WhatsApp
-                </button>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 2: PROTOCOLOS WSAVA -->
-        <section id="sec-wsava" class="sec-panel hidden space-y-6">
-            <div class="hero-gradient text-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-3">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-wider">
-                        <i class="fa-solid fa-earth-americas"></i> Guías WSAVA · Adaptación Latinoamérica y el Caribe
-                    </span>
-                    <span class="text-xs font-semibold text-cyan-200">Endemicidad Tropical: Parvovirus, Distemper, Rabia & Leptospira</span>
-                </div>
-                <h2 class="font-display font-bold text-2xl sm:text-3xl">Protocolos Clínicos de Inmunización por Etapa Fisiológica</h2>
-                <p class="text-xs sm:text-sm text-cyan-50 max-w-4xl leading-relaxed">
-                    En regiones endémicas de Latinoamérica y el Caribe, la alta carga viral ambiental y la interferencia de anticuerpos maternos (MDA) exigen culminar las primovacunaciones a las <strong>16 semanas o más</strong>, clasificando los biológicos en <strong>Esenciales (Core)</strong> y <strong>No Esenciales (Non-Core)</strong> según el riesgo epidemiológico de cada paciente.
-                </p>
-            </div>
-
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                    <div>
+                <!-- Resumen de Solicitud -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4 sticky top-20">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
-                            <i class="fa-solid fa-calculator text-brandPrimary"></i> Calculadora de Cronograma Vacunal WSAVA
+                            <i class="fa-solid fa-receipt text-brandPrimary"></i> Resumen de Cita / Pedido
                         </h3>
-                        <p class="text-xs text-slate-500">Ingresa los datos del paciente para generar fechas exactas de inmunización y enviárselas al tutor.</p>
+                        <span id="selected-count" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-brandPrimary">0 ítems</span>
                     </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end">
-                    <label class="text-xs font-semibold text-slate-700">Nombre del Paciente
-                        <input id="ws-calc-pet" type="text" placeholder="Ej. Toby" class="mt-1 w-full px-3 py-2 border border-slate-300 rounded-xl text-xs font-bold">
-                    </label>
-                    <label class="text-xs font-semibold text-slate-700">Perfil Clínico WSAVA
-                        <select id="ws-calc-profile" class="mt-1 w-full px-3 py-2 border border-slate-300 rounded-xl text-xs font-semibold">
-                            <option value="can-puppy">Canino Cachorro (Primovacunación)</option>
-                            <option value="can-adult">Canino Adulto (1 - 7 años)</option>
-                            <option value="can-senior">Canino Geriatra (+7 años)</option>
-                            <option value="can-pregnant">Canina Gestante / Pre-Servicio</option>
-                            <option value="fel-kitten">Felino Cachorro (Primovacunación)</option>
-                            <option value="fel-adult">Felino Adulto (1 - 7 años)</option>
-                            <option value="fel-senior">Felino Geriatra (+7 años)</option>
-                        </select>
-                    </label>
-                    <label class="text-xs font-semibold text-slate-700">Fecha de Inicio / Primera Dosis
-                        <input id="ws-calc-start" type="date" class="mt-1 w-full px-3 py-2 border border-slate-300 rounded-xl text-xs">
-                    </label>
-                    <button onclick="generateWsavaSchedule()" class="w-full py-2.5 bg-brandPrimary hover:brightness-110 text-white font-bold rounded-xl text-xs shadow flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Calcular Fechas
+
+                    <div id="cart-items" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                        <p class="text-xs text-slate-400 text-center py-4 italic">Selecciona servicios o productos del catálogo.</p>
+                    </div>
+
+                    <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200/80 flex items-center justify-between text-xs">
+                        <span class="font-bold text-amber-900"><i class="fa-solid fa-star text-brandOrange"></i> Puntos a ganar en esta visita:</span>
+                        <span id="cart-points-earned" class="font-display font-bold text-base text-brandOrange">+0 Pts</span>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-3 space-y-2 text-xs">
+                        <div class="flex justify-between text-slate-500">
+                            <span>Subtotal:</span>
+                            <span id="cart-subtotal" class="font-semibold">US$ 0.00</span>
+                        </div>
+                        <div id="cart-bonus-row" class="hidden flex justify-between text-emerald-700 font-bold">
+                            <span>Bono Fidelización Autorizado (<span id="cart-bonus-pct">0</span>%):</span>
+                            <span id="cart-discount-amt">- US$ 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-base font-display font-bold text-brandNavy pt-2 border-t border-dashed border-slate-200">
+                            <span>Total Estimado:</span>
+                            <span id="cart-total" class="text-xl text-brandPrimary">US$ 0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-2">
+                        <label class="text-[11px] font-semibold text-slate-600">Fecha deseada en consultorio:
+                            <input id="book-date" type="date" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs">
+                        </label>
+                    </div>
+
+                    <button onclick="sendBookingToWhatsApp()" class="w-full py-3.5 bg-[#25D366] hover:brightness-95 text-white font-bold rounded-2xl text-sm shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Solicitar por WhatsApp
                     </button>
                 </div>
-                <div id="ws-calc-output" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3"></div>
-            </div>
+            </section>
 
-            <div class="flex flex-wrap gap-1.5" id="wsava-filter-bar"></div>
-            <div id="wsava-protocols-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-        </section>
+            <!-- ===============================================================
+                 TAB B: CARNET DIGITAL, PUNTOS & TABLA DE PREMIOS PROPORCIONAL
+                 =============================================================== -->
+            <section id="sec-carnet" class="sec-panel hidden space-y-6">
+                <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-6 space-y-4">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-brandPrimary font-bold rounded-full text-xs">
+                            <i class="fa-solid fa-id-card"></i> Identificación & Club Guaros Vet
+                        </span>
+                        <h2 class="font-display font-bold text-2xl text-brandNavy">Carnet Digital de tu Mascota</h2>
+                        <p class="text-xs text-slate-600">Sube la foto de tu mascota para personalizar su carnet oficial, descarga la imagen en alta resolución y revisa cuántos puntos te faltan para tu próximo premio.</p>
 
-        <!-- SECCIÓN 3: CARNET & FIDELIZACIÓN QR -->
-        <section id="sec-petcode" class="sec-panel hidden space-y-6">
-            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-6 space-y-4">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-brandPrimary font-bold rounded-full text-xs">
-                        <i class="fa-solid fa-qrcode"></i> Sistema de Fidelización Guaros Vet
-                    </span>
-                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-brandNavy">Carnet Digital, Puntos & Foto de Paciente</h2>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Crea el identificador clínico único de la mascota, sube su foto real, acumula puntos por visitas, registra referidos de amigos y genera el carnet digital de fidelización con código QR.
-                    </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <label class="text-xs font-semibold text-slate-700 sm:col-span-2">Subir / Cambiar Foto de la Mascota
+                                <input id="tutor-photo-upload" type="file" accept="image/*" onchange="handleTutorPhotoUpload(event)" class="mt-1 w-full px-3 py-2 border border-slate-300 rounded-xl text-xs bg-slate-50">
+                            </label>
+                            <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                                <p class="text-[10px] uppercase font-bold text-slate-400">Puntos Acumulados</p>
+                                <p id="tutor-points-balance" class="font-display font-bold text-2xl text-brandOrange">0 Pts</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                                <p class="text-[10px] uppercase font-bold text-slate-400">Bono de Descuento</p>
+                                <p id="tutor-bonus-status" class="font-display font-bold text-lg text-emerald-600">Estándar</p>
+                            </div>
+                        </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                        <label class="text-xs font-semibold text-slate-700">Nombre de la Mascota *
-                            <input id="cg-pet-name" type="text" placeholder="Ej. Luna" oninput="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-bold text-brandNavy">
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Especie
-                            <select id="cg-species" onchange="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold">
-                                <option value="CAN">Canino (Perro)</option>
-                                <option value="FEL">Felino (Gato)</option>
-                                <option value="EXO">Exótico / Otro</option>
-                            </select>
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Raza / Color
-                            <input id="cg-breed" type="text" placeholder="Ej. Mestizo / Dorado" oninput="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs">
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Nombre del Tutor *
-                            <input id="cg-tutor" type="text" placeholder="Ej. María Pérez" oninput="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs">
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Subir Foto de la Mascota
-                            <input id="cg-photo-file" type="file" accept="image/*" onchange="handlePetPhotoUpload(event)" class="mt-1 w-full px-2 py-1.5 border border-slate-300 rounded-xl text-xs bg-slate-50">
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Código Microchip (Opcional)
-                            <input id="cg-microchip" type="text" placeholder="Ej. 985142003921" oninput="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono">
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Puntos de Fidelización *
-                            <input id="cg-points" type="number" min="0" value="100" oninput="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold text-amber-600">
-                        </label>
-                        <label class="text-xs font-semibold text-slate-700">Amigos Invitados (Referidos) *
-                            <input id="cg-referrals" type="number" min="0" value="2" oninput="generatePetIdentityCard()" class="mt-1 w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold text-emerald-600">
-                        </label>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <button onclick="downloadPetCardPNG()" class="px-4 py-2.5 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 shadow flex items-center gap-1.5">
+                                <i class="fa-solid fa-download"></i> Descargar Carnet PNG
+                            </button>
+                            <button onclick="sharePetCodeWhatsApp()" class="px-4 py-2.5 bg-[#25D366] text-white font-bold rounded-xl text-xs hover:brightness-95 shadow flex items-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp"></i> Compartir Carnet
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <button onclick="savePetToHistory()" class="px-4 py-2.5 bg-brandPrimary text-white font-bold rounded-xl text-xs hover:brightness-110 shadow flex items-center gap-1.5">
-                            <i class="fa-solid fa-floppy-disk"></i> Guardar en Carpeta Pacientes
-                        </button>
-                        <button onclick="downloadPetCardPNG()" class="px-4 py-2.5 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 shadow flex items-center gap-1.5">
-                            <i class="fa-solid fa-download"></i> Descargar Carnet PNG
-                        </button>
-                        <button onclick="sharePetCodeWhatsApp()" class="px-4 py-2.5 bg-[#25D366] text-white font-bold rounded-xl text-xs hover:brightness-95 shadow flex items-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Enviar al Tutor
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Carnet Digital con Foto y Puntos -->
-                <div class="lg:col-span-6 flex flex-col items-center">
-                    <div id="pet-id-card" class="w-full max-w-md rounded-3xl overflow-hidden shadow-2xl hero-gradient text-white p-6 relative border-4 border-white">
-                        <div class="flex items-center justify-between border-b border-white/20 pb-3">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-10 h-10 bg-white rounded-full p-1 flex items-center justify-center">
-                                    <img src="https://sistemia-ia.netlify.app/logo/1181544670" onerror="this.src='img/guaros-vet-logo.png'" alt="Logo" class="w-full h-full object-contain">
+                    <!-- Vista Previa Carnet -->
+                    <div class="lg:col-span-6 flex justify-center">
+                        <div id="pet-id-card" class="w-full max-w-md rounded-3xl overflow-hidden shadow-2xl hero-gradient text-white p-6 relative border-4 border-white">
+                            <div class="flex items-center justify-between border-b border-white/20 pb-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-10 h-10 bg-white rounded-full p-1 flex items-center justify-center">
+                                        <img src="https://sistemia-ia.netlify.app/logo/1181544670" onerror="this.src='img/guaros-vet-logo.png'" alt="Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <p class="font-display font-bold text-base leading-none">GUAROS VET</p>
+                                        <p class="text-[10px] text-cyan-200">Carnet Oficial & Fidelización · Lara</p>
+                                    </div>
                                 </div>
+                                <span id="card-species-badge" class="px-2.5 py-1 bg-white/25 rounded-full text-[10px] font-extrabold uppercase">CANINO</span>
+                            </div>
+
+                            <div class="py-4 flex items-center gap-4">
+                                <div class="w-20 h-20 rounded-2xl bg-white/20 border-2 border-white/40 overflow-hidden shrink-0 flex items-center justify-center shadow-md">
+                                    <img id="card-pet-photo" src="" style="display:none;" alt="Foto" class="w-full h-full object-cover">
+                                    <div id="card-pet-placeholder" class="w-full h-full flex items-center justify-center text-white/80 text-2xl"><i class="fa-solid fa-paw"></i></div>
+                                </div>
+                                <div class="space-y-1 flex-1 min-w-0">
+                                    <p class="text-[9px] uppercase tracking-widest text-cyan-200 font-bold">Paciente Registrado</p>
+                                    <h3 id="card-pet-name" class="font-display font-bold text-2xl tracking-wide truncate">MASCOTA</h3>
+                                    <p id="card-breed" class="text-[11px] text-slate-200 truncate">Raza / Color</p>
+                                    <p class="text-[11px] text-cyan-100 truncate"><i class="fa-solid fa-user text-[9px]"></i> Tutor: <strong id="card-tutor">Tutor</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="bg-brandNavy/80 backdrop-blur-sm rounded-2xl p-3 flex items-center justify-between border border-white/15">
                                 <div>
-                                    <p class="font-display font-bold text-base leading-none">GUAROS VET</p>
-                                    <p class="text-[10px] text-cyan-200">Club de Fidelización & Salud · Lara</p>
+                                    <p class="text-[9px] uppercase tracking-widest text-cyan-300 font-bold">Código Clínico Único</p>
+                                    <p id="card-generated-code" class="font-mono font-extrabold text-sm tracking-wider text-amber-300">GV-CAN-XXX-0000</p>
+                                    <p id="card-points-badge" class="text-[10px] text-emerald-300 font-bold mt-0.5">🌟 0 Puntos Acumulados</p>
+                                </div>
+                                <div class="bg-white p-1.5 rounded-xl shadow-lg shrink-0">
+                                    <div id="pet-qrcode"></div>
                                 </div>
                             </div>
-                            <span id="card-species-badge" class="px-2.5 py-1 bg-white/25 rounded-full text-[10px] font-extrabold uppercase tracking-wider">CANINO</span>
-                        </div>
 
-                        <div class="py-4 flex items-center gap-4">
-                            <!-- Foto del Paciente -->
-                            <div class="w-20 h-20 rounded-2xl bg-white/20 border-2 border-white/40 overflow-hidden shrink-0 flex items-center justify-center shadow-md">
-                                <img id="card-pet-photo" src="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" alt="Foto" class="w-full h-full object-cover">
-                                <div class="hidden w-full h-full items-center justify-center text-white/70 text-2xl"><i class="fa-solid fa-paw"></i></div>
+                            <div class="mt-3 flex justify-between items-center text-[10px] text-cyan-100/80">
+                                <span>Carrera 17 e/ 45 y 46, Barquisimeto</span>
+                                <span>0426-1601079</span>
                             </div>
-                            <div class="space-y-1 flex-1 min-w-0">
-                                <p class="text-[9px] uppercase tracking-widest text-cyan-200 font-bold">Paciente VIP</p>
-                                <h3 id="card-pet-name" class="font-display font-bold text-2xl tracking-wide truncate">MASCOTA</h3>
-                                <p id="card-breed" class="text-[11px] text-slate-200 truncate">Raza no especificada</p>
-                                <p class="text-[11px] text-cyan-100 truncate"><i class="fa-solid fa-user text-[9px]"></i> <strong id="card-tutor">Sin tutor</strong></p>
-                            </div>
-                        </div>
-
-                        <!-- Puntos y Amigos Invitados (Fidelización) -->
-                        <div class="grid grid-cols-2 gap-2 mb-3">
-                            <div class="bg-white/15 backdrop-blur-sm rounded-xl p-2.5 text-center border border-white/20">
-                                <p class="text-[9px] uppercase tracking-wider text-amber-200 font-bold">🌟 Puntos Acumulados</p>
-                                <p id="card-points-display" class="font-display font-bold text-lg text-amber-300">100 Pts</p>
-                            </div>
-                            <div class="bg-white/15 backdrop-blur-sm rounded-xl p-2.5 text-center border border-white/20">
-                                <p class="text-[9px] uppercase tracking-wider text-emerald-200 font-bold">🤝 Amigos Invitados</p>
-                                <p id="card-referrals-display" class="font-display font-bold text-lg text-emerald-300">2 Amigos</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-brandNavy/80 backdrop-blur-sm rounded-2xl p-3 flex items-center justify-between border border-white/15">
-                            <div>
-                                <p class="text-[9px] uppercase tracking-widest text-cyan-300 font-bold">Código Único / Microchip</p>
-                                <p id="card-generated-code" class="font-mono font-extrabold text-sm tracking-wider text-amber-300">GV-CAN-MAS-0000</p>
-                                <p id="card-microchip-display" class="text-[9px] text-slate-300">Microchip: No registrado</p>
-                            </div>
-                            <div class="bg-white p-1.5 rounded-xl shadow-lg shrink-0">
-                                <div id="pet-qrcode"></div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 flex justify-between items-center text-[10px] text-cyan-100/80">
-                            <span>Carrera 17 e/ 45 y 46, Barquisimeto</span>
-                            <span>0426-1601079</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- SECCIÓN 4: CARPETA DE PACIENTES (AUTOMÁTICA) -->
-        <section id="sec-patients" class="sec-panel hidden space-y-6">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
-                    <div>
-                        <h2 class="font-display font-bold text-2xl text-brandNavy">Carpeta de Pacientes (Base de Datos Local)</h2>
-                        <p class="text-xs text-slate-500">Registro automático de tutores, pacientes, fechas de última vacuna, desparasitación y microchip.</p>
+                <!-- TABLA DE PUNTOS PROPORCIONAL Y PREMIOS -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Tabla 1: Cómo ganas puntos (Proporcional al precio) -->
+                    <div class="lg:col-span-5 bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
+                                <i class="fa-solid fa-coins text-brandOrange"></i> Tabla de Acumulación de Puntos
+                            </h3>
+                            <p class="text-xs text-slate-500">Ganas <strong>5 puntos por cada US$ 1</strong> invertido en servicios y productos.</p>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-200 text-slate-500 uppercase text-[10px]">
+                                        <th class="py-2">Servicio / Producto</th>
+                                        <th class="py-2 text-right">Inversión</th>
+                                        <th class="py-2 text-right text-brandPrimary">Puntos</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="points-earning-table" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="flex gap-2">
-                        <button onclick="openNewPatientModal()" class="px-3.5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs hover:brightness-110 shadow flex items-center gap-1.5">
-                            <i class="fa-solid fa-plus"></i> Registrar Paciente Manual
+
+                    <!-- Tabla 2: Catálogo de Premios y Progreso del Cliente -->
+                    <div class="lg:col-span-7 bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
+                                <i class="fa-solid fa-gift text-emerald-600"></i> Premios Canjeables & Tu Progreso
+                            </h3>
+                            <p class="text-xs text-slate-500">Observa cuántos puntos te faltan acumular para reclamar tus obsequios gratis en consultorio.</p>
+                        </div>
+                        <div id="rewards-progress-list" class="space-y-3"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TAB C: PLANES CON AGENDA A 12 MESES, APROBACIÓN Y CHECKLIST
+                 =============================================================== -->
+            <section id="sec-plans" class="sec-panel hidden space-y-6">
+                <!-- Mis Planes Contratados / Solicitados (Con checklist de consumo y agenda 12 meses) -->
+                <div id="active-plans-wrapper" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                        <div>
+                            <h2 class="font-display font-bold text-xl text-brandNavy flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-brandPrimary"></i> Mi Plan Activo, Agenda (12 Meses) & Servicios Disponibles
+                            </h2>
+                            <p class="text-xs text-slate-500">Control de servicios ya utilizados (tachados) y fechas programadas dentro de la vigencia de 12 meses.</p>
+                        </div>
+                    </div>
+                    <div id="tutor-subscriptions-list" class="space-y-4"></div>
+                </div>
+
+                <!-- Oferta de Planes Disponibles -->
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-bold text-xl text-brandNavy">Planes de Salud Preventiva & Spa (Vigencia 12 Meses)</h3>
+                            <p class="text-xs text-slate-500">Solicita tu plan; una vez aprobado el pago en administración, se activa tu agenda anual y checklist.</p>
+                        </div>
+                        <button id="btn-admin-add-plan" onclick="openPlanModal()" class="hidden px-4 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Nuevo Plan
                         </button>
-                        <button onclick="clearPatientHistory()" class="px-3.5 py-2 bg-red-100 text-red-700 font-bold rounded-xl text-xs hover:bg-red-200">
-                            Limpiar Carpeta
-                        </button>
                     </div>
+                    <div id="plans-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
-                <div id="patient-folder-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-            </div>
-        </section>
+            </section>
 
-        <!-- SECCIÓN 5: PLANES ANUALES, SPA & CALCULADORA QUO -->
-        <section id="sec-plans" class="sec-panel hidden space-y-6">
-            <div class="bg-white p-5 rounded-3xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
-                <div class="flex flex-wrap items-center gap-3">
-                    <span class="font-bold text-xs text-brandNavy flex items-center gap-2">
-                        <i class="fa-solid fa-credit-card text-brandOrange"></i> Esquema de Cuotas QUO:
-                    </span>
-                    <div id="quo-selector" class="flex flex-wrap gap-2"></div>
+            <!-- ===============================================================
+                 TAB D: MIS DATOS PERSONALES (SOLO EDICIÓN DE DATOS DEL TUTOR)
+                 =============================================================== -->
+            <section id="sec-profile" class="sec-panel hidden max-w-2xl mx-auto">
+                <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="font-display font-bold text-xl text-brandNavy">Mis Datos Personales de Contacto</h2>
+                    <p class="text-xs text-slate-500">Por seguridad médica, solo puedes actualizar tus datos personales de contacto. Los parámetros clínicos son gestionados por el veterinario.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="text-xs font-semibold text-slate-700">Nombre del Tutor
+                            <input id="prof-tutor-name" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                        <label class="text-xs font-semibold text-slate-700">Teléfono WhatsApp
+                            <input id="prof-tutor-phone" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                        <label class="text-xs font-semibold text-slate-700 sm:col-span-2">Dirección
+                            <input id="prof-tutor-addr" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                        <label class="text-xs font-semibold text-slate-700 sm:col-span-2">Nueva Contraseña (dejar en blanco para mantener actual)
+                            <input id="prof-tutor-pass" type="password" placeholder="••••••" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                        </label>
+                    </div>
+                    <button onclick="saveTutorPersonalProfile()" class="px-5 py-2.5 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">
+                        Guardar Cambios Personales
+                    </button>
                 </div>
-                <button id="btn-add-plan" onclick="openPlanModal()" class="hidden px-4 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs hover:brightness-110 shadow flex items-center gap-1.5">
-                    <i class="fa-solid fa-plus-circle"></i> Añadir Plan / Paquete Spa
-                </button>
-            </div>
+            </section>
 
-            <div id="plans-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </section>
+            <!-- ===============================================================
+                 TAB E: CARPETA DE PACIENTES & APROBACIONES (SOLO ADMINISTRADOR)
+                 =============================================================== -->
+            <section id="sec-admin-patients" class="sec-panel hidden space-y-6">
+                <!-- Sub-bloque 1: Aprobación de Planes Solicitados y Control de Servicios Consumidos -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="font-display font-bold text-xl text-brandNavy flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-check text-brandOrange"></i> Solicitudes de Planes, Aprobación de Pago & Control de Consumo
+                    </h2>
+                    <p class="text-xs text-slate-500">Aprueba los planes pagados por los tutores y tacha cada servicio a medida que el paciente lo utilice en consulta.</p>
+                    <div id="admin-subscriptions-list" class="space-y-4"></div>
+                </div>
 
-    </main>
+                <!-- Sub-bloque 2: Carpeta Privada de Pacientes (Solo visible para el Médico) -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                        <div>
+                            <h2 class="font-display font-bold text-xl text-brandNavy flex items-center gap-2">
+                                <i class="fa-solid fa-folder-closed text-brandPrimary"></i> Carpeta Privada de Pacientes (Historias Clínicas)
+                            </h2>
+                            <p class="text-xs text-slate-500">Expedientes completos registrados por los tutores. Desde aquí puedes asignar puntos y activar bonos de descuento por fidelización.</p>
+                        </div>
+                    </div>
+                    <div id="admin-patients-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+            </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-brandNavy text-slate-300 text-xs py-6 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p class="font-semibold text-white">Guaros Vet · Dr. Carlos E. Rodríguez (@mv.carlosriguez)</p>
-            <p>Carrera 17 entre 45 y 46, Barquisimeto, Estado Lara · RIF: V-24.157.658-9</p>
-        </div>
-    </footer>
+        </main>
 
-    <!-- MODAL: LOGIN ACCESO ADMINISTRADOR -->
-    <div id="admin-login-modal" class="fixed inset-0 bg-black/70 z-[90] hidden items-center justify-center p-4">
-        <div class="bg-white max-w-sm w-full rounded-3xl p-6 space-y-4 shadow-2xl">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
-                    <i class="fa-solid fa-lock text-brandPrimary"></i> Acceso Dashboard Admin
-                </h3>
-                <button onclick="closeAdminLoginModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <!-- FOOTER -->
+        <footer class="bg-brandNavy text-slate-300 text-xs py-6 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p class="font-semibold text-white">Guaros Vet · Dr. Carlos E. Rodríguez (@mv.carlosriguez)</p>
+                <p>Carrera 17 entre 45 y 46, Barquisimeto, Estado Lara · RIF: V-24.157.658-9</p>
             </div>
-            <div class="space-y-3">
-                <label class="text-xs font-semibold text-slate-600">Usuario Administrador
-                    <input id="admin-user" type="text" value="carlosvet" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold bg-slate-50">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Contraseña secreta
-                    <input id="admin-pass" type="password" placeholder="Ingresa tu clave" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
-                </label>
-            </div>
-            <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closeAdminLoginModal()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs">Cancelar</button>
-                <button onclick="verifyAdminLogin()" class="px-5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">Ingresar al Dashboard</button>
-            </div>
-        </div>
+        </footer>
     </div>
 
-    <!-- MODAL: REGISTRAR / EDITAR PACIENTE EN CARPETA -->
-    <div id="patient-modal" class="fixed inset-0 bg-black/70 z-[80] hidden items-center justify-center p-4">
+    <!-- MODAL ADMIN: EDITAR EXPEDIENTE CLÍNICO, PUNTOS Y BONO -->
+    <div id="admin-patient-modal" class="fixed inset-0 bg-black/70 z-[90] hidden items-center justify-center p-4">
         <div class="bg-white max-w-lg w-full rounded-3xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 id="patient-modal-title" class="font-display font-bold text-lg text-brandNavy">Ficha de Paciente</h3>
-                <button onclick="closePatientModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="font-display font-bold text-lg text-brandNavy">Gestión Clínica & Fidelización del Paciente</h3>
+                <button onclick="closeAdminPatientModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <input type="hidden" id="edit-patient-id">
-            <div class="space-y-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <label class="text-xs font-semibold text-slate-600">Nombre de la Mascota *
-                    <input id="pat-pet" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
+            <input type="hidden" id="adm-pat-id">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <label class="font-semibold text-slate-700">Mascota
+                    <input id="adm-pat-pet" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
                 </label>
-                <label class="text-xs font-semibold text-slate-600">Especie
-                    <select id="pat-species" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
-                        <option value="CAN">Canino</option>
-                        <option value="FEL">Felino</option>
-                        <option value="EXO">Exótico</option>
+                <label class="font-semibold text-slate-700">Peso (Kg)
+                    <input id="adm-pat-weight" type="number" step="0.1" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
+                <label class="font-semibold text-slate-700">Fecha Última Vacuna
+                    <input id="adm-pat-vac" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
+                <label class="font-semibold text-slate-700">Fecha Última Desparasitación
+                    <input id="adm-pat-dew" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
+                <label class="font-semibold text-slate-700">Código Microchip
+                    <input id="adm-pat-chip" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl font-mono">
+                </label>
+                <label class="font-semibold text-slate-700">Puntos Acumulados
+                    <input id="adm-pat-points" type="number" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold text-amber-600">
+                </label>
+                <label class="font-semibold text-slate-700 sm:col-span-2">Bono de Descuento por Fidelización (%)
+                    <select id="adm-pat-bonus" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold text-emerald-700">
+                        <option value="0">Sin Bono (0%)</option>
+                        <option value="10">Bono Fidelización 10% OFF</option>
+                        <option value="15">Bono Cliente Fundador 15% OFF</option>
+                        <option value="20">Bono VIP 20% OFF</option>
                     </select>
                 </label>
-                <label class="text-xs font-semibold text-slate-600">Nombre del Tutor *
-                    <input id="pat-tutor" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Teléfono / WhatsApp
-                    <input id="pat-phone" type="text" placeholder="Ej. 04261601079" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Fecha Última Vacuna
-                    <input id="pat-last-vaccine" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Fecha Última Desparasitación
-                    <input id="pat-last-deworm" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Código Microchip
-                    <input id="pat-microchip" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-mono">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Puntos Fidelización
-                    <input id="pat-points" type="number" value="100" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
+                <label class="font-semibold text-slate-700 sm:col-span-2">Notas / Observaciones Clínicas
+                    <textarea id="adm-pat-notes" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                 </label>
             </div>
             <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closePatientModal()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs">Cancelar</button>
-                <button onclick="savePatientModal()" class="px-5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">Guardar Ficha</button>
+                <button onclick="closeAdminPatientModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-xs font-bold">Cancelar</button>
+                <button onclick="saveAdminPatientChanges()" class="px-5 py-2 bg-brandPrimary text-white rounded-xl text-xs font-bold shadow">Guardar Expediente</button>
             </div>
         </div>
     </div>
 
     <!-- MODAL SERVICIO -->
-    <div id="service-modal" class="fixed inset-0 bg-black/70 z-[80] hidden items-center justify-center p-4">
+    <div id="service-modal" class="fixed inset-0 bg-black/70 z-[90] hidden items-center justify-center p-4">
         <div class="bg-white max-w-md w-full rounded-3xl p-6 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 id="srv-modal-title" class="font-display font-bold text-lg text-brandNavy">Editar Servicio</h3>
+                <h3 id="srv-modal-title" class="font-display font-bold text-lg text-brandNavy">Servicio / Producto</h3>
                 <button onclick="closeServiceModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <input type="hidden" id="edit-srv-index">
-            <div class="space-y-3">
-                <label class="text-xs font-semibold text-slate-600">Nombre del Servicio *
-                    <input id="srv-name" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
+            <div class="space-y-3 text-xs">
+                <label class="block font-semibold text-slate-600">Nombre *
+                    <input id="srv-name" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
                 </label>
                 <div class="grid grid-cols-2 gap-3">
-                    <label class="text-xs font-semibold text-slate-600">Categoría
-                        <select id="srv-cat" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                    <label class="font-semibold text-slate-600">Categoría
+                        <select id="srv-cat" class="mt-1 w-full px-3 py-2 border rounded-xl">
                             <option value="Consultas">Consultas</option>
                             <option value="Vacunación">Vacunación</option>
+                            <option value="Laboratorio">Laboratorio</option>
                             <option value="Spa & Peluquería">Spa & Peluquería</option>
-                            <option value="Laboratorio & Eco">Laboratorio & Eco</option>
-                            <option value="Cirugía & Profilaxis">Cirugía & Profilaxis</option>
-                            <option value="Identificación">Identificación</option>
+                            <option value="Productos & Farmacia">Productos & Farmacia</option>
                         </select>
                     </label>
-                    <label class="text-xs font-semibold text-slate-600">Precio (US$) *
-                        <input id="srv-price" type="number" step="0.01" min="0" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
+                    <label class="font-semibold text-slate-600">Precio (US$) *
+                        <input id="srv-price" type="number" step="0.01" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
                     </label>
                 </div>
-                <label class="text-xs font-semibold text-slate-600">Descripción breve
-                    <textarea id="srv-desc" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs"></textarea>
+                <label class="block font-semibold text-slate-600">Descripción
+                    <textarea id="srv-desc" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                 </label>
             </div>
             <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closeServiceModal()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs">Cancelar</button>
-                <button onclick="saveServiceModal()" class="px-5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">Guardar Cambios</button>
+                <button onclick="closeServiceModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-xs font-bold">Cancelar</button>
+                <button onclick="saveServiceModal()" class="px-5 py-2 bg-brandPrimary text-white rounded-xl text-xs font-bold shadow">Guardar</button>
             </div>
         </div>
     </div>
 
     <!-- MODAL PLAN -->
-    <div id="plan-modal" class="fixed inset-0 bg-black/70 z-[80] hidden items-center justify-center p-4">
-        <div class="bg-white max-w-lg w-full rounded-3xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+    <div id="plan-modal" class="fixed inset-0 bg-black/70 z-[90] hidden items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 id="plan-modal-title" class="font-display font-bold text-lg text-brandNavy">Editar Plan</h3>
+                <h3 id="plan-modal-title" class="font-display font-bold text-lg text-brandNavy">Plan Preventivo</h3>
                 <button onclick="closePlanModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <input type="hidden" id="edit-plan-index">
-            <div class="space-y-3">
-                <label class="text-xs font-semibold text-slate-600">Nombre del Plan *
-                    <input id="pl-name" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
+            <div class="space-y-3 text-xs">
+                <label class="block font-semibold text-slate-600">Nombre del Plan *
+                    <input id="pl-name" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
                 </label>
                 <div class="grid grid-cols-2 gap-3">
-                    <label class="text-xs font-semibold text-slate-600">Tipo
-                        <select id="pl-cat" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
+                    <label class="font-semibold text-slate-600">Tipo
+                        <select id="pl-cat" class="mt-1 w-full px-3 py-2 border rounded-xl">
                             <option value="Salud Preventiva">Salud Preventiva</option>
                             <option value="Estética & Spa">Estética & Spa</option>
-                            <option value="Identificación">Identificación</option>
                         </select>
                     </label>
-                    <label class="text-xs font-semibold text-slate-600">Precio (US$) *
-                        <input id="pl-price" type="number" step="0.01" min="0" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs font-bold">
+                    <label class="font-semibold text-slate-600">Precio (US$) *
+                        <input id="pl-price" type="number" step="0.01" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
                     </label>
                 </div>
-                <label class="text-xs font-semibold text-slate-600">Subtítulo / Condición
-                    <input id="pl-stage" type="text" placeholder="Ej. Pacientes < 10kg · Anual" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs">
-                </label>
-                <label class="text-xs font-semibold text-slate-600">Beneficios incluidos (uno por línea)
-                    <textarea id="pl-items" rows="4" class="mt-1 w-full px-3 py-2 border rounded-xl text-xs"></textarea>
+                <label class="block font-semibold text-slate-600">Servicios incluidos (uno por línea para el checklist)
+                    <textarea id="pl-items" rows="4" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                 </label>
             </div>
             <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closePlanModal()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs">Cancelar</button>
-                <button onclick="savePlanModal()" class="px-5 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">Guardar Plan</button>
+                <button onclick="closePlanModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-xs font-bold">Cancelar</button>
+                <button onclick="savePlanModal()" class="px-5 py-2 bg-brandPrimary text-white rounded-xl text-xs font-bold shadow">Guardar Plan</button>
             </div>
         </div>
     </div>
@@ -575,470 +674,330 @@
 
     <script>
     const WA_PHONE = '584261601079';
+    const POINTS_PER_DOLLAR = 5; // 5 puntos por cada $1 ($20 consulta = 100 pts)
     const $ = id => document.getElementById(id);
-    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
-    const urlParams = new URLSearchParams(window.location.search);
-    let currency = urlParams.get('m') || 'US$';
-    let promoDiscount = parseFloat(localStorage.getItem('gv_promo_pct')) || parseFloat(urlParams.get('p')) || 20;
-    let promoValidUntil = localStorage.getItem('gv_promo_date') || urlParams.get('v') || '2026-11-18';
-    let isAdminMode = false;
-    let currentPetPhotoBase64 = '';
-
-    const WSAVA_PROTOCOLS = [
-        {
-            id: 'can-puppy',
-            group: 'Caninos',
-            title: 'Caninos Cachorros (Primovacunación)',
-            ageRange: '6 semanas hasta los 12 meses de edad',
-            badgeColor: 'bg-sky-100 text-sky-800',
-            coreVaccines: [
-                'Virus del Distemper Canino (CDV)',
-                'Parvovirus Canino (CPV-2)',
-                'Adenovirus Canino tipo 1 y 2 (CAV-1 / CAV-2)',
-                'Virus de la Rabia (obligatorio por endemicidad en LatAm)'
-            ],
-            nonCoreVaccines: [
-                'Leptospira spp. (4 serovares recomendada por clima tropical/lluvias)',
-                'Bordetella bronchiseptica + Parainfluenza (tos de las perreras)'
-            ],
-            schedule: [
-                '6 - 8 semanas: 1ª dosis Puppy (Parvovirus + Distemper de alto título).',
-                '9 - 11 semanas: 1ª dosis Séxtuple (CDV, CPV, CAV-2, Parainfluenza, Leptospira).',
-                '12 - 14 semanas: 2ª dosis Séxtuple + 1ª dosis Antirrábica (según normativa local).',
-                '16 semanas o más: 3ª dosis Séxtuple (clave para vencer anticuerpos maternos residuales).',
-                '20 semanas: 4ª dosis Séxtuple + 2ª dosis Antirrábica de refuerzo.',
-                '26 a 52 semanas (6-12 meses): Refuerzo temprano de vacuna esencial (fin de serie primaria WSAVA).'
-            ],
-            clinicalNote: 'En Latinoamérica y el Caribe nunca debe culminarse el esquema antes de las 16 semanas debido a la interferencia de inmunidad materna y alta presión viral en calle.'
-        },
-        {
-            id: 'can-adult',
-            group: 'Caninos',
-            title: 'Caninos Adultos (Mantenimiento)',
-            ageRange: '1 año hasta los 7 años de edad',
-            badgeColor: 'bg-blue-100 text-blue-900',
-            coreVaccines: [
-                'Distemper (CDV), Parvovirus (CPV-2) y Adenovirus (CAV-2)',
-                'Rabia (revacunación anual obligatoria en regiones endémicas de LatAm)'
-            ],
-            nonCoreVaccines: [
-                'Leptospira spp. (requiere refuerzo estrictamente anual por inmunidad de corta duración)',
-                'Bordetella bronchiseptica (anual o semestral si asiste a guarderías, parques o peluquería)'
-            ],
-            schedule: [
-                'Tras el refuerzo de los 6-12 meses: revacunación de componentes virales esenciales (CDV/CPV/CAV) cada 1 a 3 años según riesgo o titulación de anticuerpos.',
-                'Leptospira y Bordetella: administración anual obligatoria (su inmunidad humoral decae a los 12 meses).',
-                'Antirrábica: refuerzo anual conforme a la legislación sanitaria de Venezuela y el Caribe.'
-            ],
-            clinicalNote: 'Evaluar estilo de vida: perros con acceso a jardines húmedos, roedores o salidas frecuentes requieren cobertura anual contra Leptospira.'
-        },
-        {
-            id: 'can-senior',
-            group: 'Caninos',
-            title: 'Caninos Geriatras (Inmunosenescencia)',
-            ageRange: 'A partir de los 7 - 8 años (según talla/raza)',
-            badgeColor: 'bg-purple-100 text-purple-900',
-            coreVaccines: [
-                'Rabia (obligatoria por salud pública)',
-                'Esenciales virales (CDV, CPV-2, CAV-2) solo previa evaluación clínica o serología'
-            ],
-            nonCoreVaccines: [
-                'Leptospira spp. (si existe exposición ambiental)',
-                'Bordetella (si requiere hospitalización frecuente o peluquería)'
-            ],
-            schedule: [
-                'Evaluación geriátrica pre-vacunal obligatoria (examen físico completo + perfil hematológico/bioquímico).',
-                'Los perros senior suelen conservar memoria inmunológica sólida; evitar sobre-vacunación innecesaria.',
-                'Mantener Rabia anual y ajustar refuerzos virales cada 3 años si el paciente está clínicamente estable.'
-            ],
-            clinicalNote: 'Nunca vacunar pacientes geriátricos descompensados, febriles, con enfermedad renal/hepática aguda o bajo terapia inmunosupresora.'
-        },
-        {
-            id: 'can-pregnant',
-            group: 'Reproductivo',
-            title: 'Caninas Gestantes & Pre-Servicio',
-            ageRange: 'Pre-monta, Gestación y Lactancia',
-            badgeColor: 'bg-rose-100 text-rose-900',
-            coreVaccines: [
-                'Esquema completo vigente ANTES del celo o servicio',
-                'Contraindicadas vacunas a virus vivo modificado (MLV) durante la gestación'
-            ],
-            nonCoreVaccines: [
-                'Herpesvirus Canino (en criaderos con historial de mortalidad neonatal, según disponibilidad)'
-            ],
-            schedule: [
-                'Pre-servicio (2 a 4 semanas antes de la monta): actualizar Séxtuple y Rabia para maximizar la transferencia de anticuerpos por calostro.',
-                'Durante la gestación (Días 1 a 63): NO administrar vacunas vivas modificadas (riesgo de aborto, malformaciones fetales o hipoplasia cerebelosa).',
-                'Post-parto: esperar hasta el destete (6 semanas post-parto) para retomar refuerzos vacunales de la madre.'
-            ],
-            clinicalNote: 'Si una hembra gestante no vacunada enfrenta un brote epidémico crítico, solo se emplearán biológicos inactivados bajo estricto criterio médico.'
-        },
-        {
-            id: 'fel-kitten',
-            group: 'Felinos',
-            title: 'Felinos Cachorros (Gatitos)',
-            ageRange: '6 - 8 semanas hasta los 12 meses de edad',
-            badgeColor: 'bg-orange-100 text-orange-900',
-            coreVaccines: [
-                'Panleucopenia Felina (FPV)',
-                'Herpesvirus Felino tipo 1 (FHV-1 - Rinotraqueítis)',
-                'Calicivirus Felino (FCV)',
-                'Virus de la Rabia (esencial en Latinoamérica y el Caribe)'
-            ],
-            nonCoreVaccines: [
-                'Virus de la Leucemia Felina (FeLV) — Considerada ESENCIAL en gatitos menores de 1 año con acceso exterior o contacto con otros gatos (previo test ELISA FeLV/FIV negativo)'
-            ],
-            schedule: [
-                '8 semanas: 1ª dosis Triple Felina (FPV + FHV-1 + FCV).',
-                '12 semanas: 2ª dosis Triple Felina + Test rápido FeLV/FIV + 1ª dosis Leucemia Felina (si aplica).',
-                '16 semanas o más: 3ª dosis Triple Felina + 2ª dosis Leucemia Felina + Vacuna Antirrábica.',
-                '26 a 52 semanas (6 - 12 meses): Refuerzo temprano de Triple Felina (cierre de inmunidad juvenil WSAVA).'
-            ],
-            clinicalNote: 'Aplicar vacunas siguiendo los sitios anatómicos recomendados por WSAVA (extremidades distales o cola, evitando zona interescapular) para prevenir sarcomas en sitio de inyección.'
-        },
-        {
-            id: 'fel-adult',
-            group: 'Felinos',
-            title: 'Felinos Adultos (Indoor / Outdoor)',
-            ageRange: '1 año hasta los 7 años de edad',
-            badgeColor: 'bg-amber-100 text-amber-900',
-            coreVaccines: [
-                'Triple Felina (FPV, FHV-1, FCV)',
-                'Virus de la Rabia (refuerzo anual en zonas endémicas)'
-            ],
-            nonCoreVaccines: [
-                'Leucemia Felina (FeLV): revacunación cada 1 a 2 años solo en gatos con acceso al exterior o convivencia con gatos positivos'
-            ],
-            schedule: [
-                'Gatos estrictamente Indoor (bajo riesgo): Triple Felina cada 3 años tras el refuerzo de los 12 meses + Antirrábica anual.',
-                'Gatos Outdoor o multihogar (alto riesgo respiratorio): Refuerzo anual de FHV-1/FCV y cada 3 años de Panleucopenia (FPV) + Antirrábica anual.'
-            ],
-            clinicalNote: 'Preferir vacunas libres de adyuvantes (recombinantes) en felinos adultos para minimizar reacciones inflamatorias locales.'
-        },
-        {
-            id: 'fel-senior',
-            group: 'Felinos',
-            title: 'Felinos Geriatras (+7 / +10 años)',
-            ageRange: 'Desde los 7 años (Mature) y +10 años (Senior)',
-            badgeColor: 'bg-teal-100 text-teal-900',
-            coreVaccines: [
-                'Antirrábica (según regulación local y exposición)',
-                'Triple Felina (espaciada cada 3 años previa valoración renal y tiroidea)'
-            ],
-            nonCoreVaccines: [
-                'No se recomienda iniciar vacunación FeLV en gatos senior estrictamente indoor sin exposición nueva'
-            ],
-            schedule: [
-                'Chequeo geriátrico previo obligatorio: perfil renal (creatinina/SDMA), presión arterial y estado dental.',
-                'Mantener intervalo de 3 años para Triple Felina en pacientes estables.',
-                'Minimizar estrés de transporte mediante manejo Cat-Friendly en consultorio.'
-            ],
-            clinicalNote: 'En felinos senior con Enfermedad Renal Crónica (ERC) avanzada o hipertiroidismo no controlado, se pospone la vacunación hasta estabilizar al paciente.'
-        }
-    ];
-
-    let activeWsavaGroup = 'Todos';
+    const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     const DEFAULT_SERVICES = [
-        { id: 's1', name: 'Consulta Médica General', cat: 'Consultas', price: 20, desc: 'Evaluación clínica integral, diagnóstico y plan terapéutico en consultorio.' },
-        { id: 's2', name: 'Consulta Geriátrica Avanzada', cat: 'Consultas', price: 30, desc: 'Chequeo especializado para pacientes senior, control articular, renal y metabólico.' },
-        { id: 's3', name: 'Vacuna Puppy / Séxtuple Canina', cat: 'Vacunación', price: 18, desc: 'Inmunización bajo protocolo WSAVA contra enfermedades virales y bacterianas.' },
-        { id: 's4', name: 'Vacuna Triple Felina / Antirrábica', cat: 'Vacunación', price: 20, desc: 'Protección esencial para felinos y prevención antirrábica.' },
-        { id: 's5', name: 'Baño & Spa Completo (Mediano)', cat: 'Spa & Peluquería', price: 25, desc: 'Baño dermatológico, corte de uñas, limpieza de oídos, secado y brushing.' },
-        { id: 's6', name: 'Peluquería Full + Hidratación', cat: 'Spa & Peluquería', price: 35, desc: 'Corte estético según raza, mascarilla hidratante y perfume hipoalergénico.' },
-        { id: 's7', name: 'Eco Abdominal / POCUS', cat: 'Laboratorio & Eco', price: 35, desc: 'Ecosonografía diagnóstica rápida y evaluación de órganos internos.' },
-        { id: 's8', name: 'Profilaxis Dental Ultrasónica', cat: 'Cirugía & Profilaxis', price: 85, desc: 'Limpieza profunda de sarro con ultrasonido y pulido dental.' },
-        { id: 's9', name: 'Guaros ID (Microchip + Carnet)', cat: 'Identificación', price: 15, desc: 'Implantación de microchip oficial, registro y carnet digital + físico.' }
+        { id: 's1', name: 'Consulta Médica General', cat: 'Consultas', price: 20, desc: 'Evaluación clínica integral y plan terapéutico en consultorio.' },
+        { id: 's2', name: 'Consulta Geriátrica Avanzada', cat: 'Consultas', price: 30, desc: 'Chequeo especializado senior, control articular y metabólico.' },
+        { id: 's3', name: 'Vacuna Puppy / Séxtuple Canina', cat: 'Vacunación', price: 18, desc: 'Inmunización bajo protocolo WSAVA LatAm.' },
+        { id: 's4', name: 'Vacuna Triple Felina / Antirrábica', cat: 'Vacunación', price: 20, desc: 'Protección esencial felina y prevención antirrábica.' },
+        { id: 's5', name: 'Hematología Completa + Frotis', cat: 'Laboratorio', price: 30, desc: 'Conteo celular completo y evaluación hemotrópica.' },
+        { id: 's6', name: 'Baño Base Completo (Mediano)', cat: 'Spa & Peluquería', price: 25, desc: 'Baño dermatológico, corte de uñas, limpieza ótica y secado.' },
+        { id: 's7', name: 'Peluquería Full + Hidratación', cat: 'Spa & Peluquería', price: 35, desc: 'Corte estético según raza y mascarilla hidratante.' },
+        { id: 's8', name: 'Eco Abdominal / POCUS', cat: 'Laboratorio', price: 35, desc: 'Ecosonografía diagnóstica rápida de órganos internos.' }
+    ];
+
+    const REWARDS_CATALOG = [
+        { id: 'r1', title: 'Consulta Médica General GRATIS', pointsRequired: 1000, icon: 'fa-stethoscope', desc: 'Canjeable por una consulta clínica completa en consultorio.' },
+        { id: 'r2', title: 'Hematología Completa GRATIS', pointsRequired: 1500, icon: 'fa-vial', desc: 'Perfil hematológico completo sin costo para control preventivo.' },
+        { id: 'r3', title: 'Baño Base Completo GRATIS', pointsRequired: 2500, icon: 'fa-bath', desc: 'Sesión de baño dermatológico, corte de uñas y limpieza de oídos.' },
+        { id: 'r4', title: 'Eco Abdominal / POCUS GRATIS', pointsRequired: 3500, icon: 'fa-wave-square', desc: 'Evaluación ecosonográfica preventiva de órganos internos.' }
     ];
 
     const DEFAULT_PLANS = [
-        { id: 'p1', name: 'Guaros Puppy (1er Año WSAVA)', cat: 'Salud Preventiva', price: 160, stage: 'Caninos Cachorros · Protocolo Completo', items: ['1 Vacuna Puppy + 4 Séxtuples + 2 Antirrábicas', '4 Consultas de control médico', '4 Desparasitaciones internas', 'Asesoría nutricional y de crianza'] },
-        { id: 'p2', name: 'Plan Salud Preventiva Adulto', cat: 'Salud Preventiva', price: 155, stage: 'Caninos Adultos · Anual', featured: true, items: ['Refuerzos vacunales esenciales + Antirrábica', '1 Profilaxis dental + 1 Consulta', '2 Desparasitaciones + 1 Eco POCUS', 'Prioridad de agenda en consultorio'] },
-        { id: 'p3', name: 'Plan Felino Integral (WSAVA)', cat: 'Salud Preventiva', price: 130, stage: 'Gatitos y Adultos · Protocolo Completo', items: ['Esquema Triple Felina + Antirrábica', '2 Desparasitaciones internas/externas', '2 Consultas de control médico', 'Evaluación preventiva renal y dental'] },
-        { id: 'p4', name: 'Plan Senior Geriátrico', cat: 'Salud Preventiva', price: 185, stage: 'Caninos y Felinos +7 años', items: ['2 Consultas geriátricas especializadas', 'Perfil hematológico y bioquímico renal/hepático', '1 Eco POCUS abdominal preventivo', 'Control vacunal personalizado WSAVA'] },
-        { id: 'p5', name: 'Spa Constancia (Trimestral)', cat: 'Estética & Spa', price: 80, stage: '3 Meses de Estética', items: ['3 Peluquerías Full completas', '3 Baños de mantenimiento', 'Corte de uñas y limpieza ótica mensual', 'Ahorro preferencial por paquete'] },
-        { id: 'p6', name: 'Spa VIP (Anual)', cat: 'Estética & Spa', price: 220, stage: '12 Meses Consentido', items: ['12 Peluquerías Full (1 por mes)', '2 Baños de mantenimiento adicionales', 'Hidratación profunda de manto', 'Atención prioritaria en agenda Spa'] }
+        {
+            id: 'p1',
+            name: 'Plan Cachorro WSAVA (12 Meses)',
+            cat: 'Salud Preventiva',
+            price: 160,
+            items: [
+                '1 Vacuna Puppy (Semana 6-8)',
+                '1ª Vacuna Séxtuple (Semana 9-11)',
+                '2ª Vacuna Séxtuple + 1ª Antirrábica (Semana 12-14)',
+                '3ª Vacuna Séxtuple (Semana 16+)',
+                '4ª Vacuna Séxtuple + 2ª Antirrábica (Semana 20)',
+                '4 Consultas de control y desparasitación'
+            ]
+        },
+        {
+            id: 'p2',
+            name: 'Plan Salud Preventiva Adulto (12 Meses)',
+            cat: 'Salud Preventiva',
+            price: 155,
+            items: [
+                'Refuerzo Vacuna Séxtuple Anual',
+                'Refuerzo Vacuna Antirrábica Anual',
+                '1 Profilaxis Dental Ultrasónica',
+                '1 Eco POCUS Abdominal Preventivo',
+                '2 Desparasitaciones + 1 Consulta Control'
+            ]
+        },
+        {
+            id: 'p3',
+            name: 'Plan Spa Constancia (Trimestral / Anual)',
+            cat: 'Estética & Spa',
+            price: 80,
+            items: [
+                '1ª Sesión Peluquería Full + Baño',
+                '2ª Sesión Peluquería Full + Baño',
+                '3ª Sesión Peluquería Full + Baño',
+                '3 Cortes de uñas y limpieza ótica'
+            ]
+        }
     ];
 
-    let services = JSON.parse(localStorage.getItem('gv_services_v4')) || DEFAULT_SERVICES;
-    let plans = JSON.parse(localStorage.getItem('gv_plans_v4')) || DEFAULT_PLANS;
+    let services = JSON.parse(localStorage.getItem('gv_services_v5')) || DEFAULT_SERVICES;
+    let plans = JSON.parse(localStorage.getItem('gv_plans_v5')) || DEFAULT_PLANS;
+    let patientsDB = JSON.parse(localStorage.getItem('gv_patients_db_v5')) || [];
+    let subscriptionsDB = JSON.parse(localStorage.getItem('gv_subscriptions_v5')) || [];
+
+    let currentSession = null; // { role: 'admin' | 'tutor' | 'guest', patientId: string | null }
     let cart = [];
     let activeCategory = 'Todos';
-
-    const QUO_MODELS = [
-        { id: 'gv-50', name: 'Guaros Vet (50% / 50%)', calc: p => `Inicial 50% (${currency} ${(p*0.5).toFixed(2)}) + 50% a 15 días (${currency} ${(p*0.5).toFixed(2)})` },
-        { id: 'gp-40', name: 'Guaros Pets (40% / 30% / 30%)', calc: p => `Inicial 40% (${currency} ${(p*0.4).toFixed(2)}) + 2 cuotas de ${currency} ${(p*0.3).toFixed(2)}` }
-    ];
-    let currentQuo = 'gv-50';
 
     let toastTimer;
     function showToast(msg) {
         $('toast-msg').textContent = msg;
         $('toast').classList.add('toast-show');
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => $('toast').classList.remove('toast-show'), 2200);
-    }
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => showToast('Copiado: ' + text));
+        toastTimer = setTimeout(() => $('toast').classList.remove('toast-show'), 2500);
     }
 
-    // CONTROL DE ACCESO DASHBOARD ADMIN
-    function openAdminLoginModal() {
-        if (isAdminMode) {
-            if (confirm('¿Deseas cerrar la sesión del Modo Edición Admin?')) {
-                isAdminMode = false;
-                applyAdminUIMode();
-                showToast('Sesión de administrador cerrada');
+    function buildDeterministicPetCode(petName, species, tutorCi) {
+        const cleanPet = (petName || 'PET').normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        const prefix = (cleanPet.slice(0, 3) || 'PET').padEnd(3, 'X');
+        const sp = (species || 'CAN').toUpperCase();
+        let hash = 0;
+        const seed = `${cleanPet}-${sp}-${tutorCi}`;
+        for (let i = 0; i < seed.length; i++) {
+            hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+            hash |= 0;
+        }
+        return `GV-${sp}-${prefix}-${String(Math.abs(hash) % 9000 + 1000)}`;
+    }
+
+    // =========================================================================
+    // AUTENTICACIÓN & DASHBOARD DE INICIO
+    // =========================================================================
+    function switchAuthTab(tab) {
+        ['login', 'register', 'admin'].forEach(t => {
+            $('auth-form-' + t).classList.toggle('hidden', t !== tab);
+            const btn = $('auth-tab-' + t);
+            if (btn) {
+                if (t === tab) {
+                    btn.classList.add('bg-brandPrimary', 'text-white', 'shadow');
+                    btn.classList.remove('bg-slate-100', 'text-slate-600');
+                } else {
+                    btn.classList.remove('bg-brandPrimary', 'text-white', 'shadow');
+                    btn.classList.add('bg-slate-100', 'text-slate-600');
+                }
             }
-            return;
+        });
+    }
+
+    function registerTutorAccount() {
+        const tutorName = $('reg-tutor-name').value.trim();
+        const tutorCi = $('reg-tutor-ci').value.trim();
+        const tutorPhone = $('reg-tutor-phone').value.trim();
+        const tutorAddr = $('reg-tutor-addr').value.trim();
+        const username = $('reg-username').value.trim().toLowerCase();
+        const password = $('reg-password').value.trim();
+        const petName = $('reg-pet-name').value.trim();
+
+        if (!tutorName || !username || !password || !petName) {
+            return showToast('Completa los campos obligatorios (*)');
         }
-        $('admin-pass').value = '';
-        $('admin-login-modal').classList.remove('hidden');
-        $('admin-login-modal').classList.add('flex');
+        if (patientsDB.some(p => p.username === username)) {
+            return showToast('Ese usuario ya existe. Elige otro.');
+        }
+
+        const species = $('reg-pet-species').value;
+        const newPatient = {
+            id: 'pat-' + Date.now(),
+            code: buildDeterministicPetCode(petName, species, tutorCi || username),
+            username,
+            password,
+            tutorName,
+            tutorCi,
+            tutorPhone,
+            tutorAddr,
+            petName: petName.toUpperCase(),
+            species,
+            breed: $('reg-pet-breed').value.trim() || 'Mestizo',
+            sex: $('reg-pet-sex').value,
+            dob: $('reg-pet-dob').value || 'No registrada',
+            weight: $('reg-pet-weight').value || 'N/A',
+            lastVaccine: $('reg-pet-vaccine').value || 'Pendiente',
+            lastDeworm: $('reg-pet-deworm').value || 'Pendiente',
+            microchip: $('reg-pet-chip').value.trim() || 'No posee',
+            allergies: $('reg-pet-allergies').value.trim() || 'Ninguna',
+            points: 100, // Bono bienvenida 100 puntos
+            bonusPct: 0,
+            photo: '',
+            clinicalNotes: 'Historia clínica aperturada por el tutor vía web.'
+        };
+
+        patientsDB.push(newPatient);
+        localStorage.setItem('gv_patients_db_v5', JSON.stringify(patientsDB));
+
+        currentSession = { role: 'tutor', patientId: newPatient.id };
+        launchMainApp();
+        showToast('¡Historia Clínica creada! +100 pts de bienvenida');
     }
-    function closeAdminLoginModal() {
-        $('admin-login-modal').classList.add('hidden');
-        $('admin-login-modal').classList.remove('flex');
+
+    function loginTutor() {
+        const usr = $('login-tutor-user').value.trim().toLowerCase();
+        const pwd = $('login-tutor-pass').value.trim();
+        const found = patientsDB.find(p => (p.username === usr || p.tutorCi.toLowerCase() === usr) && p.password === pwd);
+        if (!found) {
+            return showToast('Usuario o contraseña incorrectos');
+        }
+        currentSession = { role: 'tutor', patientId: found.id };
+        launchMainApp();
+        showToast(`Bienvenido, ${found.tutorName}`);
     }
-    function verifyAdminLogin() {
-        const usr = $('admin-user').value.trim();
-        const pwd = $('admin-pass').value.trim();
+
+    function enterGuestCatalog() {
+        currentSession = { role: 'guest', patientId: null };
+        launchMainApp();
+    }
+
+    function loginAdmin() {
+        const usr = $('admin-login-user').value.trim();
+        const pwd = $('admin-login-pass').value.trim();
         if (usr === 'carlosvet' && pwd === 'GuarosVet2026*') {
-            isAdminMode = true;
-            closeAdminLoginModal();
-            applyAdminUIMode();
-            showToast('¡Bienvenido al Dashboard Admin, Dr. Carlos!');
+            currentSession = { role: 'admin', patientId: null };
+            launchMainApp();
+            showToast('Sesión Médica Iniciada · Control Total');
         } else {
-            alert('Contraseña incorrecta. Acceso denegado.');
+            alert('Clave de administración incorrecta.');
         }
     }
 
-    function applyAdminUIMode() {
-        if (isAdminMode) {
-            $('btn-add-service').classList.remove('hidden');
-            $('btn-add-plan').classList.remove('hidden');
-            $('edit-promo-btn').classList.remove('hidden');
+    function logoutSystem() {
+        currentSession = null;
+        cart = [];
+        $('main-app').classList.add('hidden');
+        $('auth-gateway').classList.remove('hidden');
+        switchAuthTab('login');
+    }
+
+    function getLoggedPatient() {
+        if (!currentSession || currentSession.role !== 'tutor') return null;
+        return patientsDB.find(p => p.id === currentSession.patientId) || null;
+    }
+
+    function launchMainApp() {
+        $('auth-gateway').classList.add('hidden');
+        $('main-app').classList.remove('hidden');
+
+        const isAdmin = currentSession.role === 'admin';
+        const pat = getLoggedPatient();
+
+        $('role-badge').textContent = isAdmin ? 'Médico Admin' : (pat ? 'Tutor Verificado' : 'Visitante');
+        $('header-user-greeting').textContent = isAdmin
+            ? 'Dr. Carlos Rodríguez · Panel de Control Total'
+            : (pat ? `Tutor: ${pat.tutorName} · Paciente: ${pat.petName}` : 'Explorando Catálogo Guaros Vet');
+
+        // Mostrar botones de edición solo al Admin
+        $('btn-admin-add-service').classList.toggle('hidden', !isAdmin);
+        $('btn-admin-add-plan').classList.toggle('hidden', !isAdmin);
+
+        // Construir pestañas de navegación según rol
+        let tabs = [
+            { id: 'catalog', icon: 'fa-store', label: 'Catálogo & Citas' }
+        ];
+        if (pat) {
+            tabs.push({ id: 'carnet', icon: 'fa-id-card', label: 'Mi Carnet & Premios' });
+            tabs.push({ id: 'plans', icon: 'fa-calendar-check', label: 'Planes & Agenda 12M' });
+            tabs.push({ id: 'profile', icon: 'fa-user-pen', label: 'Mis Datos' });
+        } else if (isAdmin) {
+            tabs.push({ id: 'plans', icon: 'fa-calendar-check', label: 'Gestión de Planes' });
+            tabs.push({ id: 'admin-patients', icon: 'fa-folder-open', label: 'Carpeta de Pacientes (Privado)' });
         } else {
-            $('btn-add-service').classList.add('hidden');
-            $('btn-add-plan').classList.add('hidden');
-            $('edit-promo-btn').classList.add('hidden');
+            tabs.push({ id: 'plans', icon: 'fa-shield-dog', label: 'Planes Preventivos' });
         }
+
+        $('main-nav-tabs').innerHTML = tabs.map(t => `
+            <button onclick="switchSection('${t.id}')" id="tab-btn-${t.id}" class="sec-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+                <i class="fa-solid ${t.icon}"></i> ${t.label}
+            </button>
+        `).join('');
+
+        renderCategoryFilters();
         renderServices();
-        renderPlans();
-    }
-
-    function updatePromoUI() {
-        $('banner-discount-text').textContent = `${promoDiscount}% OFF`;
-        $('banner-date-text').textContent = promoValidUntil;
-        $('cart-discount-pct').textContent = promoDiscount;
         renderCart();
-    }
+        renderPlans();
 
-    function editPromoSettings() {
-        const newPct = prompt('Porcentaje de descuento activo (%):', promoDiscount);
-        if (newPct !== null && !isNaN(parseFloat(newPct))) {
-            promoDiscount = Math.max(0, Math.min(100, parseFloat(newPct)));
-            localStorage.setItem('gv_promo_pct', promoDiscount);
+        if (pat) {
+            loadTutorCarnetAndRewards(pat);
+            loadTutorPersonalProfile(pat);
+            renderSubscriptions();
         }
-        const newDate = prompt('Fecha límite de la promoción (AAAA-MM-DD):', promoValidUntil);
-        if (newDate) {
-            promoValidUntil = newDate.trim();
-            localStorage.setItem('gv_promo_date', promoValidUntil);
+        if (isAdmin) {
+            renderAdminPatientsFolder();
+            renderSubscriptions();
         }
-        updatePromoUI();
-        showToast('Promoción actualizada');
+
+        switchSection(isAdmin ? 'admin-patients' : 'catalog');
     }
 
     function switchSection(sec) {
-        ['booking', 'wsava', 'petcode', 'patients', 'plans'].forEach(s => {
-            $('sec-' + s).classList.toggle('hidden', s !== sec);
-            const btn = $('tab-btn-' + s);
-            if (s === sec) {
+        document.querySelectorAll('.sec-panel').forEach(p => p.classList.add('hidden'));
+        const panel = $('sec-' + sec);
+        if (panel) panel.classList.remove('hidden');
+
+        document.querySelectorAll('.sec-btn').forEach(btn => {
+            if (btn.id === 'tab-btn-' + sec) {
                 btn.classList.add('bg-brandPrimary', 'text-white', 'shadow-md');
-                btn.classList.remove('bg-white', 'text-slate-600', 'hover:bg-slate-100');
+                btn.classList.remove('bg-white', 'text-slate-600');
             } else {
                 btn.classList.remove('bg-brandPrimary', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white', 'text-slate-600', 'hover:bg-slate-100');
+                btn.classList.add('bg-white', 'text-slate-600');
             }
         });
-        if (sec === 'patients') renderPatientFolder();
     }
 
-    function renderWsavaFilters() {
-        const groups = ['Todos', 'Caninos', 'Felinos', 'Reproductivo'];
-        $('wsava-filter-bar').innerHTML = groups.map(g => `
-            <button onclick="activeWsavaGroup='${g}';renderWsavaFilters();renderWsavaProtocols()" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition ${activeWsavaGroup === g ? 'bg-brandNavy text-white shadow' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}">
-                ${esc(g)}
-            </button>
-        `).join('');
-    }
-
-    function renderWsavaProtocols() {
-        const list = activeWsavaGroup === 'Todos' ? WSAVA_PROTOCOLS : WSAVA_PROTOCOLS.filter(p => p.group === activeWsavaGroup);
-        $('wsava-protocols-grid').innerHTML = list.map(p => `
-            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between space-y-4">
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between gap-2">
-                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${p.badgeColor}">${esc(p.group)}</span>
-                        <span class="text-[11px] font-semibold text-slate-500"><i class="fa-regular fa-clock"></i> ${esc(p.ageRange)}</span>
-                    </div>
-                    <h3 class="font-display font-bold text-xl text-brandNavy">${esc(p.title)}</h3>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                        <div class="bg-blue-50/70 p-3 rounded-2xl border border-blue-100">
-                            <p class="text-[10px] font-extrabold uppercase text-brandPrimary mb-1.5"><i class="fa-solid fa-shield-virus"></i> Esenciales (Core WSAVA)</p>
-                            <ul class="space-y-1 text-[11px] text-slate-700">
-                                ${p.coreVaccines.map(v => `<li>• ${esc(v)}</li>`).join('')}
-                            </ul>
-                        </div>
-                        <div class="bg-amber-50/70 p-3 rounded-2xl border border-amber-100">
-                            <p class="text-[10px] font-extrabold uppercase text-brandOrange mb-1.5"><i class="fa-solid fa-stethoscope"></i> No Esenciales / Riesgo LatAm</p>
-                            <ul class="space-y-1 text-[11px] text-slate-700">
-                                ${p.nonCoreVaccines.map(v => `<li>• ${esc(v)}</li>`).join('')}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1.5 pt-1">
-                        <p class="text-[11px] font-bold text-brandNavy uppercase tracking-wider">Esquema Recomendado:</p>
-                        <ul class="space-y-1.5 text-xs text-slate-600">
-                            ${p.schedule.map(s => `<li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i><span>${esc(s)}</span></li>`).join('')}
-                        </ul>
-                    </div>
-
-                    <div class="p-3 bg-slate-50 rounded-xl border-l-4 border-brandPrimary text-[11px] text-slate-600">
-                        <strong class="text-brandNavy">Criterio Clínico:</strong> ${esc(p.clinicalNote)}
-                    </div>
-                </div>
-
-                <div class="pt-2 border-t border-slate-100 flex justify-end">
-                    <button onclick="sendWsavaProtocolWA('${p.id}')" class="px-4 py-2 bg-[#25D366] hover:brightness-95 text-white font-bold rounded-xl text-xs shadow flex items-center gap-1.5">
-                        <i class="fa-brands fa-whatsapp"></i> Consultar / Agendar Protocolo
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function sendWsavaProtocolWA(id) {
-        const p = WSAVA_PROTOCOLS.find(x => x.id === id);
-        if (!p) return;
-        const msg = `🩺 *Protocolo WSAVA · Guaros Vet*\n\n` +
-            `Me interesa aplicar el protocolo: *${p.title}* (${p.ageRange}).\n\n` +
-            `¿Qué disponibilidad tienen en el consultorio de Barquisimeto?`;
-        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    function addDays(dateStr, days) {
-        const d = new Date(dateStr + 'T12:00:00');
-        d.setDate(d.getDate() + days);
-        return d.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    }
-
-    function generateWsavaSchedule() {
-        const pet = $('ws-calc-pet').value.trim() || 'Paciente';
-        const prof = $('ws-calc-profile').value;
-        const start = $('ws-calc-start').value;
-        if (!start) return showToast('Selecciona la fecha de inicio');
-
-        let rows = [];
-        if (prof === 'can-puppy') {
-            rows = [
-                { step: 'Dosis 1 · Vacuna Puppy (Parvo/Distemper)', date: addDays(start, 0) },
-                { step: 'Dosis 2 · 1ª Vacuna Séxtuple', date: addDays(start, 21) },
-                { step: 'Dosis 3 · 2ª Vacuna Séxtuple + 1ª Antirrábica', date: addDays(start, 42) },
-                { step: 'Dosis 4 · 3ª Vacuna Séxtuple (16+ semanas)', date: addDays(start, 63) },
-                { step: 'Dosis 5 · 4ª Vacuna Séxtuple + 2ª Antirrábica', date: addDays(start, 84) },
-                { step: 'Refuerzo Temprano WSAVA (6-12 meses)', date: addDays(start, 180) }
-            ];
-        } else if (prof === 'fel-kitten') {
-            rows = [
-                { step: 'Dosis 1 · 1ª Triple Felina', date: addDays(start, 0) },
-                { step: 'Dosis 2 · 2ª Triple Felina + Test FeLV/FIV', date: addDays(start, 28) },
-                { step: 'Dosis 3 · 3ª Triple Felina (16+ sem) + Antirrábica', date: addDays(start, 56) },
-                { step: 'Refuerzo Temprano WSAVA (6-12 meses)', date: addDays(start, 180) }
-            ];
-        } else if (prof === 'can-pregnant') {
-            rows = [
-                { step: 'Pre-Servicio: Actualización Séxtuple + Antirrábica', date: addDays(start, 0) },
-                { step: 'Ventana óptima para monta (post-inmunización)', date: addDays(start, 21) },
-                { step: 'Durante gestación: CERO vacunas vivas modificadas', date: 'Días 1 al 63 de gestación' },
-                { step: 'Post-destete: Retomar control vacunal', date: addDays(start, 126) }
-            ];
-        } else {
-            rows = [
-                { step: 'Chequeo Clínico + Refuerzo Antirrábico / Anual', date: addDays(start, 0) },
-                { step: 'Control Semestral + Desparasitación', date: addDays(start, 180) },
-                { step: 'Próximo Refuerzo Anual WSAVA', date: addDays(start, 365) }
-            ];
-        }
-
-        const out = $('ws-calc-output');
-        out.classList.remove('hidden');
-        out.innerHTML = `
-            <div class="flex flex-wrap items-center justify-between gap-2">
-                <p class="font-display font-bold text-sm text-brandNavy">Cronograma WSAVA para ${esc(pet)}:</p>
-                <button onclick="sendScheduleWhatsApp('${esc(pet)}')" class="px-3 py-1.5 bg-[#25D366] text-white font-bold rounded-lg text-xs">
-                    <i class="fa-brands fa-whatsapp"></i> Enviar Cronograma por WA
-                </button>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="ws-schedule-items">
-                ${rows.map(r => `<div class="bg-white p-2.5 rounded-xl border border-slate-200 text-xs flex justify-between items-center"><span class="font-semibold text-slate-700">${esc(r.step)}</span><span class="font-mono font-bold text-brandPrimary shrink-0 ml-2">${esc(r.date)}</span></div>`).join('')}
-            </div>
-        `;
-        window.lastWsavaRows = rows;
-    }
-
-    function sendScheduleWhatsApp(pet) {
-        const rows = window.lastWsavaRows || [];
-        const txt = `🐾 *Cronograma de Vacunación WSAVA · Guaros Vet*\n` +
-            `Paciente: *${pet}*\n\n` +
-            rows.map(r => `📅 *${r.date}:* ${r.step}`).join('\n') +
-            `\n\n📍 Carrera 17 entre 45 y 46, Barquisimeto · 0426-1601079`;
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`, '_blank');
-    }
-
+    // =========================================================================
+    // CATÁLOGO DE SERVICIOS Y PRODUCTOS + PUNTOS PROPORCIONALES
+    // =========================================================================
     function renderCategoryFilters() {
         const cats = ['Todos', ...new Set(services.map(s => s.cat))];
         $('category-filters').innerHTML = cats.map(c => `
-            <button onclick="activeCategory='${c}';renderServices();renderCategoryFilters()" class="px-3 py-1.5 rounded-full text-xs font-bold transition ${activeCategory === c ? 'bg-brandNavy text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}">
+            <button onclick="activeCategory='${c}';renderServices();renderCategoryFilters()" class="px-3 py-1.5 rounded-full text-xs font-bold transition ${activeCategory === c ? 'bg-brandNavy text-white' : 'bg-white text-slate-600 border border-slate-200'}">
                 ${esc(c)}
             </button>
         `).join('');
     }
 
     function renderServices() {
+        const isAdmin = currentSession && currentSession.role === 'admin';
         const filtered = activeCategory === 'Todos' ? services : services.filter(s => s.cat === activeCategory);
         $('services-grid').innerHTML = filtered.map(s => {
             const idx = services.findIndex(x => x.id === s.id);
             const inCart = cart.some(c => c.id === s.id);
+            const pts = Math.round(Number(s.price) * POINTS_PER_DOLLAR);
             return `
-            <div class="bg-white p-4 rounded-2xl border ${inCart ? 'border-brandPrimary ring-2 ring-brandPrimary/20' : 'border-slate-200'} card-hover flex flex-col justify-between gap-3 relative">
-                ${isAdminMode ? `
+            <div class="bg-white p-4 rounded-2xl border ${inCart ? 'border-brandPrimary ring-2 ring-brandPrimary/20' : 'border-slate-200'} card-hover flex flex-col justify-between gap-3">
+                ${isAdmin ? `
                 <div class="flex justify-end gap-1.5 border-b border-slate-100 pb-2">
                     <button onclick="openServiceModal(${idx})" class="px-2 py-1 bg-amber-100 text-amber-800 rounded-lg text-[10px] font-bold"><i class="fa-solid fa-pen"></i> Editar</button>
                     <button onclick="deleteService(${idx})" class="px-2 py-1 bg-red-100 text-red-700 rounded-lg text-[10px] font-bold"><i class="fa-solid fa-trash"></i></button>
                 </div>` : ''}
                 <div>
                     <div class="flex items-start justify-between gap-2">
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-50 text-brandPrimary">${esc(s.cat)}</span>
-                        <span class="font-display font-bold text-base text-brandNavy">${currency} ${Number(s.price).toFixed(2)}</span>
+                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-50 text-brandPrimary">${esc(s.cat)}</span>
+                        <div class="text-right">
+                            <span class="font-display font-bold text-base text-brandNavy">US$ ${Number(s.price).toFixed(2)}</span>
+                            <span class="block text-[10px] font-bold text-brandOrange">+${pts} pts</span>
+                        </div>
                     </div>
                     <h4 class="font-display font-bold text-base text-brandNavy mt-2">${esc(s.name)}</h4>
-                    <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">${esc(s.desc)}</p>
+                    <p class="text-[11px] text-slate-500 mt-1">${esc(s.desc)}</p>
                 </div>
                 <button onclick="toggleCartItem('${s.id}')" class="w-full py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${inCart ? 'bg-emerald-600 text-white' : 'bg-slate-100 hover:bg-brandPrimary hover:text-white text-brandNavy'}">
                     <i class="fa-solid ${inCart ? 'fa-check' : 'fa-plus'}"></i>
-                    <span>${inCart ? 'Agregado a la cita' : 'Agregar a mi cita'}</span>
+                    <span>${inCart ? 'Seleccionado' : 'Agregar'}</span>
                 </button>
             </div>`;
         }).join('');
     }
 
     function toggleCartItem(id) {
-        const exists = cart.findIndex(x => x.id === id);
-        if (exists > -1) cart.splice(exists, 1);
+        const idx = cart.findIndex(x => x.id === id);
+        if (idx > -1) cart.splice(idx, 1);
         else {
             const srv = services.find(x => x.id === id);
             if (srv) cart.push(srv);
@@ -1048,34 +1007,483 @@
     }
 
     function renderCart() {
-        $('selected-count').textContent = `${cart.length} seleccionado${cart.length === 1 ? '' : 's'}`;
+        $('selected-count').textContent = `${cart.length} ítem${cart.length === 1 ? '' : 's'}`;
         if (cart.length === 0) {
-            $('cart-items').innerHTML = `<p class="text-xs text-slate-400 text-center py-4 italic">Aún no has seleccionado servicios del catálogo.</p>`;
+            $('cart-items').innerHTML = `<p class="text-xs text-slate-400 text-center py-4 italic">Aún no has seleccionado servicios.</p>`;
         } else {
             $('cart-items').innerHTML = cart.map(item => `
                 <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200/70 text-xs">
                     <span class="font-semibold text-brandNavy truncate pr-2">${esc(item.name)}</span>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <span class="font-bold text-slate-700">${currency} ${Number(item.price).toFixed(2)}</span>
-                        <button onclick="toggleCartItem('${item.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
+                    <span class="font-bold text-slate-700 shrink-0">US$ ${Number(item.price).toFixed(2)}</span>
                 </div>
             `).join('');
         }
 
         const subtotal = cart.reduce((acc, item) => acc + Number(item.price), 0);
-        const applyDisc = $('apply-promo-check').checked;
-        const discountAmt = applyDisc ? (subtotal * (promoDiscount / 100)) : 0;
+        const earnedPts = Math.round(subtotal * POINTS_PER_DOLLAR);
+        $('cart-points-earned').textContent = `+${earnedPts} Pts`;
+
+        const pat = getLoggedPatient();
+        const bonusPct = (pat && pat.bonusPct > 0) ? pat.bonusPct : 0;
+        const discountAmt = subtotal * (bonusPct / 100);
         const total = Math.max(0, subtotal - discountAmt);
 
-        $('cart-subtotal').textContent = `${currency} ${subtotal.toFixed(2)}`;
-        $('cart-discount-amt').textContent = `- ${currency} ${discountAmt.toFixed(2)}`;
-        $('cart-total').textContent = `${currency} ${total.toFixed(2)}`;
+        if (bonusPct > 0) {
+            $('cart-bonus-row').classList.remove('hidden');
+            $('cart-bonus-pct').textContent = bonusPct;
+            $('cart-discount-amt').textContent = `- US$ ${discountAmt.toFixed(2)}`;
+        } else {
+            $('cart-bonus-row').classList.add('hidden');
+        }
+
+        $('cart-subtotal').textContent = `US$ ${subtotal.toFixed(2)}`;
+        $('cart-total').textContent = `US$ ${total.toFixed(2)}`;
     }
 
+    function sendBookingToWhatsApp() {
+        const pat = getLoggedPatient();
+        const date = $('book-date').value || 'Por coordinar';
+        const list = cart.length > 0
+            ? cart.map(c => `• ${c.name} (US$ ${Number(c.price).toFixed(2)})`).join('\n')
+            : '• Consulta General';
+
+        const msg = `🐾 *SOLICITUD DE CITA · GUAROS VET*\n\n` +
+            (pat ? `🆔 *Código:* ${pat.code}\n🐶 *Mascota:* ${pat.petName}\n👤 *Tutor:* ${pat.tutorName}\n` : `👤 *Cliente Web*\n`) +
+            `📅 *Fecha:* ${date}\n\n` +
+            `*Servicios:*\n${list}\n\n` +
+            `💵 *Total:* ${$('cart-total').textContent}\n` +
+            `🌟 *Puntos a acumular:* ${$('cart-points-earned').textContent}`;
+
+        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // =========================================================================
+    // CARNET DIGITAL, FOTO & TABLA DE PREMIOS PROPORCIONAL
+    // =========================================================================
+    function handleTutorPhotoUpload(event) {
+        const pat = getLoggedPatient();
+        if (!pat) return;
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            pat.photo = e.target.result;
+            localStorage.setItem('gv_patients_db_v5', JSON.stringify(patientsDB));
+            loadTutorCarnetAndRewards(pat);
+            showToast('Foto actualizada en el carnet');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function loadTutorCarnetAndRewards(pat) {
+        $('tutor-points-balance').textContent = `${pat.points} Pts`;
+        $('tutor-bonus-status').textContent = pat.bonusPct > 0 ? `${pat.bonusPct}% OFF Activo` : 'Acumulando';
+
+        $('card-pet-name').textContent = pat.petName;
+        $('card-species-badge').textContent = pat.species === 'CAN' ? 'CANINO' : (pat.species === 'FEL' ? 'FELINO' : 'EXÓTICO');
+        $('card-breed').textContent = `${pat.breed} · ${pat.sex}`;
+        $('card-tutor').textContent = pat.tutorName;
+        $('card-generated-code').textContent = pat.code;
+        $('card-points-badge').textContent = `🌟 ${pat.points} Puntos Acumulados`;
+
+        if (pat.photo) {
+            $('card-pet-photo').src = pat.photo;
+            $('card-pet-photo').style.display = 'block';
+            $('card-pet-placeholder').style.display = 'none';
+        } else {
+            $('card-pet-photo').style.display = 'none';
+            $('card-pet-placeholder').style.display = 'flex';
+        }
+
+        const qrBox = $('pet-qrcode');
+        qrBox.innerHTML = '';
+        new QRCode(qrBox, {
+            text: `GUAROS VET | ID: ${pat.code} | Paciente: ${pat.petName} | Puntos: ${pat.points}`,
+            width: 78,
+            height: 78,
+            colorDark: '#0B2545',
+            colorLight: '#ffffff'
+        });
+
+        // Renderizar Tabla de Puntos por Servicio
+        $('points-earning-table').innerHTML = services.map(s => `
+            <tr>
+                <td class="py-2 font-medium text-slate-700">${esc(s.name)}</td>
+                <td class="py-2 text-right text-slate-500">US$ ${Number(s.price).toFixed(2)}</td>
+                <td class="py-2 text-right font-bold text-brandPrimary">+${Math.round(Number(s.price) * POINTS_PER_DOLLAR)} pts</td>
+            </tr>
+        `).join('');
+
+        // Renderizar Tabla de Premios y Progreso
+        $('rewards-progress-list').innerHTML = REWARDS_CATALOG.map(r => {
+            const pct = Math.min(100, Math.round((pat.points / r.pointsRequired) * 100));
+            const missing = Math.max(0, r.pointsRequired - pat.points);
+            const unlocked = pat.points >= r.pointsRequired;
+            return `
+            <div class="p-3.5 rounded-2xl border ${unlocked ? 'bg-emerald-50/70 border-emerald-200' : 'bg-slate-50 border-slate-200'} space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl ${unlocked ? 'bg-emerald-600 text-white' : 'bg-brandNavy text-white'} flex items-center justify-center shrink-0">
+                            <i class="fa-solid ${r.icon}"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-brandNavy">${esc(r.title)}</h4>
+                            <p class="text-[11px] text-slate-500">${esc(r.desc)}</p>
+                        </div>
+                    </div>
+                    <span class="font-display font-bold text-xs px-2.5 py-1 rounded-full ${unlocked ? 'bg-emerald-600 text-white' : 'bg-amber-100 text-amber-800'} shrink-0">
+                        ${r.pointsRequired} Pts
+                    </span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                    <div class="${unlocked ? 'bg-emerald-500' : 'bg-brandPrimary'} h-2 rounded-full transition-all" style="width:${pct}%"></div>
+                </div>
+                <div class="flex justify-between items-center text-[11px]">
+                    <span class="font-semibold ${unlocked ? 'text-emerald-700' : 'text-slate-600'}">
+                        ${unlocked ? '🎉 ¡Premio desbloqueado! Disponible para canje' : `Te faltan <strong>${missing} puntos</strong> para canjear este premio`}
+                    </span>
+                    ${unlocked ? `<button onclick="redeemRewardWA('${esc(r.title)}', ${r.pointsRequired})" class="px-2.5 py-1 bg-[#25D366] text-white font-bold rounded-lg text-[10px]">Canjear por WA</button>` : `<span class="font-bold text-slate-400">${pct}%</span>`}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function redeemRewardWA(title, pts) {
+        const pat = getLoggedPatient();
+        if (!pat) return;
+        const msg = `🎁 *CANJE DE PREMIO FIDELIZACIÓN · GUAROS VET*\n\n` +
+            `🆔 *Paciente:* ${pat.petName} (${pat.code})\n` +
+            `👤 *Tutor:* ${pat.tutorName}\n` +
+            `🏆 *Premio a reclamar:* ${title} (${pts} pts)\n` +
+            `🌟 *Saldo actual:* ${pat.points} pts\n\n` +
+            `Solicito agendar mi premio en consultorio.`;
+        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function downloadPetCardPNG() {
+        showToast('Generando Carnet PNG...');
+        html2canvas($('pet-id-card'), { scale: 3, useCORS: true }).then(canvas => {
+            const a = document.createElement('a');
+            a.download = `Carnet-${$('card-generated-code').textContent}.png`;
+            a.href = canvas.toDataURL('image/png');
+            a.click();
+        });
+    }
+
+    function sharePetCodeWhatsApp() {
+        const pat = getLoggedPatient();
+        if (!pat) return;
+        const msg = `🐾 *Carnet Digital Guaros Vet*\nPaciente: *${pat.petName}*\nCódigo: *${pat.code}*\nPuntos: *${pat.points} Pts*`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // =========================================================================
+    // PLANES CON AGENDA A 12 MESES, APROBACIÓN ADMIN Y CHECKLIST DE CONSUMO
+    // =========================================================================
+    function renderPlans() {
+        const isAdmin = currentSession && currentSession.role === 'admin';
+        const pat = getLoggedPatient();
+
+        $('plans-container').innerHTML = plans.map((p, idx) => `
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="p-5 text-white hero-gradient">
+                        ${isAdmin ? `
+                        <div class="flex justify-end gap-1.5 mb-2">
+                            <button onclick="openPlanModal(${idx})" class="px-2 py-1 bg-amber-400 text-brandNavy rounded-lg text-[10px] font-bold">Editar</button>
+                            <button onclick="deletePlan(${idx})" class="px-2 py-1 bg-red-600 text-white rounded-lg text-[10px] font-bold">Borrar</button>
+                        </div>` : ''}
+                        <span class="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-white/20">${esc(p.cat)} · 12 Meses</span>
+                        <h3 class="font-display font-bold text-xl mt-2">${esc(p.name)}</h3>
+                        <p class="font-display font-bold text-2xl text-amber-300 mt-1">US$ ${Number(p.price).toFixed(2)}</p>
+                    </div>
+                    <div class="p-5 space-y-2 text-xs text-slate-600">
+                        <p class="font-bold text-brandNavy uppercase text-[10px]">Servicios incluidos en el paquete:</p>
+                        <ul class="space-y-1.5">
+                            ${p.items.map(it => `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-brandPrimary mt-0.5"></i><span>${esc(it)}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                ${pat ? `
+                <div class="p-4 bg-slate-50 border-t border-slate-100">
+                    <button onclick="requestPlanSubscription('${p.id}')" class="w-full py-2.5 bg-brandPrimary hover:brightness-110 text-white font-bold rounded-xl text-xs shadow">
+                        Solicitar Plan & Generar Agenda 12M
+                    </button>
+                </div>` : ''}
+            </div>
+        `).join('');
+    }
+
+    function build12MonthSchedule(startDateStr, itemsList) {
+        const start = new Date(startDateStr + 'T12:00:00');
+        const end = new Date(start);
+        end.setFullYear(end.getFullYear() + 1); // Exactamente 12 meses sin importar día de inicio
+
+        const totalItems = itemsList.length;
+        const intervalDays = totalItems > 1 ? Math.floor(365 / totalItems) : 30;
+
+        return {
+            startDate: start.toISOString().split('T')[0],
+            endDate: end.toISOString().split('T')[0],
+            checklist: itemsList.map((label, idx) => {
+                const d = new Date(start);
+                d.setDate(d.getDate() + (idx * intervalDays));
+                if (d > end) d.setTime(end.getTime());
+                return {
+                    label,
+                    scheduledDate: d.toISOString().split('T')[0],
+                    consumed: false
+                };
+            })
+        };
+    }
+
+    function requestPlanSubscription(planId) {
+        const pat = getLoggedPatient();
+        const plan = plans.find(p => p.id === planId);
+        if (!pat || !plan) return;
+
+        // Verificar si ya tiene un plan anterior para aplicar beneficio de renovación
+        const hasPreviousPlan = subscriptionsDB.some(s => s.patientId === pat.id);
+        const todayStr = new Date().toISOString().split('T')[0];
+        const scheduleData = build12MonthSchedule(todayStr, plan.items);
+
+        const newSub = {
+            id: 'sub-' + Date.now(),
+            patientId: pat.id,
+            patientName: pat.petName,
+            patientCode: pat.code,
+            tutorName: pat.tutorName,
+            planName: plan.name,
+            price: hasPreviousPlan ? Number((plan.price * 0.85).toFixed(2)) : plan.price,
+            isRenewal: hasPreviousPlan,
+            renewalGift: hasPreviousPlan ? '15% Descuento Renovación Anual + 1 Baño Cortesía' : '',
+            status: 'pending', // 'pending' | 'approved'
+            startDate: scheduleData.startDate,
+            endDate: scheduleData.endDate,
+            checklist: scheduleData.checklist
+        };
+
+        subscriptionsDB.unshift(newSub);
+        localStorage.setItem('gv_subscriptions_v5', JSON.stringify(subscriptionsDB));
+        renderSubscriptions();
+        showToast('Plan solicitado. En espera de aprobación de pago por el médico.');
+
+        const msg = `📋 *SOLICITUD DE PLAN PREVENTIVO · GUAROS VET*\n\n` +
+            `🆔 *Paciente:* ${pat.petName} (${pat.code})\n` +
+            `👤 *Tutor:* ${pat.tutorName}\n` +
+            `📦 *Plan:* ${plan.name}\n` +
+            `💵 *Monto:* US$ ${newSub.price} ${hasPreviousPlan ? '(Incluye 15% OFF Renovación Anual)' : ''}\n` +
+            `📅 *Vigencia:* ${newSub.startDate} al ${newSub.endDate} (12 meses)\n\n` +
+            `Envío comprobante para aprobación y activación de mi agenda.`;
+        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function renderSubscriptions() {
+        const isAdmin = currentSession && currentSession.role === 'admin';
+        const pat = getLoggedPatient();
+
+        const list = isAdmin
+            ? subscriptionsDB
+            : (pat ? subscriptionsDB.filter(s => s.patientId === pat.id) : []);
+
+        const html = list.length === 0
+            ? `<p class="text-xs text-slate-400 italic py-4">No hay planes registrados todavía.</p>`
+            : list.map(sub => {
+                const consumedCount = sub.checklist.filter(c => c.consumed).length;
+                const totalCount = sub.checklist.length;
+                return `
+                <div class="p-5 rounded-2xl border ${sub.status === 'approved' ? 'border-emerald-200 bg-emerald-50/30' : 'border-amber-200 bg-amber-50/40'} space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/70 pb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${sub.status === 'approved' ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-white'}">
+                                    ${sub.status === 'approved' ? '✅ Pago Aprobado · Activo' : '⏳ Pendiente de Aprobación de Pago'}
+                                </span>
+                                ${sub.isRenewal ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800">🎁 ${esc(sub.renewalGift)}</span>` : ''}
+                            </div>
+                            <h4 class="font-display font-bold text-lg text-brandNavy mt-1">${esc(sub.planName)} — ${esc(sub.patientName)} (${esc(sub.patientCode)})</h4>
+                            <p class="text-xs text-slate-500">Tutor: <strong>${esc(sub.tutorName)}</strong> · Vigencia 12 meses: <strong>${sub.startDate}</strong> al <strong>${sub.endDate}</strong></p>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            ${isAdmin && sub.status === 'pending' ? `
+                            <button onclick="approveSubscription('${sub.id}')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow">
+                                <i class="fa-solid fa-check-double"></i> Aprobar Pago & Activar
+                            </button>` : ''}
+                            ${isAdmin ? `
+                            <button onclick="deleteSubscription('${sub.id}')" class="px-2.5 py-2 bg-red-100 text-red-700 rounded-xl text-xs font-bold">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Checklist de Servicios y Agenda a 12 Meses -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-bold text-brandNavy">
+                            <span>Agenda & Servicios del Paquete (${consumedCount}/${totalCount} utilizados):</span>
+                            <span class="text-brandPrimary">${totalCount - consumedCount} disponibles</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            ${sub.checklist.map((item, cIdx) => `
+                            <div onclick="${isAdmin && sub.status === 'approved' ? `toggleSubItemConsumed('${sub.id}', ${cIdx})` : ''}"
+                                 class="p-2.5 rounded-xl border text-xs flex items-center justify-between gap-2 ${isAdmin && sub.status === 'approved' ? 'cursor-pointer hover:bg-slate-100' : ''} ${item.consumed ? 'bg-slate-100 border-slate-200 text-slate-400' : 'bg-white border-slate-200 text-slate-700'}">
+                                <div class="flex items-center gap-2 min-w-0">
+                                    <i class="fa-solid ${item.consumed ? 'fa-square-check text-emerald-600' : 'fa-square text-slate-300'}"></i>
+                                    <span class="${item.consumed ? 'line-through' : 'font-semibold'} truncate">${esc(item.label)}</span>
+                                </div>
+                                <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-blue-50 text-brandPrimary shrink-0">${item.scheduledDate}</span>
+                            </div>`).join('')}
+                        </div>
+                        ${isAdmin && sub.status === 'approved' ? `<p class="text-[10px] text-slate-400 italic">* Haz clic sobre cada servicio para tacharlo a medida que el paciente lo utilice.</p>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+
+        if (isAdmin && $('admin-subscriptions-list')) $('admin-subscriptions-list').innerHTML = html;
+        if (!isAdmin && $('tutor-subscriptions-list')) $('tutor-subscriptions-list').innerHTML = html;
+    }
+
+    function approveSubscription(subId) {
+        const sub = subscriptionsDB.find(s => s.id === subId);
+        if (!sub) return;
+        sub.status = 'approved';
+
+        // Sumar puntos proporcionales al tutor por la adquisición del plan
+        const pat = patientsDB.find(p => p.id === sub.patientId);
+        if (pat) {
+            pat.points = Number(pat.points || 0) + Math.round(Number(sub.price) * POINTS_PER_DOLLAR);
+            localStorage.setItem('gv_patients_db_v5', JSON.stringify(patientsDB));
+        }
+
+        localStorage.setItem('gv_subscriptions_v5', JSON.stringify(subscriptionsDB));
+        renderSubscriptions();
+        renderAdminPatientsFolder();
+        showToast('Plan aprobado, agenda activada y puntos acreditados');
+    }
+
+    function toggleSubItemConsumed(subId, itemIdx) {
+        const sub = subscriptionsDB.find(s => s.id === subId);
+        if (!sub) return;
+        sub.checklist[itemIdx].consumed = !sub.checklist[itemIdx].consumed;
+        localStorage.setItem('gv_subscriptions_v5', JSON.stringify(subscriptionsDB));
+        renderSubscriptions();
+        showToast(sub.checklist[itemIdx].consumed ? 'Servicio marcado como utilizado' : 'Servicio restaurado');
+    }
+
+    function deleteSubscription(subId) {
+        if (confirm('¿Eliminar este registro de plan?')) {
+            subscriptionsDB = subscriptionsDB.filter(s => s.id !== subId);
+            localStorage.setItem('gv_subscriptions_v5', JSON.stringify(subscriptionsDB));
+            renderSubscriptions();
+        }
+    }
+
+    // =========================================================================
+    // PERFIL TUTOR (SOLO DATOS PERSONALES) & CARPETA PRIVADA ADMIN
+    // =========================================================================
+    function loadTutorPersonalProfile(pat) {
+        $('prof-tutor-name').value = pat.tutorName;
+        $('prof-tutor-phone').value = pat.tutorPhone;
+        $('prof-tutor-addr').value = pat.tutorAddr;
+        $('prof-tutor-pass').value = '';
+    }
+
+    function saveTutorPersonalProfile() {
+        const pat = getLoggedPatient();
+        if (!pat) return;
+        pat.tutorName = $('prof-tutor-name').value.trim() || pat.tutorName;
+        pat.tutorPhone = $('prof-tutor-phone').value.trim();
+        pat.tutorAddr = $('prof-tutor-addr').value.trim();
+        const newPass = $('prof-tutor-pass').value.trim();
+        if (newPass) pat.password = newPass;
+
+        localStorage.setItem('gv_patients_db_v5', JSON.stringify(patientsDB));
+        loadTutorCarnetAndRewards(pat);
+        showToast('Datos personales actualizados');
+    }
+
+    function renderAdminPatientsFolder() {
+        if (patientsDB.length === 0) {
+            $('admin-patients-grid').innerHTML = `<p class="text-xs text-slate-400 col-span-full italic py-6 text-center">Aún no hay historias clínicas registradas por los tutores.</p>`;
+            return;
+        }
+        $('admin-patients-grid').innerHTML = patientsDB.map(p => `
+            <div class="bg-slate-50 p-4 rounded-3xl border border-slate-200 space-y-3 flex flex-col justify-between">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-white border overflow-hidden flex items-center justify-center shrink-0">
+                            ${p.photo ? `<img src="${p.photo}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-paw text-slate-400 text-lg"></i>`}
+                        </div>
+                        <div>
+                            <span class="font-mono text-[10px] font-extrabold text-brandPrimary">${esc(p.code)}</span>
+                            <h4 class="font-display font-bold text-base text-brandNavy">${esc(p.petName)} <span class="text-xs font-normal text-slate-500">(${esc(p.species)} · ${esc(p.breed)})</span></h4>
+                            <p class="text-xs text-slate-600">Tutor: <strong>${esc(p.tutorName)}</strong> (${esc(p.tutorCi)}) · Tel: ${esc(p.tutorPhone)}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 bg-white p-3 rounded-2xl border border-slate-100 text-[11px] text-slate-600">
+                    <p>💉 Últ. Vacuna: <strong>${esc(p.lastVaccine)}</strong></p>
+                    <p>💊 Desparasit.: <strong>${esc(p.lastDeworm)}</strong></p>
+                    <p>🏷️ Microchip: <strong class="font-mono">${esc(p.microchip)}</strong></p>
+                    <p>⚖️ Peso / Sexo: <strong>${esc(p.weight)}kg · ${esc(p.sex)}</strong></p>
+                    <p>🌟 Puntos: <strong class="text-amber-600">${p.points} Pts</strong></p>
+                    <p>🎁 Bono Fideliz.: <strong class="text-emerald-600">${p.bonusPct}% OFF</strong></p>
+                </div>
+
+                <div class="flex justify-end gap-2">
+                    <button onclick="openAdminPatientModal('${p.id}')" class="px-3.5 py-1.5 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">
+                        <i class="fa-solid fa-pen-to-square"></i> Gestionar Historia / Puntos / Bono
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function openAdminPatientModal(patId) {
+        const p = patientsDB.find(x => x.id === patId);
+        if (!p) return;
+        $('adm-pat-id').value = p.id;
+        $('adm-pat-pet').value = p.petName;
+        $('adm-pat-weight').value = p.weight;
+        $('adm-pat-vac').value = p.lastVaccine !== 'Pendiente' ? p.lastVaccine : '';
+        $('adm-pat-dew').value = p.lastDeworm !== 'Pendiente' ? p.lastDeworm : '';
+        $('adm-pat-chip').value = p.microchip;
+        $('adm-pat-points').value = p.points;
+        $('adm-pat-bonus').value = p.bonusPct || 0;
+        $('adm-pat-notes').value = p.clinicalNotes || '';
+
+        $('admin-patient-modal').classList.remove('hidden');
+        $('admin-patient-modal').classList.add('flex');
+    }
+    function closeAdminPatientModal() {
+        $('admin-patient-modal').classList.add('hidden');
+        $('admin-patient-modal').classList.remove('flex');
+    }
+    function saveAdminPatientChanges() {
+        const p = patientsDB.find(x => x.id === $('adm-pat-id').value);
+        if (!p) return;
+        p.petName = $('adm-pat-pet').value.trim().toUpperCase() || p.petName;
+        p.weight = $('adm-pat-weight').value || p.weight;
+        p.lastVaccine = $('adm-pat-vac').value || p.lastVaccine;
+        p.lastDeworm = $('adm-pat-dew').value || p.lastDeworm;
+        p.microchip = $('adm-pat-chip').value.trim() || 'No posee';
+        p.points = parseInt($('adm-pat-points').value) || 0;
+        p.bonusPct = parseInt($('adm-pat-bonus').value) || 0;
+        p.clinicalNotes = $('adm-pat-notes').value.trim();
+
+        localStorage.setItem('gv_patients_db_v5', JSON.stringify(patientsDB));
+        closeAdminPatientModal();
+        renderAdminPatientsFolder();
+        showToast('Expediente, puntos y bono actualizados');
+    }
+
+    // =========================================================================
+    // MODALES ADMIN: SERVICIOS Y PLANES
+    // =========================================================================
     function openServiceModal(idx = null) {
         $('edit-srv-index').value = idx !== null ? idx : '';
-        $('srv-modal-title').textContent = idx !== null ? 'Editar Servicio y Precio' : 'Añadir Nuevo Servicio';
         if (idx !== null) {
             const s = services[idx];
             $('srv-name').value = s.name;
@@ -1099,344 +1507,40 @@
         const idx = $('edit-srv-index').value;
         const item = {
             id: idx !== '' ? services[idx].id : 'srv-' + Date.now(),
-            name: $('srv-name').value.trim() || 'Servicio Clínico',
+            name: $('srv-name').value.trim() || 'Servicio',
             cat: $('srv-cat').value,
             price: parseFloat($('srv-price').value) || 0,
             desc: $('srv-desc').value.trim()
         };
         if (idx !== '') services[parseInt(idx)] = item;
         else services.push(item);
-
-        localStorage.setItem('gv_services_v4', JSON.stringify(services));
+        localStorage.setItem('gv_services_v5', JSON.stringify(services));
         closeServiceModal();
         renderCategoryFilters();
         renderServices();
-        renderCart();
-        showToast('Servicio guardado');
+        showToast('Catálogo actualizado');
     }
     function deleteService(idx) {
-        if (confirm('¿Eliminar este servicio del catálogo?')) {
-            const removed = services.splice(idx, 1)[0];
-            cart = cart.filter(c => c.id !== removed.id);
-            localStorage.setItem('gv_services_v4', JSON.stringify(services));
+        if (confirm('¿Eliminar este servicio?')) {
+            services.splice(idx, 1);
+            localStorage.setItem('gv_services_v5', JSON.stringify(services));
             renderCategoryFilters();
             renderServices();
-            renderCart();
-            showToast('Servicio eliminado');
         }
-    }
-
-    function buildDeterministicPetCode(petName, species, tutorName) {
-        const cleanPet = (petName || 'MASCOTA').normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-        const prefix = (cleanPet.slice(0, 3) || 'PET').padEnd(3, 'X');
-        const sp = (species || 'CAN').toUpperCase();
-        const seedStr = `${cleanPet}-${sp}-${(tutorName || '').trim().toUpperCase()}`;
-        let hash = 0;
-        for (let i = 0; i < seedStr.length; i++) {
-            hash = ((hash << 5) - hash) + seedStr.charCodeAt(i);
-            hash |= 0;
-        }
-        const num = String(Math.abs(hash) % 9000 + 1000);
-        return `GV-${sp}-${prefix}-${num}`;
-    }
-
-    function syncPetCodeFromBooking() {
-        const pet = $('book-pet-name').value;
-        const sp = $('book-pet-species').value;
-        const tutor = $('book-tutor-name').value;
-        $('live-pet-code').textContent = buildDeterministicPetCode(pet, sp, tutor);
-    }
-
-    function sendBookingToWhatsApp() {
-        const pet = $('book-pet-name').value.trim() || 'Mi Mascota';
-        const tutor = $('book-tutor-name').value.trim() || 'Tutor';
-        const date = $('book-date').value || 'Por coordinar';
-        const code = $('live-pet-code').textContent;
-        const total = $('cart-total').textContent;
-
-        const list = cart.length > 0
-            ? cart.map(c => `• ${c.name} (${currency} ${Number(c.price).toFixed(2)})`).join('\n')
-            : '• Consulta / Evaluación general';
-
-        const msg = `🐾 *SOLICITUD DE CITA · GUAROS VET*\n\n` +
-            `🆔 *Código Paciente:* ${code}\n` +
-            `🐶 *Mascota:* ${pet}\n` +
-            `👤 *Tutor:* ${tutor}\n` +
-            `📅 *Fecha sugerida:* ${date}\n\n` +
-            `*Servicios seleccionados:*\n${list}\n\n` +
-            `💵 *Total Estimado:* ${total}\n` +
-            `📍 Carrera 17 entre 45 y 46, Barquisimeto`;
-
-        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    function handlePetPhotoUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            currentPetPhotoBase64 = e.target.result;
-            const imgEl = $('card-pet-photo');
-            imgEl.src = currentPetPhotoBase64;
-            imgEl.style.display = 'block';
-            if (imgEl.nextElementSibling) imgEl.nextElementSibling.style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-    }
-
-    let qrInstance = null;
-    function generatePetIdentityCard() {
-        const pet = $('cg-pet-name').value.trim() || 'MASCOTA';
-        const sp = $('cg-species').value;
-        const breed = $('cg-breed').value.trim() || 'Raza / Color no especificado';
-        const tutor = $('cg-tutor').value.trim() || 'Sin asignar';
-        const microchip = $('cg-microchip').value.trim() || 'No registrado';
-        const points = $('cg-points').value || '100';
-        const referrals = $('cg-referrals').value || '2';
-
-        const code = buildDeterministicPetCode(pet, sp, tutor);
-        const spMap = { CAN: 'CANINO', FEL: 'FELINO', EXO: 'EXÓTICO' };
-
-        $('card-pet-name').textContent = pet.toUpperCase();
-        $('card-species-badge').textContent = spMap[sp] || 'MASCOTA';
-        $('card-breed').textContent = breed;
-        $('card-tutor').textContent = tutor;
-        $('card-generated-code').textContent = code;
-        $('card-microchip-display').textContent = `Microchip: ${microchip}`;
-        $('card-points-display').textContent = `${points} Pts`;
-        $('card-referrals-display').textContent = `${referrals} Amigos`;
-
-        const imgEl = $('card-pet-photo');
-        if (currentPetPhotoBase64) {
-            imgEl.src = currentPetPhotoBase64;
-            imgEl.style.display = 'block';
-            if (imgEl.nextElementSibling) imgEl.nextElementSibling.style.display = 'none';
-        } else {
-            imgEl.style.display = 'none';
-            if (imgEl.nextElementSibling) imgEl.nextElementSibling.style.display = 'flex';
-        }
-
-        const qrContainer = $('pet-qrcode');
-        qrContainer.innerHTML = '';
-        qrInstance = new QRCode(qrContainer, {
-            text: `GUAROS VET | ID: ${code} | Paciente: ${pet} | Tutor: ${tutor} | Puntos: ${points} | Ref: ${referrals} | Microchip: ${microchip}`,
-            width: 82,
-            height: 82,
-            colorDark: '#0B2545',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.M
-        });
-    }
-
-    function downloadPetCardPNG() {
-        showToast('Generando Carnet Digital PNG...');
-        html2canvas($('pet-id-card'), { scale: 3, useCORS: true }).then(canvas => {
-            const a = document.createElement('a');
-            a.download = `Carnet-${$('card-generated-code').textContent}.png`;
-            a.href = canvas.toDataURL('image/png');
-            a.click();
-            showToast('¡Carnet descargado!');
-        });
-    }
-
-    function sharePetCodeWhatsApp() {
-        const code = $('card-generated-code').textContent;
-        const pet = $('card-pet-name').textContent;
-        const points = $('card-points-display').textContent;
-        const msg = `🐾 *Carnet & Fidelización Guaros Vet*\n\n` +
-            `Paciente: *${pet}*\n` +
-            `Código Único: *${code}*\n` +
-            `Puntos Acumulados: *${points}*\n\n` +
-            `Presenta este código en cada visita a nuestro consultorio en Barquisimeto (Carrera 17 entre 45 y 46).`;
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    // CARPETA DE PACIENTES AUTOMÁTICA
-    function savePetToHistory() {
-        const pet = $('cg-pet-name').value.trim();
-        if (!pet) return showToast('Escribe primero el nombre de la mascota');
-        const record = {
-            id: 'pat-' + Date.now(),
-            code: $('card-generated-code').textContent,
-            pet: pet.toUpperCase(),
-            species: $('cg-species').value,
-            tutor: $('cg-tutor').value.trim() || 'Sin tutor',
-            phone: '0426-1601079',
-            lastVaccine: new Date().toISOString().split('T')[0],
-            lastDeworm: new Date().toISOString().split('T')[0],
-            microchip: $('cg-microchip').value.trim() || 'No asignado',
-            points: $('cg-points').value || '100',
-            photo: currentPetPhotoBase64 || ''
-        };
-        let hist = JSON.parse(localStorage.getItem('gv_patients_folder')) || [];
-        hist = [record, ...hist.filter(h => h.code !== record.code)];
-        localStorage.setItem('gv_patients_folder', JSON.stringify(hist));
-        renderPatientFolder();
-        showToast('¡Paciente guardado en la carpeta oficial!');
-    }
-
-    function renderPatientFolder() {
-        const hist = JSON.parse(localStorage.getItem('gv_patients_folder')) || [];
-        if (hist.length === 0) {
-            $('patient-folder-list').innerHTML = `<p class="text-xs text-slate-400 col-span-full italic py-6 text-center">No hay pacientes registrados en la carpeta aún.</p>`;
-            return;
-        }
-        $('patient-folder-list').innerHTML = hist.map((h, idx) => `
-            <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between">
-                <div class="flex items-start gap-3">
-                    <div class="w-14 h-14 rounded-2xl bg-slate-100 overflow-hidden shrink-0 border border-slate-200 flex items-center justify-center">
-                        ${h.photo ? `<img src="${h.photo}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-paw text-slate-400 text-xl"></i>`}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-blue-50 text-brandPrimary">${esc(h.species)}</span>
-                        <h4 class="font-display font-bold text-base text-brandNavy truncate mt-0.5">${esc(h.pet)}</h4>
-                        <p class="text-[11px] text-slate-500 truncate">Tutor: <strong class="text-slate-700">${esc(h.tutor)}</strong></p>
-                    </div>
-                </div>
-                <div class="bg-slate-50 p-3 rounded-2xl space-y-1.5 text-[11px] text-slate-600 border border-slate-100">
-                    <p class="flex justify-between"><span>🆔 Código:</span> <strong class="font-mono text-brandPrimary">${esc(h.code)}</strong></p>
-                    <p class="flex justify-between"><span>💉 Últ. Vacuna:</span> <strong class="text-slate-700">${esc(h.lastVaccine)}</strong></p>
-                    <p class="flex justify-between"><span>💊 Desparasitación:</span> <strong class="text-slate-700">${esc(h.lastDeworm)}</strong></p>
-                    <p class="flex justify-between"><span>🏷️ Microchip:</span> <strong class="font-mono text-slate-700">${esc(h.microchip)}</strong></p>
-                    <p class="flex justify-between"><span>🌟 Puntos Club:</span> <strong class="text-amber-600">${esc(h.points)} Pts</strong></p>
-                </div>
-                <div class="flex justify-end gap-2 pt-1 border-t border-slate-100">
-                    <button onclick="copyToClipboard('${esc(h.code)}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-[10px] font-bold text-slate-700"><i class="fa-solid fa-copy"></i> Copiar ID</button>
-                    <button onclick="deletePatientRecord(${idx})" class="px-2.5 py-1 bg-red-50 hover:bg-red-100 rounded-lg text-[10px] font-bold text-red-600"><i class="fa-solid fa-trash"></i></button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function openNewPatientModal() {
-        $('edit-patient-id').value = '';
-        $('pat-pet').value = '';
-        $('pat-species').value = 'CAN';
-        $('pat-tutor').value = '';
-        $('pat-phone').value = '0426-1601079';
-        $('pat-last-vaccine').valueAsDate = new Date();
-        $('pat-last-deworm').valueAsDate = new Date();
-        $('pat-microchip').value = '';
-        $('pat-points').value = '100';
-        $('patient-modal').classList.remove('hidden');
-        $('patient-modal').classList.add('flex');
-    }
-    function closePatientModal() {
-        $('patient-modal').classList.add('hidden');
-        $('patient-modal').classList.remove('flex');
-    }
-    function savePatientModal() {
-        const pet = $('pat-pet').value.trim();
-        const tutor = $('pat-tutor').value.trim();
-        if (!pet || !tutor) return showToast('Completa el nombre de la mascota y del tutor');
-
-        const record = {
-            id: 'pat-' + Date.now(),
-            code: buildDeterministicPetCode(pet, $('pat-species').value, tutor),
-            pet: pet.toUpperCase(),
-            species: $('pat-species').value,
-            tutor: tutor,
-            phone: $('pat-phone').value.trim(),
-            lastVaccine: $('pat-last-vaccine').value || 'No registrada',
-            lastDeworm: $('pat-last-deworm').value || 'No registrada',
-            microchip: $('pat-microchip').value.trim() || 'No asignado',
-            points: $('pat-points').value || '100',
-            photo: ''
-        };
-        let hist = JSON.parse(localStorage.getItem('gv_patients_folder')) || [];
-        hist.unshift(record);
-        localStorage.setItem('gv_patients_folder', JSON.stringify(hist));
-        closePatientModal();
-        renderPatientFolder();
-        showToast('Ficha de paciente guardada');
-    }
-    function deletePatientRecord(idx) {
-        if (confirm('¿Eliminar este paciente de la carpeta?')) {
-            let hist = JSON.parse(localStorage.getItem('gv_patients_folder')) || [];
-            hist.splice(idx, 1);
-            localStorage.setItem('gv_patients_folder', JSON.stringify(hist));
-            renderPatientFolder();
-            showToast('Paciente eliminado');
-        }
-    }
-    function clearPatientHistory() {
-        if (confirm('¿Estás seguro de vaciar toda la carpeta de pacientes?')) {
-            localStorage.removeItem('gv_patients_folder');
-            renderPatientFolder();
-            showToast('Carpeta vaciada');
-        }
-    }
-
-    function renderQuoSelector() {
-        $('quo-selector').innerHTML = QUO_MODELS.map(q => `
-            <button onclick="currentQuo='${q.id}';renderQuoSelector();renderPlans()" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${currentQuo === q.id ? 'bg-brandNavy text-white shadow' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
-                ${esc(q.name)}
-            </button>
-        `).join('');
-    }
-
-    function renderPlans() {
-        const quoObj = QUO_MODELS.find(q => q.id === currentQuo);
-        $('plans-container').innerHTML = plans.map((p, idx) => `
-            <div class="bg-white rounded-3xl shadow-sm border ${p.featured ? 'border-brandPrimary ring-2 ring-brandPrimary/25' : 'border-slate-200'} overflow-hidden flex flex-col justify-between">
-                <div>
-                    <div class="p-5 text-white hero-gradient relative">
-                        ${isAdminMode ? `
-                        <div class="flex justify-end gap-1.5 mb-2">
-                            <button onclick="openPlanModal(${idx})" class="px-2.5 py-1 bg-amber-400 text-brandNavy rounded-lg text-[10px] font-bold"><i class="fa-solid fa-pen"></i> Editar Plan</button>
-                            <button onclick="deletePlan(${idx})" class="px-2.5 py-1 bg-red-600 text-white rounded-lg text-[10px] font-bold"><i class="fa-solid fa-trash"></i></button>
-                        </div>` : ''}
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20">${esc(p.cat)}</span>
-                        <h3 class="font-display font-bold text-xl mt-2">${esc(p.name)}</h3>
-                        <p class="text-xs text-cyan-100">${esc(p.stage)}</p>
-                    </div>
-                    <div class="p-5 space-y-4">
-                        <div>
-                            <p class="text-[10px] font-bold uppercase text-slate-400">Inversión</p>
-                            <p class="font-display font-bold text-3xl text-brandNavy">${currency} ${Number(p.price).toFixed(2)}</p>
-                            <p class="text-[11px] font-bold text-brandOrange mt-1"><i class="fa-solid fa-credit-card"></i> ${quoObj.calc(Number(p.price))}</p>
-                        </div>
-                        <ul class="space-y-1.5 text-xs text-slate-600">
-                            ${(p.items || []).map(it => `<li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-brandPrimary mt-0.5"></i><span>${esc(it)}</span></li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-                <div class="p-4 bg-slate-50 border-t border-slate-100">
-                    <button onclick="sendPlanWhatsApp(${idx})" class="w-full py-2.5 bg-[#25D366] hover:brightness-95 text-white font-bold rounded-xl text-xs shadow flex items-center justify-center gap-1.5">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Solicitar este Plan
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function sendPlanWhatsApp(idx) {
-        const p = plans[idx];
-        const quoObj = QUO_MODELS.find(q => q.id === currentQuo);
-        const msg = `🐾 *${p.name} · Guaros Vet*\n` +
-            `${p.stage}\n\n` +
-            `*Incluye:*\n${p.items.map(i => '✅ ' + i).join('\n')}\n\n` +
-            `💵 *Precio:* ${currency} ${Number(p.price).toFixed(2)}\n` +
-            `💳 *Modalidad QUO:* ${quoObj.calc(Number(p.price))}\n\n` +
-            `Quiero afiliar a mi mascota en Barquisimeto.`;
-        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function openPlanModal(idx = null) {
         $('edit-plan-index').value = idx !== null ? idx : '';
-        $('plan-modal-title').textContent = idx !== null ? 'Editar Plan o Paquete' : 'Nuevo Plan / Paquete Spa';
         if (idx !== null) {
             const p = plans[idx];
             $('pl-name').value = p.name;
             $('pl-cat').value = p.cat;
             $('pl-price').value = p.price;
-            $('pl-stage').value = p.stage;
-            $('pl-items').value = (p.items || []).join('\n');
+            $('pl-items').value = p.items.join('\n');
         } else {
             $('pl-name').value = '';
             $('pl-cat').value = 'Salud Preventiva';
             $('pl-price').value = 100;
-            $('pl-stage').value = '';
             $('pl-items').value = '';
         }
         $('plan-modal').classList.remove('hidden');
@@ -1450,16 +1554,14 @@
         const idx = $('edit-plan-index').value;
         const item = {
             id: idx !== '' ? plans[idx].id : 'pl-' + Date.now(),
-            name: $('pl-name').value.trim() || 'Plan Guaros Vet',
+            name: $('pl-name').value.trim() || 'Plan Preventivo',
             cat: $('pl-cat').value,
             price: parseFloat($('pl-price').value) || 0,
-            stage: $('pl-stage').value.trim(),
             items: $('pl-items').value.split('\n').map(x => x.trim()).filter(Boolean)
         };
         if (idx !== '') plans[parseInt(idx)] = item;
         else plans.push(item);
-
-        localStorage.setItem('gv_plans_v4', JSON.stringify(plans));
+        localStorage.setItem('gv_plans_v5', JSON.stringify(plans));
         closePlanModal();
         renderPlans();
         showToast('Plan actualizado');
@@ -1467,27 +1569,10 @@
     function deletePlan(idx) {
         if (confirm('¿Eliminar este plan?')) {
             plans.splice(idx, 1);
-            localStorage.setItem('gv_plans_v4', JSON.stringify(plans));
+            localStorage.setItem('gv_plans_v5', JSON.stringify(plans));
             renderPlans();
-            showToast('Plan eliminado');
         }
     }
-
-    (function init() {
-        $('ws-calc-start').valueAsDate = new Date();
-        updatePromoUI();
-        renderCategoryFilters();
-        renderServices();
-        renderCart();
-        renderWsavaFilters();
-        renderWsavaProtocols();
-        syncPetCodeFromBooking();
-        generatePetIdentityCard();
-        renderPatientFolder();
-        renderQuoSelector();
-        renderPlans();
-        switchSection('booking');
-    })();
     </script>
 </body>
 </html>
