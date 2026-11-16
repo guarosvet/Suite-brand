@@ -332,6 +332,19 @@
 
             <!-- TAB B: CARNET DIGITAL -->
             <section id="sec-carnet" class="sec-panel hidden space-y-6">
+                <!-- SELECTOR DE MASCOTAS (GRUPO FAMILIAR) -->
+                <div class="bg-white p-5 rounded-3xl shadow-sm border border-slate-200 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <h3 class="font-display font-bold text-base text-brandNavy flex items-center gap-2">
+                            <i class="fa-solid fa-paw text-brandOrange"></i> Mis Mascotas / Grupo Familiar
+                        </h3>
+                        <button onclick="openAddPetModal()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Registrar Otra Mascota
+                        </button>
+                    </div>
+                    <div id="tutor-pets-switcher" class="flex flex-wrap gap-2 pt-1"></div>
+                </div>
+
                 <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     <div class="lg:col-span-6 space-y-4">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-brandPrimary font-bold rounded-full text-xs">
@@ -538,6 +551,68 @@
                 <p>Carrera 17 entre 45 y 46, Barquisimeto, Estado Lara · RIF: V-24.157.658-9</p>
             </div>
         </footer>
+    </div>
+
+    <!-- MODAL: REGISTRAR OTRA MASCOTA -->
+    <div id="add-pet-modal" class="fixed inset-0 bg-black/70 z-[95] hidden items-center justify-center p-4">
+        <div class="bg-white max-w-md w-full rounded-3xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-display font-bold text-lg text-brandNavy">Añadir Otra Mascota a tu Cuenta</h3>
+                <button onclick="closeAddPetModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-slate-500">Tus datos como tutor se mantendrán. Solo ingresa los datos de tu nuevo peludito.</p>
+            <div class="space-y-3 text-xs">
+                <label class="block font-semibold text-slate-700">Nombre de la Mascota *
+                    <input id="new-pet-name" type="text" placeholder="Ej. Luna" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
+                </label>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="font-semibold text-slate-700">Especie *
+                        <select id="new-pet-species" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                            <option value="CAN">Canino (Perro)</option>
+                            <option value="FEL">Felino (Gato)</option>
+                            <option value="EXO">Exótico / Otro</option>
+                        </select>
+                    </label>
+                    <label class="font-semibold text-slate-700">Sexo
+                        <select id="new-pet-sex" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                            <option value="Macho Entero">Macho Entero</option>
+                            <option value="Macho Castrado">Macho Castrado</option>
+                            <option value="Hembra Entera">Hembra Entera</option>
+                            <option value="Hembra Esterilizada">Hembra Esterilizada</option>
+                        </select>
+                    </label>
+                </div>
+                <label class="block font-semibold text-slate-700">Raza y Color *
+                    <input id="new-pet-breed" type="text" placeholder="Ej. Poodle / Blanco" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="font-semibold text-slate-700">Fecha Nacimiento
+                        <input id="new-pet-dob" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                    </label>
+                    <label class="font-semibold text-slate-700">Peso (Kg)
+                        <input id="new-pet-weight" type="number" step="0.1" placeholder="Ej. 8.5" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                    </label>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="font-semibold text-slate-700">Última Vacuna
+                        <input id="new-pet-vaccine" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                    </label>
+                    <label class="font-semibold text-slate-700">Última Desparasitación
+                        <input id="new-pet-deworm" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                    </label>
+                </div>
+                <label class="block font-semibold text-slate-700">Código Microchip (Opcional)
+                    <input id="new-pet-chip" type="text" placeholder="Opcional" class="mt-1 w-full px-3 py-2 border rounded-xl font-mono">
+                </label>
+                <label class="block font-semibold text-slate-700">Alergias / Patologías
+                    <input id="new-pet-allergies" type="text" placeholder="Ninguna" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeAddPetModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-xs font-bold">Cancelar</button>
+                <button onclick="saveNewPetAccount()" class="px-5 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow">Guardar Mascota en la Nube</button>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL ADMIN: EDITAR PACIENTE -->
@@ -1042,6 +1117,7 @@
 
         if (pat) {
             loadTutorCarnetAndRewards(pat);
+            renderTutorFamilyPets(pat);
             loadTutorPersonalProfile(pat);
             renderSubscriptions();
         }
@@ -1183,9 +1259,126 @@
             pat.photo = e.target.result;
             await supabaseClient.from('patients').update({ photo: pat.photo }).eq('id', pat.id);
             loadTutorCarnetAndRewards(pat);
+            renderTutorFamilyPets(pat);
             showToast('Foto actualizada en la nube');
         };
         reader.readAsDataURL(file);
+    }
+
+    function renderTutorFamilyPets(pat) {
+        const familyPets = patientsDB.filter(p => p.tutorCi && p.tutorCi.toLowerCase() === pat.tutorCi.toLowerCase());
+        const switcher = $('tutor-pets-switcher');
+        if (!switcher) return;
+
+        switcher.innerHTML = familyPets.map(p => `
+            <button onclick="switchActivePet('${p.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${p.id === pat.id ? 'bg-brandNavy text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+                <i class="fa-solid fa-paw ${p.id === pat.id ? 'text-amber-400' : 'text-brandPrimary'}"></i>
+                <span>${esc(p.petName)}</span>
+                <span class="text-[10px] opacity-80 font-mono">(${esc(p.code)})</span>
+            </button>
+        `).join('');
+    }
+
+    function switchActivePet(patId) {
+        currentSession.patientId = patId;
+        localStorage.setItem('gv_session', JSON.stringify(currentSession));
+        launchMainApp();
+        showToast('Cambiando al carnet de tu otra mascota');
+    }
+
+    function openAddPetModal() {
+        $('new-pet-name').value = '';
+        $('new-pet-breed').value = '';
+        $('new-pet-dob').value = '';
+        $('new-pet-weight').value = '';
+        $('new-pet-vaccine').value = '';
+        $('new-pet-deworm').value = '';
+        $('new-pet-chip').value = '';
+        $('new-pet-allergies').value = '';
+
+        $('add-pet-modal').classList.remove('hidden');
+        $('add-pet-modal').classList.add('flex');
+    }
+
+    function closeAddPetModal() {
+        $('add-pet-modal').classList.add('hidden');
+        $('add-pet-modal').classList.remove('flex');
+    }
+
+    async function saveNewPetAccount() {
+        const pat = getLoggedPatient();
+        if (!pat) return;
+        const petName = $('new-pet-name').value.trim();
+        if (!petName) return showToast('Ingresa el nombre de la mascota');
+
+        const species = $('new-pet-species').value;
+        const newObj = {
+            id: 'pat-' + Date.now(),
+            code: buildDeterministicPetCode(petName, species, pat.tutorCi),
+            username: pat.username + '_' + petName.toLowerCase().replace(/[^a-z0-9]/g, ''),
+            password: pat.password,
+            tutorName: pat.tutorName,
+            tutorCi: pat.tutorCi,
+            tutorPhone: pat.tutorPhone,
+            tutorAddr: pat.tutorAddr,
+            petName: petName.toUpperCase(),
+            species,
+            breed: $('new-pet-breed').value.trim() || 'Mestizo',
+            sex: $('new-pet-sex').value,
+            dob: $('new-pet-dob').value || 'No registrada',
+            weight: $('new-pet-weight').value || 'N/A',
+            lastVaccine: $('new-pet-vaccine').value || 'Pendiente',
+            lastDeworm: $('new-pet-deworm').value || 'Pendiente',
+            microchip: $('new-pet-chip').value.trim() || 'No posee',
+            allergies: $('new-pet-allergies').value.trim() || 'Ninguna',
+            points: 100,
+            bonusPct: pat.bonusPct || 0,
+            photo: '',
+            clinicalNotes: 'Mascota adicional registrada por el tutor.'
+        };
+
+        const { error } = await supabaseClient.from('patients').insert([{
+            id: newObj.id,
+            code: newObj.code,
+            username: newObj.username,
+            password: newObj.password,
+            tutor_name: newObj.tutorName,
+            tutor_ci: newObj.tutorCi,
+            tutor_phone: newObj.tutorPhone,
+            tutor_addr: newObj.tutorAddr,
+            pet_name: newObj.petName,
+            species: newObj.species,
+            breed: newObj.breed,
+            sex: newObj.sex,
+            dob: newObj.dob,
+            weight: newObj.weight,
+            last_vaccine: newObj.lastVaccine,
+            last_deworm: newObj.lastDeworm,
+            microchip: newObj.microchip,
+            allergies: newObj.allergies,
+            points: newObj.points,
+            bonus_pct: newObj.bonusPct,
+            photo: newObj.photo,
+            clinical_notes: newObj.clinicalNotes
+        }]);
+
+        if (error) {
+            return showToast('Error al guardar en la nube: ' + error.message);
+        }
+
+        patientsDB.push(newObj);
+        currentSession.patientId = newObj.id;
+        localStorage.setItem('gv_session', JSON.stringify(currentSession));
+
+        closeAddPetModal();
+        launchMainApp();
+        showToast('¡Nueva mascota añadida y sincronizada en la nube!');
+
+        const waMsg = `🐾 *NUEVA MASCOTA EN GRUPO FAMILIAR · GUAROS VET*\n\n` +
+            `🆔 *Código:* ${newObj.code}\n` +
+            `🐶 *Mascota:* ${newObj.petName} (${newObj.species})\n` +
+            `👤 *Tutor:* ${newObj.tutorName} (CI: ${newObj.tutorCi})`;
+        window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(waMsg)}`, '_blank');
     }
 
     function loadTutorCarnetAndRewards(pat) {
