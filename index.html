@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guaros Vet · Portal Clínico, Historia Médica & Club de Fidelización</title>
-    <meta name="description" content="Portal oficial de Guaros Vet en Barquisimeto: historia clínica digital, agenda, vademécum por peso, carnet QR y Club Guaros.">
+    <title>Guaros Vet · Portal Clínico, Historia Médica, WSAVA & Club de Fidelización</title>
+    <meta name="description" content="Portal oficial de Guaros Vet en Barquisimeto: historia clínica digital, agenda sincronizada con Google Calendar, protocolo WSAVA, vademécum por peso y Club Guaros.">
     <link rel="icon" type="image/png" href="img/guaros-vet-logo.png">
 
     <!-- Tailwind CSS -->
@@ -70,14 +70,14 @@
                     <div>
                         <span class="px-2.5 py-0.5 bg-brandCyan/20 text-cyan-300 text-[10px] font-extrabold uppercase tracking-wider rounded-full">Barquisimeto · Lara</span>
                         <h1 class="font-display font-bold text-3xl mt-2">GUAROS VET</h1>
-                        <p class="text-xs text-slate-300 mt-1">Portal Clínico Digital, Historia Médica, Agenda & Club Guaros.</p>
+                        <p class="text-xs text-slate-300 mt-1">Portal Clínico Digital, Historia Médica, Agenda WSAVA & Club Guaros.</p>
                     </div>
                 </div>
 
                 <!-- Consulta rápida de puntos por código de carnet -->
                 <div class="bg-white/10 border border-white/15 rounded-2xl p-4 space-y-2.5">
                     <p class="text-[11px] font-extrabold uppercase text-amber-300"><i class="fa-solid fa-qrcode"></i> Consulta Rápida por Código</p>
-                    <p class="text-[11px] text-slate-200">Revisa los puntos y datos del carnet sin iniciar sesión.</p>
+                    <p class="text-[11px] text-slate-200">Revisa los puntos, vacunas y carnet sin iniciar sesión.</p>
                     <div class="flex gap-2">
                         <input id="quick-code-input" type="text" placeholder="Ej. GV-CAN-MAX-1024" class="flex-1 px-3 py-2 rounded-xl bg-brandNavy/80 border border-white/20 text-xs font-mono text-white placeholder:text-slate-400">
                         <button onclick="lookupQuickCode()" class="px-3.5 py-2 bg-brandOrange hover:brightness-110 text-white rounded-xl text-xs font-bold">
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="space-y-2 text-xs text-slate-300 border-t border-white/15 pt-4">
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-shield-dog text-amber-400"></i> Protocolos WSAVA y seguimiento clínico</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-shield-dog text-amber-400"></i> Protocolos WSAVA y control automático de refuerzos</p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-star text-amber-400"></i> 5 puntos por cada US$ 1 en servicios</p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-calendar-check text-amber-400"></i> Agenda y solicitud directa por WhatsApp</p>
                 </div>
@@ -151,7 +151,10 @@
                             <label class="text-[11px] font-semibold text-slate-700">Teléfono WhatsApp *
                                 <input id="reg-tutor-phone" type="text" placeholder="Ej. 0414-5551234" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
                             </label>
-                            <label class="text-[11px] font-semibold text-slate-700">Dirección / Sector *
+                            <label class="text-[11px] font-semibold text-slate-700">Correo Electrónico
+                                <input id="reg-tutor-email" type="email" placeholder="correo@ejemplo.com" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700 sm:col-span-2">Dirección / Sector *
                                 <input id="reg-tutor-addr" type="text" placeholder="Ej. Nueva Segovia, Barquisimeto" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
                             </label>
                             <label class="text-[11px] font-semibold text-slate-700">Usuario de Acceso *
@@ -176,8 +179,11 @@
                                     <option value="EXO">Exótico / Otro</option>
                                 </select>
                             </label>
-                            <label class="text-[11px] font-semibold text-slate-700">Raza y Color *
-                                <input id="reg-pet-breed" type="text" placeholder="Ej. Mestizo / Miel" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            <label class="text-[11px] font-semibold text-slate-700">Raza *
+                                <input id="reg-pet-breed" type="text" placeholder="Ej. Mestizo" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
+                            </label>
+                            <label class="text-[11px] font-semibold text-slate-700">Color
+                                <input id="reg-pet-color" type="text" placeholder="Ej. Miel / Negro" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
                             </label>
                             <label class="text-[11px] font-semibold text-slate-700">Sexo y Estado Reproductivo
                                 <select id="reg-pet-sex" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
@@ -199,9 +205,6 @@
                             <label class="text-[11px] font-semibold text-slate-700">Última Desparasitación
                                 <input id="reg-pet-deworm" type="date" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
                             </label>
-                            <label class="text-[11px] font-semibold text-slate-700">Código Microchip (Si posee)
-                                <input id="reg-pet-chip" type="text" placeholder="Opcional" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs font-mono">
-                            </label>
                             <label class="text-[11px] font-semibold text-slate-700">Alergias / Patologías Previas
                                 <input id="reg-pet-allergies" type="text" placeholder="Ninguna conocida" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl text-xs">
                             </label>
@@ -217,7 +220,7 @@
                 <div id="auth-form-admin" class="hidden space-y-4">
                     <div>
                         <h2 class="font-display font-bold text-2xl text-brandNavy">Panel del Consultorio · Guaros Vet</h2>
-                        <p class="text-xs text-slate-500">Acceso médico para agenda, historias clínicas, fármacos y fidelización.</p>
+                        <p class="text-xs text-slate-500">Acceso médico para agenda, historias clínicas, protocolos WSAVA y fármacos.</p>
                     </div>
                     <div class="space-y-3">
                         <label class="block text-xs font-semibold text-slate-700">Usuario Administrador
@@ -331,7 +334,6 @@
                         </div>
                     </div>
 
-                    <!-- Campos extra para invitados que agenden directo -->
                     <div id="guest-booking-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                         <label class="text-[11px] font-semibold text-slate-600">Tu nombre *
                             <input id="book-guest-name" type="text" placeholder="Nombre y apellido" class="mt-1 w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs">
@@ -370,7 +372,7 @@
                 </div>
             </section>
 
-            <!-- TAB B: CARNET DIGITAL (QR + PREPARADO PARA NFC / CO-FOUNDERS) & PREMIOS -->
+            <!-- TAB B: CARNET DIGITAL (QR + NFC / CO-FOUNDERS), PROTOCOLO WSAVA & PREMIOS -->
             <section id="sec-carnet" class="sec-panel hidden space-y-6">
                 <div class="bg-white p-5 rounded-3xl shadow-sm border border-slate-200 space-y-3">
                     <div class="flex flex-wrap items-center justify-between gap-3">
@@ -383,6 +385,9 @@
                     </div>
                     <div id="tutor-pets-switcher" class="flex flex-wrap gap-2 pt-1"></div>
                 </div>
+
+                <!-- Alerta automática WSAVA para la mascota activa del tutor -->
+                <div id="tutor-wsava-card" class="bg-white p-5 rounded-3xl shadow-sm border border-slate-200 space-y-3"></div>
 
                 <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     <div class="lg:col-span-6 space-y-4">
@@ -416,7 +421,7 @@
                         </div>
                     </div>
 
-                    <!-- Tarjeta estilo oscuro con QR e insignia NFC / Co-founder -->
+                    <!-- Tarjeta oscura con QR e insignia NFC / Co-founder -->
                     <div class="lg:col-span-6 flex justify-center">
                         <div id="pet-id-card" class="w-full max-w-md rounded-3xl overflow-hidden shadow-2xl bg-brandNavy text-white p-6 relative border-4 border-brandPrimary/50">
                             <div class="flex items-center justify-between border-b border-white/15 pb-3">
@@ -574,8 +579,8 @@
                 <!-- Subnavegación del consultorio -->
                 <div class="bg-white p-3 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-2">
                     <div class="flex flex-wrap gap-1.5">
-                        <button onclick="switchConsultorioSub('resumen')" id="csub-btn-resumen" class="csub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-brandNavy text-white">Resumen & Mensajes</button>
-                        <button onclick="switchConsultorioSub('agenda')" id="csub-btn-agenda" class="csub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600">Agenda</button>
+                        <button onclick="switchConsultorioSub('resumen')" id="csub-btn-resumen" class="csub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-brandNavy text-white">Alertas WSAVA & Mensajes</button>
+                        <button onclick="switchConsultorioSub('agenda')" id="csub-btn-agenda" class="csub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600">Agenda & Google Calendar</button>
                         <button onclick="switchConsultorioSub('historias')" id="csub-btn-historias" class="csub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600">Pacientes & Historia Clínica</button>
                         <button onclick="switchConsultorioSub('farmacos')" id="csub-btn-farmacos" class="csub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600">Fármacos (Dosis / Peso)</button>
                     </div>
@@ -589,7 +594,7 @@
                     </div>
                 </div>
 
-                <!-- SUBVISTA 1: RESUMEN, SOLICITUDES DE PLANES Y RECORDATORIOS WHATSAPP -->
+                <!-- SUBVISTA 1: RESUMEN, VENCIMIENTOS WSAVA, PLANES Y WHATSAPP -->
                 <div id="csub-resumen" class="csub-panel space-y-6">
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         <div class="bg-brandNavy text-white p-4 rounded-2xl shadow">
@@ -597,8 +602,8 @@
                             <p id="kpi-appointments" class="font-display font-bold text-3xl mt-1">0</p>
                         </div>
                         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                            <p class="text-[11px] text-slate-500 font-semibold">Planes Pendientes</p>
-                            <p id="kpi-pending-subs" class="font-display font-bold text-3xl text-brandOrange mt-1">0</p>
+                            <p class="text-[11px] text-slate-500 font-semibold">Alertas WSAVA Activas</p>
+                            <p id="kpi-wsava-alerts" class="font-display font-bold text-3xl text-brandOrange mt-1">0</p>
                         </div>
                         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                             <p class="text-[11px] text-slate-500 font-semibold">Pacientes en Nube</p>
@@ -610,6 +615,19 @@
                         </div>
                     </div>
 
+                    <!-- Motor Automático de Revacunación y Desparasitación WSAVA + Criterio Médico -->
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
+                                    <i class="fa-solid fa-syringe text-brandPrimary"></i> Control Automático WSAVA · Revacunación y Desparasitación
+                                </h3>
+                                <p class="text-xs text-slate-500">Cachorros: 1 Puppy + 4 Séxtuples + 2 Antirrábicas (cada 2–3 sem, cierre 12 meses) y refuerzo anual. Felinos: Triple Felina + Antirrábica según edad. Sincroniza directo con Google Calendar o avisa por WhatsApp.</p>
+                            </div>
+                        </div>
+                        <div id="wsava-alerts-list" class="space-y-3"></div>
+                    </div>
+
                     <!-- Solicitudes de planes y control de consumo -->
                     <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
                         <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
@@ -618,27 +636,28 @@
                         <div id="admin-subscriptions-list" class="space-y-4"></div>
                     </div>
 
-                    <!-- Recordatorios rápidos por WhatsApp (Citas, Vacunas, Cumpleaños) -->
+                    <!-- Recordatorios rápidos por WhatsApp -->
                     <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div>
-                                <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
-                                    <i class="fa-brands fa-whatsapp text-[#25D366]"></i> Mensajes y Recordatorios Listos para WhatsApp
-                                </h3>
-                                <p class="text-xs text-slate-500">Envía recordatorios de cita, control de vacunas o saludos de cumpleaños con un clic.</p>
-                            </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-brandNavy flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-[#25D366]"></i> Recordatorios Rápidos de Cumpleaños y Seguimiento
+                            </h3>
+                            <p class="text-xs text-slate-500">Envía mensajes listos por WhatsApp con un clic.</p>
                         </div>
                         <div id="wa-reminders-list" class="space-y-2.5"></div>
                     </div>
                 </div>
 
-                <!-- SUBVISTA 2: AGENDA -->
+                <!-- SUBVISTA 2: AGENDA & SINCRONIZACIÓN CON GOOGLE CALENDAR -->
                 <div id="csub-agenda" class="csub-panel hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
                         <div>
-                            <h3 class="font-display font-bold text-xl text-brandNavy">Agenda del Consultorio</h3>
-                            <p class="text-xs text-slate-500">Gestiona citas, confirma asistencias y envía recordatorios.</p>
+                            <h3 class="font-display font-bold text-xl text-brandNavy">Agenda del Consultorio · Sincronización Google Calendar</h3>
+                            <p class="text-xs text-slate-500">Añade cada cita o refuerzo WSAVA a Google Calendar con un clic o descarga el calendario completo (.ics).</p>
                         </div>
+                        <button onclick="exportAllToICS()" class="px-3.5 py-2 bg-brandNavy hover:brightness-110 text-white font-bold rounded-xl text-xs shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-calendar-arrow-down"></i> Exportar Todo a Google Calendar (.ics)
+                        </button>
                     </div>
                     <div id="agenda-list" class="space-y-3"></div>
                 </div>
@@ -656,7 +675,7 @@
                         <div id="admin-patients-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                     </div>
 
-                    <!-- Editor de Historia Clínica Detallada (basado en historia_clinica-guarosvet.doc) -->
+                    <!-- Editor de Historia Clínica Detallada (completo según historia_clinica-guarosvet.doc) -->
                     <div id="clinical-record-editor" class="hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border-2 border-brandPrimary/30 space-y-6">
                         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
                             <div>
@@ -664,7 +683,7 @@
                                 <h3 id="hc-title" class="font-display font-bold text-2xl text-brandNavy mt-1">Paciente</h3>
                                 <p id="hc-subtitle" class="text-xs text-slate-500"></p>
                             </div>
-                            <div class="flex gap-2">
+                            <div class="flex flex-wrap gap-2">
                                 <button onclick="saveFullClinicalRecord()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow">
                                     <i class="fa-solid fa-floppy-disk"></i> Guardar Historia Clínica
                                 </button>
@@ -676,7 +695,23 @@
 
                         <input type="hidden" id="hc-patient-id">
 
-                        <!-- Bloque 1: Datos básicos y peso -->
+                        <!-- Encabezado Administrativo del .doc -->
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs bg-blue-50/50 p-4 rounded-2xl border border-blue-100">
+                            <label class="font-semibold">Fecha de Consulta
+                                <input id="hc-visit-date" type="date" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
+                            </label>
+                            <label class="font-semibold">N° Historia Clínica
+                                <input id="hc-record-num" type="text" placeholder="Ej. HC-2026-001" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-mono">
+                            </label>
+                            <label class="font-semibold">Color del Paciente
+                                <input id="hc-pet-color" type="text" placeholder="Ej. Negro / Miel" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
+                            </label>
+                            <label class="font-semibold">Correo Propietario
+                                <input id="hc-owner-email" type="email" placeholder="correo@ejemplo.com" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
+                            </label>
+                        </div>
+
+                        <!-- Bloque 1: Peso, Fechas Preventivas y Puntos -->
                         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs bg-slate-50 p-4 rounded-2xl border">
                             <label class="font-semibold">Peso Actual (Kg) *
                                 <input id="hc-weight" type="number" step="0.1" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-bold text-brandNavy">
@@ -699,10 +734,10 @@
                                 <label class="font-semibold">Motivo de Consulta
                                     <input id="hc-reason" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl">
                                 </label>
-                                <label class="font-semibold">Historia Reproductiva / Últ. Celo o Parto
-                                    <input id="hc-repro" type="text" placeholder="Ej. Entero / Castrado / Fecha último celo" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                                <label class="font-semibold">Historia Reproductiva (Entero/Esterilizado · Últ. Celo / Parto)
+                                    <input id="hc-repro" type="text" placeholder="Ej. Entero / Castrado / Último celo" class="mt-1 w-full px-3 py-2 border rounded-xl">
                                 </label>
-                                <label class="font-semibold">Vacunas (Fecha / Marca / Lote) y Desparasitación
+                                <label class="font-semibold">Vacunas (Fecha / Lote) y Última Desparasitación
                                     <textarea id="hc-vaccines-detail" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                                 </label>
                                 <label class="font-semibold">Enfermedades Anteriores y Alimentación
@@ -722,10 +757,10 @@
                             </div>
                         </div>
 
-                        <!-- Bloque 3: Examen Clínico y Constantes -->
+                        <!-- Bloque 3: Examen Clínico y Constantes completas (.doc) -->
                         <div class="space-y-3 text-xs">
                             <h4 class="font-display font-bold text-base text-brandNavy border-b pb-1">Examen Clínico y Constantes</h4>
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                                 <label class="font-semibold">F. Respiratoria (rpm)
                                     <input id="hc-rr" type="text" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
                                 </label>
@@ -735,30 +770,45 @@
                                 <label class="font-semibold">Temperatura (°C)
                                     <input id="hc-temp" type="text" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
                                 </label>
-                                <label class="font-semibold">Pulso / TLLC
+                                <label class="font-semibold">Pulso
                                     <input id="hc-pulse" type="text" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
                                 </label>
-                                <label class="font-semibold">Mucosas / Actitud
-                                    <input id="hc-mucosa" type="text" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
+                                <label class="font-semibold">Tiempo Llenado Capilar (TLLC)
+                                    <input id="hc-tllc" type="text" placeholder="Ej. < 2 seg" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
+                                </label>
+                                <label class="font-semibold">Ganglios Linfáticos
+                                    <input id="hc-lymph" type="text" placeholder="Normales / Reactivos" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
+                                </label>
+                                <label class="font-semibold">Mucosas
+                                    <input id="hc-mucosa" type="text" placeholder="Rosadas / Húmedas" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
+                                </label>
+                                <label class="font-semibold">Actitud y Temperamento
+                                    <select id="hc-attitude" class="mt-1 w-full px-2.5 py-2 border rounded-xl">
+                                        <option value="Alerta">Alerta</option>
+                                        <option value="Letárgico">Letárgico</option>
+                                        <option value="Estuporoso">Estuporoso</option>
+                                        <option value="Comatoso">Comatoso</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
                                 </label>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1" id="hc-systems-container"></div>
 
-                            <label class="block font-semibold pt-1">Descripción de Hallazgos del Examen Clínico
+                            <label class="block font-semibold pt-1">Descripción de los Hallazgos
                                 <textarea id="hc-findings" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                             </label>
                         </div>
 
-                        <!-- Bloque 4: Diagnósticos, Exámenes y Tratamiento -->
+                        <!-- Bloque 4: Diagnósticos, Exámenes Complementarios (.doc) y Tratamiento -->
                         <div class="space-y-3 text-xs">
-                            <h4 class="font-display font-bold text-base text-brandNavy border-b pb-1">Diagnósticos, Exámenes Complementarios y Tratamiento</h4>
+                            <h4 class="font-display font-bold text-base text-brandNavy border-b pb-1">Lista de Problemas, Exámenes Complementarios y Diagnóstico</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <label class="font-semibold">Lista de Problemas / Diagnósticos Diferenciales
                                     <textarea id="hc-differentials" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                                 </label>
-                                <label class="font-semibold">Exámenes Complementarios (Hematología, Eco, RX, etc.)
-                                    <textarea id="hc-exams" rows="2" class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
+                                <label class="font-semibold">Exámenes Complementarios (Química, Hemático, Eco, RX, Orina, Copro, Frotis, etc.)
+                                    <textarea id="hc-exams" rows="2" placeholder="Química Sanguínea, Cuadro Hemático, Ecografía, Rayos X, Parcial de Orina, Coprológico..." class="mt-1 w-full px-3 py-2 border rounded-xl"></textarea>
                                 </label>
                                 <label class="font-semibold">Diagnóstico Final o Confirmatorio
                                     <input id="hc-final-dx" type="text" class="mt-1 w-full px-3 py-2 border rounded-xl font-bold">
@@ -768,56 +818,79 @@
                                 </label>
                             </div>
 
-                            <!-- Tratamiento intrahospitalario / receta (Producto Base, Dosis Básica, Presentación, Vía, Frecuencia y Duración) -->
+                            <!-- Tratamiento intrahospitalario / receta -->
                             <div class="space-y-2 pt-2">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-bold text-brandNavy">Tratamiento / Prescripción (Producto Base · Dosis Básica · Presentación · Vía · Frecuencia y Duración)</span>
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <span class="font-bold text-brandNavy">Tratamiento (Producto Base · Dosis Básica · Presentación · Vía · Frecuencia y Duración)</span>
                                     <button type="button" onclick="addRxRow()" class="px-2.5 py-1 bg-blue-50 text-brandPrimary font-bold rounded-lg text-[11px]">
                                         + Agregar Fármaco a la Hoja
                                     </button>
                                 </div>
                                 <div id="hc-rx-rows" class="space-y-2"></div>
                             </div>
+
+                            <!-- Pie de firma del .doc -->
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-200 bg-slate-50 p-3.5 rounded-2xl">
+                                <label class="font-semibold">Médico Veterinario
+                                    <input id="hc-vet-name" type="text" value="M.V. Carlos E. Rodríguez L." class="mt-1 w-full px-2.5 py-1.5 bg-white border rounded-lg font-bold">
+                                </label>
+                                <label class="font-semibold">Matrícula Profesional
+                                    <input id="hc-vet-license" type="text" placeholder="MPPS / Colegio" class="mt-1 w-full px-2.5 py-1.5 bg-white border rounded-lg">
+                                </label>
+                                <label class="font-semibold">Estudiante Responsable
+                                    <input id="hc-student-name" type="text" placeholder="Opcional" class="mt-1 w-full px-2.5 py-1.5 bg-white border rounded-lg">
+                                </label>
+                                <label class="font-semibold">Código Responsable
+                                    <input id="hc-student-code" type="text" placeholder="Opcional" class="mt-1 w-full px-2.5 py-1.5 bg-white border rounded-lg">
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- SUBVISTA 4: FÁRMACOS (ESTILO CPVET: DOSIS, PRESENTACIÓN, VÍA Y CÁLCULO POR PESO) -->
+                <!-- SUBVISTA 4: FÁRMACOS (ESTILO CPVET: PACIENTE, PESO, MG, ML/UNIDADES Y ENVÍO A RECETA) -->
                 <div id="csub-farmacos" class="csub-panel hidden bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
                     <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
                         <div>
                             <h3 class="font-display font-bold text-xl text-brandNavy">Vademécum de Fármacos y Cálculo por Peso</h3>
-                            <p class="text-xs text-slate-500">Registra medicamentos con su dosis base (mg/kg), presentación y vía; calcula dosis según el peso en kg.</p>
+                            <p class="text-xs text-slate-500">Selecciona un paciente o ingresa su peso en kg; calcula dosis total en mg y volumen/unidades según concentración.</p>
                         </div>
                     </div>
 
                     <!-- Formulario para agregar fármaco -->
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-xs items-end">
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 grid grid-cols-1 sm:grid-cols-6 gap-2.5 text-xs items-end">
                         <label class="font-semibold sm:col-span-2">Producto Base / Fármaco *
                             <input id="drug-name" type="text" placeholder="Ej. Amoxicilina + Clavulánico" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-bold">
                         </label>
                         <label class="font-semibold">Dosis Básica (mg/kg) *
-                            <input id="drug-dose-mgkg" type="number" step="0.1" placeholder="Ej. 12.5" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-bold text-brandPrimary">
+                            <input id="drug-dose-mgkg" type="number" step="0.01" placeholder="Ej. 12.5" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-bold text-brandPrimary">
                         </label>
-                        <label class="font-semibold">Presentación / Concentración
-                            <input id="drug-pres" type="text" placeholder="Ej. 250mg/5mL" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
+                        <label class="font-semibold">Concentración (mg/mL o mg/tab)
+                            <input id="drug-conc" type="number" step="0.1" placeholder="Ej. 50" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
+                        </label>
+                        <label class="font-semibold">Presentación
+                            <input id="drug-pres" type="text" placeholder="Ej. Susp. 250mg/5mL" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
                         </label>
                         <label class="font-semibold">Vía y Frecuencia
                             <input id="drug-route" type="text" placeholder="Ej. VO c/12h x 7d" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl">
                         </label>
-                        <div class="sm:col-span-5 flex justify-end">
+                        <div class="sm:col-span-6 flex justify-end">
                             <button onclick="addDrugToCatalog()" class="px-4 py-2 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow">
                                 <i class="fa-solid fa-plus"></i> Guardar Fármaco
                             </button>
                         </div>
                     </div>
 
-                    <!-- Calculadora rápida por peso -->
-                    <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 flex flex-wrap items-center gap-4 text-xs">
-                        <label class="font-bold text-brandNavy">Peso del paciente para calcular (Kg):
-                            <input id="calc-pet-weight" oninput="renderDrugsList()" type="number" step="0.1" value="10" class="ml-2 w-24 px-3 py-1.5 bg-white border rounded-xl font-bold text-brandPrimary">
+                    <!-- Selector de paciente + peso automático -->
+                    <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs items-center">
+                        <label class="font-bold text-brandNavy">Cargar Peso desde Paciente Registrado:
+                            <select id="calc-patient-select" onchange="onSelectCalcPatient()" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-semibold">
+                                <option value="">-- Peso manual --</option>
+                            </select>
                         </label>
-                        <span class="text-slate-600">El cálculo en mg se muestra automáticamente para cada fármaco registrado.</span>
+                        <label class="font-bold text-brandNavy">Peso para Cálculo (Kg):
+                            <input id="calc-pet-weight" oninput="renderDrugsList()" type="number" step="0.1" value="10" class="mt-1 w-full px-3 py-2 bg-white border rounded-xl font-bold text-brandPrimary">
+                        </label>
                     </div>
 
                     <div id="drugs-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
@@ -891,6 +964,9 @@
                         <input id="new-pet-vaccine" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
                     </label>
                 </div>
+                <label class="block font-semibold text-slate-700">Última Desparasitación
+                    <input id="new-pet-deworm" type="date" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
                 <label class="block font-semibold text-slate-700">Alergias / Patologías
                     <input id="new-pet-allergies" type="text" placeholder="Ninguna" class="mt-1 w-full px-3 py-2 border rounded-xl">
                 </label>
@@ -910,7 +986,7 @@
                 <button onclick="closeNewAppointmentModal()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             <div class="space-y-3 text-xs">
-                <label class="block font-semibold">Paciente (Registrado o Manual)
+                <label class="block font-semibold">Paciente Registrado
                     <select id="appt-patient-select" class="mt-1 w-full px-3 py-2 border rounded-xl"></select>
                 </label>
                 <div class="grid grid-cols-2 gap-2">
@@ -923,6 +999,10 @@
                 </div>
                 <label class="block font-semibold">Servicio / Motivo *
                     <input id="appt-service" type="text" placeholder="Ej. Consulta médica general / Vacuna" class="mt-1 w-full px-3 py-2 border rounded-xl">
+                </label>
+                <label class="flex items-center gap-2 font-semibold text-brandPrimary pt-1">
+                    <input id="appt-open-gcal" type="checkbox" checked class="rounded">
+                    Abrir inmediatamente en Google Calendar al guardar
                 </label>
             </div>
             <div class="flex justify-end gap-2 pt-2">
@@ -1016,6 +1096,7 @@
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const WA_PHONE = '584261601079';
+    const CLINIC_LOCATION = 'Guaros Vet, Carrera 17 entre calles 45 y 46, Barquisimeto, Lara';
     const POINTS_PER_DOLLAR = 5;
     const $ = id => document.getElementById(id);
     const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -1061,7 +1142,7 @@
             price: 160,
             items: [
                 '1 Vacuna Puppy (Semana 6-8)',
-                '4 Vacunas Séxtuples en calendario',
+                '4 Vacunas Séxtuples (cada 2-3 semanas y refuerzo 12 meses)',
                 '2 Vacunas Antirrábicas',
                 '4 Consultas de control y desparasitación'
             ]
@@ -1093,9 +1174,9 @@
     ];
 
     const DEFAULT_DRUGS = [
-        { id: 'd1', name: 'Amoxicilina + Clavulánico', doseMgKg: 12.5, pres: '250mg / 5mL o Comp.', route: 'VO c/12h x 7 días' },
-        { id: 'd2', name: 'Meloxicam', doseMgKg: 0.1, pres: 'Suspensión / Inyectable', route: 'VO/SC c/24h (dosis inicial 0.2 mg/kg)' },
-        { id: 'd3', name: 'Metronidazol', doseMgKg: 15, pres: 'Tabletas / Suspensión', route: 'VO c/12h x 5-7 días' }
+        { id: 'd1', name: 'Amoxicilina + Clavulánico', doseMgKg: 12.5, conc: 50, pres: 'Susp. 250mg/5mL', route: 'VO c/12h x 7 días' },
+        { id: 'd2', name: 'Meloxicam', doseMgKg: 0.1, conc: 1.5, pres: 'Susp. 1.5mg/mL', route: 'VO c/24h (1er día 0.2 mg/kg)' },
+        { id: 'd3', name: 'Metronidazol', doseMgKg: 15, conc: 50, pres: 'Susp. 250mg/5mL', route: 'VO c/12h x 5-7 días' }
     ];
 
     const QUO_MODELS = [
@@ -1120,9 +1201,182 @@
         $('toast-msg').textContent = msg;
         $('toast').classList.add('toast-show');
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => $('toast').classList.remove('toast-show'), 2500);
+        toastTimer = setTimeout(() => $('toast').classList.remove('toast-show'), 2600);
     }
 
+    // =========================================================================
+    // MOTOR AUTOMÁTICO WSAVA + CRITERIO MÉDICO (REVACUNACIÓN Y DESPARASITACIÓN)
+    // =========================================================================
+    function addDaysISO(dateStr, days) {
+        const base = dateStr ? new Date(dateStr + 'T12:00:00') : new Date();
+        if (isNaN(base.getTime())) return new Date().toISOString().split('T')[0];
+        base.setDate(base.getDate() + days);
+        return base.toISOString().split('T')[0];
+    }
+
+    function diffDaysFromToday(targetDateStr) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const target = new Date(targetDateStr + 'T00:00:00');
+        return Math.round((target - today) / (1000 * 60 * 60 * 24));
+    }
+
+    function computeWSAVASchedule(pat) {
+        const today = new Date();
+        const dob = pat.dob ? new Date(pat.dob + 'T12:00:00') : null;
+        const ageMonths = dob && !isNaN(dob.getTime())
+            ? Math.max(0, (today.getFullYear() - dob.getFullYear()) * 12 + (today.getMonth() - dob.getMonth()))
+            : 24;
+
+        const isFeline = pat.species === 'FEL';
+        const isPuppyOrKitten = ageMonths < 12;
+
+        // Criterio médico + WSAVA:
+        // Cachorros/gatitos (<12m): refuerzo cada 2 a 3 semanas (18 días promedio) y cierre a los 12 meses.
+        // Adultos (>=12m): revacunación anual (365 días) Séxtuple+Antirrábica (caninos) o Triple Felina+Antirrábica (felinos).
+        const vacIntervalDays = isPuppyOrKitten ? 18 : 365;
+        const nextVacDate = pat.lastVaccine
+            ? addDaysISO(pat.lastVaccine, vacIntervalDays)
+            : new Date().toISOString().split('T')[0];
+
+        const vacProtocolLabel = isFeline
+            ? (isPuppyOrKitten
+                ? 'Serie Gatito WSAVA: Triple Felina c/ 2–3 sem + Antirrábica (refuerzo 12 meses)'
+                : 'Revacunación Anual Felina: Triple Felina + Antirrábica')
+            : (isPuppyOrKitten
+                ? 'Esquema Cachorro WSAVA: 1 Puppy + 4 Séxtuples + 2 Antirrábicas (c/ 2–3 sem, cierre 12 meses)'
+                : 'Revacunación Anual Canina: Séxtuple + Antirrábica');
+
+        // Desparasitación: cada 21 días en < 6 meses, cada 90 días en >= 6 meses
+        const dewIntervalDays = ageMonths < 6 ? 21 : 90;
+        const nextDewDate = pat.lastDeworm
+            ? addDaysISO(pat.lastDeworm, dewIntervalDays)
+            : new Date().toISOString().split('T')[0];
+
+        const vacDaysLeft = diffDaysFromToday(nextVacDate);
+        const dewDaysLeft = diffDaysFromToday(nextDewDate);
+
+        return {
+            ageMonths,
+            isPuppyOrKitten,
+            vacProtocolLabel,
+            nextVacDate,
+            vacDaysLeft,
+            vacOverdue: vacDaysLeft <= 0,
+            vacDueSoon: vacDaysLeft > 0 && vacDaysLeft <= 15,
+            nextDewDate,
+            dewDaysLeft,
+            dewOverdue: dewDaysLeft <= 0,
+            dewDueSoon: dewDaysLeft > 0 && dewDaysLeft <= 10
+        };
+    }
+
+    // =========================================================================
+    // SINCRONIZACIÓN CON GOOGLE CALENDAR (URL DIRECTA + EXPORTACIÓN .ICS)
+    // =========================================================================
+    function buildGoogleCalendarUrl({ title, dateStr, timeStr = '09:00', durationMinutes = 45, details = '' }) {
+        const cleanDate = (dateStr || new Date().toISOString().split('T')[0]).replace(/-/g, '');
+        const [hh, mm] = (timeStr || '09:00').split(':').map(n => parseInt(n, 10) || 0);
+        const start = new Date(`${dateStr}T${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:00`);
+        const end = new Date(start.getTime() + durationMinutes * 60000);
+
+        const fmtGCal = d => {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            const h = String(d.getHours()).padStart(2, '0');
+            const min = String(d.getMinutes()).padStart(2, '0');
+            return `${y}${m}${day}T${h}${min}00`;
+        };
+
+        const datesParam = isNaN(start.getTime())
+            ? `${cleanDate}T090000/${cleanDate}T094500`
+            : `${fmtGCal(start)}/${fmtGCal(end)}`;
+
+        const params = new URLSearchParams({
+            action: 'TEMPLATE',
+            text: title,
+            dates: datesParam,
+            details: details,
+            location: CLINIC_LOCATION,
+            ctz: 'America/Caracas'
+        });
+        return `https://calendar.google.com/calendar/render?${params.toString()}`;
+    }
+
+    function openInGoogleCalendar(title, dateStr, timeStr, details) {
+        const url = buildGoogleCalendarUrl({ title, dateStr, timeStr, details });
+        window.open(url, '_blank');
+    }
+
+    function exportAllToICS() {
+        const events = [];
+        appointmentsDB.forEach(a => {
+            events.push({
+                uid: a.id + '@guarosvet',
+                summary: `Guaros Vet · ${a.petName} (${a.service})`,
+                date: a.date,
+                time: a.time || '09:00',
+                desc: `Paciente: ${a.petName} (${a.code}) | Tutor: ${a.tutorName} | Servicio: ${a.service}`
+            });
+        });
+
+        patientsDB.forEach(p => {
+            const w = computeWSAVASchedule(p);
+            events.push({
+                uid: `vac-${p.id}@guarosvet`,
+                summary: `Vacuna WSAVA · ${p.petName} (${p.code})`,
+                date: w.nextVacDate,
+                time: '09:30',
+                desc: `${w.vacProtocolLabel} | Tutor: ${p.tutorName} (${p.tutorPhone || ''})`
+            });
+            events.push({
+                uid: `dew-${p.id}@guarosvet`,
+                summary: `Desparasitación · ${p.petName} (${p.code})`,
+                date: w.nextDewDate,
+                time: '10:00',
+                desc: `Control antiparasitario | Tutor: ${p.tutorName} (${p.tutorPhone || ''})`
+            });
+        });
+
+        if (events.length === 0) return showToast('No hay eventos para exportar');
+
+        const lines = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Guaros Vet//Agenda Clinica y WSAVA//ES',
+            'CALSCALE:GREGORIAN'
+        ];
+
+        events.forEach(ev => {
+            const dClean = (ev.date || '').replace(/-/g, '');
+            const tClean = (ev.time || '09:00').replace(':', '') + '00';
+            lines.push(
+                'BEGIN:VEVENT',
+                `UID:${ev.uid}`,
+                `DTSTART;TZID=America/Caracas:${dClean}T${tClean}`,
+                `DTEND;TZID=America/Caracas:${dClean}T${tClean}`,
+                `SUMMARY:${ev.summary}`,
+                `DESCRIPTION:${ev.desc}`,
+                `LOCATION:${CLINIC_LOCATION}`,
+                'END:VEVENT'
+            );
+        });
+        lines.push('END:VCALENDAR');
+
+        const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'GuarosVet_Agenda_y_WSAVA.ics';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Archivo .ics descargado para Google Calendar');
+    }
+
+    // =========================================================================
+    // PARSEO Y CARGA DESDE SUPABASE
+    // =========================================================================
     function parseClinicalNotes(raw) {
         if (!raw) return {};
         try {
@@ -1219,9 +1473,11 @@
             box.innerHTML = `<p class="text-amber-300 font-bold">No se encontró el código ${esc(code)}.</p>`;
             return;
         }
+        const w = computeWSAVASchedule(found);
         box.innerHTML = `
             <p class="font-bold text-white">${esc(found.petName)} <span class="text-cyan-300 font-mono">(${esc(found.code)})</span></p>
             <p class="text-slate-300">Tutor: ${esc(found.tutorName)} · Peso: ${esc(found.weight || '--')} kg</p>
+            <p class="text-cyan-200 text-[11px]">Próx. Vacuna WSAVA: <strong>${w.nextVacDate}</strong></p>
             <p class="font-display font-bold text-amber-400 text-sm pt-1">⭐ ${found.points} Puntos acumulados</p>
         `;
     }
@@ -1259,6 +1515,7 @@
         const tutorName = $('reg-tutor-name').value.trim();
         const tutorCi = $('reg-tutor-ci').value.trim();
         const tutorPhone = $('reg-tutor-phone').value.trim();
+        const tutorEmail = $('reg-tutor-email').value.trim();
         const tutorAddr = $('reg-tutor-addr').value.trim();
         const username = $('reg-username').value.trim().toLowerCase();
         const password = $('reg-password').value.trim();
@@ -1290,12 +1547,16 @@
             weight: weightVal,
             lastVaccine: $('reg-pet-vaccine').value || '',
             lastDeworm: $('reg-pet-deworm').value || '',
-            microchip: $('reg-pet-chip').value.trim() || '',
+            microchip: '',
             allergies: $('reg-pet-allergies').value.trim() || 'Ninguna',
             points: 100,
             bonusPct: 0,
             photo: '',
-            clinicalNotes: JSON.stringify({ notesText: 'Historia clínica aperturada por el tutor vía web.' })
+            clinicalNotes: JSON.stringify({
+                petColor: $('reg-pet-color').value.trim(),
+                ownerEmail: tutorEmail,
+                notesText: 'Historia clínica aperturada por el tutor vía web.'
+            })
         };
 
         const { error } = await supabaseClient.from('patients').insert([{
@@ -1397,7 +1658,7 @@
 
         $('role-badge').textContent = isAdmin ? 'Consultorio' : (pat ? 'Tutor' : 'Visitante');
         $('header-user-greeting').textContent = isAdmin
-            ? 'Dr. Carlos E. Rodríguez · Panel Clínico & Supabase'
+            ? 'Dr. Carlos E. Rodríguez · Panel Clínico, WSAVA & Google Calendar'
             : (pat ? `Tutor: ${pat.tutorName} · Paciente: ${pat.petName}` : 'Servicios, Planes y Reserva por WhatsApp');
 
         let tabs = [
@@ -1405,7 +1666,7 @@
             { id: 'plans', icon: 'fa-shield-dog', label: 'Planes de Salud' }
         ];
         if (pat) {
-            tabs.splice(1, 0, { id: 'carnet', icon: 'fa-id-card', label: 'Carnet & Puntos' });
+            tabs.splice(1, 0, { id: 'carnet', icon: 'fa-id-card', label: 'Carnet, Vacunas & Puntos' });
             tabs.push({ id: 'profile', icon: 'fa-user-pen', label: 'Mis Datos' });
         } else if (isAdmin) {
             tabs.push({ id: 'consultorio', icon: 'fa-stethoscope', label: 'Panel del Consultorio' });
@@ -1585,7 +1846,7 @@
     }
 
     // =========================================================================
-    // CARNET DIGITAL (QR + PREPARADO NFC / CO-FOUNDERS) & MULTI-MASCOTA
+    // CARNET DIGITAL (QR + NFC / CO-FOUNDERS), WSAVA & MULTI-MASCOTA
     // =========================================================================
     async function handleTutorPhotoUpload(event) {
         const pat = getLoggedPatient();
@@ -1629,6 +1890,7 @@
         $('new-pet-weight').value = '';
         $('new-pet-dob').value = '';
         $('new-pet-vaccine').value = '';
+        $('new-pet-deworm').value = '';
         $('new-pet-allergies').value = '';
         $('add-pet-modal').classList.remove('hidden');
         $('add-pet-modal').classList.add('flex');
@@ -1683,7 +1945,7 @@
             dob: $('new-pet-dob').value || '',
             weight: $('new-pet-weight').value || '',
             lastVaccine: $('new-pet-vaccine').value || '',
-            lastDeworm: '',
+            lastDeworm: $('new-pet-deworm').value || '',
             microchip: '',
             allergies: $('new-pet-allergies').value.trim() || 'Ninguna',
             points: 100,
@@ -1731,6 +1993,30 @@
     function loadTutorCarnetAndRewards(pat) {
         $('tutor-points-balance').textContent = `${pat.points} Pts`;
         $('tutor-weight-balance').textContent = pat.weight ? `${pat.weight} kg` : 'No indicado';
+
+        // Bloque WSAVA para el tutor
+        const w = computeWSAVASchedule(pat);
+        $('tutor-wsava-card').innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded bg-blue-50 text-brandPrimary">Calendario Preventivo WSAVA · ${esc(pat.petName)}</span>
+                    <h3 class="font-display font-bold text-base text-brandNavy mt-1">${esc(w.vacProtocolLabel)}</h3>
+                </div>
+                <button onclick="openInGoogleCalendar('Control WSAVA · ${esc(pat.petName)}', '${w.nextVacDate}', '09:30', '${esc(w.vacProtocolLabel)}')" class="px-3 py-1.5 bg-brandPrimary text-white font-bold rounded-xl text-xs shadow flex items-center gap-1.5">
+                    <i class="fa-solid fa-calendar-plus"></i> Guardar en Google Calendar
+                </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-2xl border ${w.vacOverdue ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-slate-200'}">
+                    <p class="font-bold text-brandNavy"><i class="fa-solid fa-syringe text-brandPrimary"></i> Próxima Vacuna</p>
+                    <p class="font-mono font-bold text-sm mt-1">${w.nextVacDate} <span class="text-[11px] font-sans ${w.vacOverdue ? 'text-red-600 font-bold' : 'text-slate-500'}">(${w.vacOverdue ? 'Vencida / Toca hoy' : 'en ' + w.vacDaysLeft + ' días'})</span></p>
+                </div>
+                <div class="p-3 rounded-2xl border ${w.dewOverdue ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-200'}">
+                    <p class="font-bold text-brandNavy"><i class="fa-solid fa-pills text-brandOrange"></i> Próxima Desparasitación</p>
+                    <p class="font-mono font-bold text-sm mt-1">${w.nextDewDate} <span class="text-[11px] font-sans ${w.dewOverdue ? 'text-amber-700 font-bold' : 'text-slate-500'}">(${w.dewOverdue ? 'Vencida / Toca hoy' : 'en ' + w.dewDaysLeft + ' días'})</span></p>
+                </div>
+            </div>
+        `;
 
         const isCoFounder = pat.bonusPct >= 15 || pat.points >= 2000;
         $('card-tier-label').textContent = isCoFounder ? 'Guaros Co-founder · NFC + QR' : 'Carnet · Club Guaros';
@@ -2061,20 +2347,100 @@
     }
 
     // =========================================================================
-    // PANEL DEL CONSULTORIO: KPIs, AGENDA, RECORDATORIOS, HISTORIA CLÍNICA & FÁRMACOS
+    // PANEL DEL CONSULTORIO: ALERTAS WSAVA, AGENDA, HISTORIA CLÍNICA & FÁRMACOS
     // =========================================================================
     async function renderConsultorioDashboard() {
         await initCloudData();
+        const wsavaAlerts = patientsDB
+            .map(p => ({ pat: p, w: computeWSAVASchedule(p) }))
+            .filter(item => item.w.vacOverdue || item.w.vacDueSoon || item.w.dewOverdue || item.w.dewDueSoon);
+
         $('kpi-appointments').textContent = appointmentsDB.length;
-        $('kpi-pending-subs').textContent = subscriptionsDB.filter(s => s.status === 'pending').length;
+        $('kpi-wsava-alerts').textContent = wsavaAlerts.length;
         $('kpi-patients').textContent = patientsDB.length;
         $('kpi-points').textContent = patientsDB.reduce((acc, p) => acc + Number(p.points || 0), 0).toLocaleString('es-VE');
 
+        renderWSAVAAlertsPanel();
         renderSubscriptions();
         renderAgendaList();
         renderRemindersList();
         renderAdminPatientsFolder();
+        populateCalcPatientSelect();
         renderDrugsList();
+    }
+
+    function renderWSAVAAlertsPanel() {
+        const box = $('wsava-alerts-list');
+        if (!box) return;
+        if (patientsDB.length === 0) {
+            box.innerHTML = `<p class="text-xs text-slate-400 italic">No hay pacientes registrados aún.</p>`;
+            return;
+        }
+
+        const sorted = patientsDB
+            .map(p => ({ pat: p, w: computeWSAVASchedule(p) }))
+            .sort((a, b) => Math.min(a.w.vacDaysLeft, a.w.dewDaysLeft) - Math.min(b.w.vacDaysLeft, b.w.dewDaysLeft));
+
+        box.innerHTML = sorted.map(({ pat, w }) => {
+            const vacBadge = w.vacOverdue
+                ? `<span class="px-2 py-0.5 rounded bg-red-600 text-white font-bold text-[10px]">Vacuna Vencida (${w.nextVacDate})</span>`
+                : `<span class="px-2 py-0.5 rounded bg-blue-100 text-brandPrimary font-bold text-[10px]">Vacuna: ${w.nextVacDate}</span>`;
+            const dewBadge = w.dewOverdue
+                ? `<span class="px-2 py-0.5 rounded bg-amber-600 text-white font-bold text-[10px]">Desparasitación Vencida (${w.nextDewDate})</span>`
+                : `<span class="px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-bold text-[10px]">Desparasit.: ${w.nextDewDate}</span>`;
+
+            const waMsg = `Hola ${pat.tutorName}, te escribimos de Guaros Vet. Según el protocolo preventivo WSAVA de ${pat.petName} (${pat.code}), le corresponde su refuerzo (${w.vacProtocolLabel}) para el ${w.nextVacDate} y desparasitación (${w.nextDewDate}). ¿Agendamos su visita?`;
+
+            return `
+            <div class="p-3.5 rounded-2xl border ${w.vacOverdue || w.dewOverdue ? 'border-red-200 bg-red-50/40' : 'border-slate-200 bg-slate-50'} flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <strong class="font-display text-sm text-brandNavy">${esc(pat.petName)}</strong>
+                        <span class="font-mono text-[10px] text-slate-500">(${esc(pat.code)})</span>
+                        ${vacBadge}
+                        ${dewBadge}
+                    </div>
+                    <p class="text-[11px] text-slate-600">Tutor: <strong>${esc(pat.tutorName)}</strong> · ${esc(w.vacProtocolLabel)}</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                    <button onclick="syncWSAVAToAgendaAndGCal('${pat.id}', '${w.nextVacDate}', 'Vacuna WSAVA · ${esc(pat.petName)}')" class="px-2.5 py-1.5 bg-brandPrimary text-white font-bold rounded-xl text-[11px] shadow">
+                        <i class="fa-solid fa-calendar-plus"></i> Google Calendar
+                    </button>
+                    <button onclick="sendReminderWA('${esc(pat.tutorPhone)}', '${encodeURIComponent(waMsg)}')" class="px-2.5 py-1.5 bg-[#25D366] text-white font-bold rounded-xl text-[11px] shadow">
+                        <i class="fa-brands fa-whatsapp"></i> Avisar
+                    </button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function syncWSAVAToAgendaAndGCal(patId, targetDate, serviceTitle) {
+        const pat = patientsDB.find(p => p.id === patId);
+        if (!pat) return;
+        const w = computeWSAVASchedule(pat);
+
+        appointmentsDB.push({
+            id: 'appt-wsava-' + Date.now(),
+            patientId: pat.id,
+            petName: pat.petName,
+            code: pat.code,
+            tutorName: pat.tutorName,
+            phone: pat.tutorPhone,
+            date: targetDate,
+            time: '09:30',
+            service: serviceTitle,
+            status: 'Programada WSAVA'
+        });
+        localStorage.setItem('gv_appts_v6', JSON.stringify(appointmentsDB));
+        renderAgendaList();
+        $('kpi-appointments').textContent = appointmentsDB.length;
+
+        openInGoogleCalendar(
+            `${serviceTitle} (${pat.code})`,
+            targetDate,
+            '09:30',
+            `Tutor: ${pat.tutorName} (${pat.tutorPhone || ''})\nProtocolo: ${w.vacProtocolLabel}`
+        );
     }
 
     function openNewAppointmentModal() {
@@ -2096,6 +2462,7 @@
         const date = $('appt-date').value;
         const time = $('appt-time').value;
         const service = $('appt-service').value.trim();
+        const openGCal = $('appt-open-gcal').checked;
         if (!pat || !date || !service) return showToast('Completa los datos de la cita');
 
         appointmentsDB.push({
@@ -2114,32 +2481,53 @@
         closeNewAppointmentModal();
         renderConsultorioDashboard();
         showToast('Cita agregada a la agenda');
+
+        if (openGCal) {
+            openInGoogleCalendar(
+                `Guaros Vet · ${pat.petName} (${service})`,
+                date,
+                time,
+                `Paciente: ${pat.petName} (${pat.code})\nTutor: ${pat.tutorName} (${pat.tutorPhone || ''})\nMotivo: ${service}`
+            );
+        }
     }
 
     function renderAgendaList() {
         const box = $('agenda-list');
         if (!box) return;
         if (appointmentsDB.length === 0) {
-            box.innerHTML = `<p class="text-xs text-slate-400 italic py-3">No hay citas agendadas todavía. Usa "+ Nueva Cita" para programar una.</p>`;
+            box.innerHTML = `<p class="text-xs text-slate-400 italic py-3">No hay citas agendadas todavía. Usa "+ Nueva Cita" o sincroniza desde los alertas WSAVA.</p>`;
             return;
         }
-        box.innerHTML = appointmentsDB.map(a => `
+        box.innerHTML = appointmentsDB.map((a, idx) => `
             <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 flex flex-wrap items-center justify-between gap-3 text-xs">
                 <div>
                     <span class="font-mono font-bold text-brandPrimary">${esc(a.date)} · ${esc(a.time)}</span>
                     <h4 class="font-display font-bold text-base text-brandNavy">${esc(a.petName)} <span class="text-xs font-normal text-slate-500">(${esc(a.tutorName)})</span></h4>
                     <p class="text-slate-600">${esc(a.service)}</p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="sendReminderWA('${esc(a.phone)}', 'Hola ${esc(a.tutorName)}, te escribimos de Guaros Vet para recordarte la cita de ${esc(a.petName)} el ${esc(a.date)} a las ${esc(a.time)} (${esc(a.service)}).')" class="px-3 py-1.5 bg-[#25D366] text-white font-bold rounded-xl">
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="openInGoogleCalendar('Guaros Vet · ${esc(a.petName)} (${esc(a.service)})', '${esc(a.date)}', '${esc(a.time)}', 'Tutor: ${esc(a.tutorName)}')" class="px-3 py-1.5 bg-brandPrimary text-white font-bold rounded-xl">
+                        <i class="fa-solid fa-calendar-plus"></i> Google Calendar
+                    </button>
+                    <button onclick="sendReminderWA('${esc(a.phone)}', '${encodeURIComponent(`Hola ${a.tutorName}, te escribimos de Guaros Vet para recordarte la cita de ${a.petName} el ${a.date} a las ${a.time} (${a.service}).`)}')" class="px-3 py-1.5 bg-[#25D366] text-white font-bold rounded-xl">
                         <i class="fa-brands fa-whatsapp"></i> Recordar
                     </button>
                     <button onclick="openClinicalRecordForPatient('${esc(a.patientId)}')" class="px-3 py-1.5 bg-brandNavy text-white font-bold rounded-xl">
                         Historia
                     </button>
+                    <button onclick="deleteAppointment(${idx})" class="px-2.5 py-1.5 bg-red-100 text-red-700 font-bold rounded-xl">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
             </div>
         `).join('');
+    }
+
+    function deleteAppointment(idx) {
+        appointmentsDB.splice(idx, 1);
+        localStorage.setItem('gv_appts_v6', JSON.stringify(appointmentsDB));
+        renderConsultorioDashboard();
     }
 
     function renderRemindersList() {
@@ -2150,17 +2538,17 @@
             return;
         }
         box.innerHTML = patientsDB.slice(0, 8).map(p => {
-            const vacMsg = `Hola ${p.tutorName}, te saludamos de Guaros Vet. Recordatorio de control preventivo / vacuna para ${p.petName} (${p.code}).`;
             const bdayMsg = `¡Feliz cumpleaños para ${p.petName}! Te desea todo el equipo de Guaros Vet en Barquisimeto.`;
+            const checkMsg = `Hola ${p.tutorName}, te saludamos de Guaros Vet para hacer seguimiento clínico a ${p.petName} (${p.code}). ¿Cómo sigue?`;
             return `
             <div class="p-3 rounded-2xl border border-slate-200 bg-slate-50 flex flex-wrap items-center justify-between gap-2 text-xs">
                 <div>
                     <p class="font-bold text-brandNavy">${esc(p.petName)} <span class="font-mono text-[10px] text-slate-400">(${esc(p.code)})</span> · Tutor: ${esc(p.tutorName)}</p>
-                    <p class="text-[11px] text-slate-500">Últ. vacuna: ${esc(p.lastVaccine || 'No registrada')} · Cumpleaños/Nac.: ${esc(p.dob || 'No registrado')}</p>
+                    <p class="text-[11px] text-slate-500">Nacimiento/Cumpleaños: ${esc(p.dob || 'No registrado')}</p>
                 </div>
                 <div class="flex flex-wrap gap-1.5">
-                    <button onclick="sendReminderWA('${esc(p.tutorPhone)}', '${encodeURIComponent(vacMsg)}')" class="px-2.5 py-1.5 bg-[#25D366] text-white font-bold rounded-xl text-[11px]">
-                        Vacuna / Control
+                    <button onclick="sendReminderWA('${esc(p.tutorPhone)}', '${encodeURIComponent(checkMsg)}')" class="px-2.5 py-1.5 bg-[#25D366] text-white font-bold rounded-xl text-[11px]">
+                        Seguimiento
                     </button>
                     <button onclick="sendReminderWA('${esc(p.tutorPhone)}', '${encodeURIComponent(bdayMsg)}')" class="px-2.5 py-1.5 bg-brandPrimary text-white font-bold rounded-xl text-[11px]">
                         Cumpleaños
@@ -2229,6 +2617,11 @@
         $('hc-title').textContent = `${p.petName} · ${p.code}`;
         $('hc-subtitle').textContent = `Tutor: ${p.tutorName} (${p.tutorCi || 'Sin CI'}) · Tel: ${p.tutorPhone || '--'} · Especie: ${p.species} · Raza: ${p.breed} · Sexo: ${p.sex}`;
 
+        $('hc-visit-date').value = hc.visitDate || new Date().toISOString().split('T')[0];
+        $('hc-record-num').value = hc.recordNum || p.code;
+        $('hc-pet-color').value = hc.petColor || '';
+        $('hc-owner-email').value = hc.ownerEmail || '';
+
         $('hc-weight').value = p.weight || '';
         $('hc-last-vac').value = p.lastVaccine || '';
         $('hc-last-dew').value = p.lastDeworm || '';
@@ -2245,13 +2638,21 @@
         $('hc-hr').value = hc.hr || '';
         $('hc-temp').value = hc.temp || '';
         $('hc-pulse').value = hc.pulse || '';
+        $('hc-tllc').value = hc.tllc || '';
+        $('hc-lymph').value = hc.lymph || '';
         $('hc-mucosa').value = hc.mucosa || '';
+        $('hc-attitude').value = hc.attitude || 'Alerta';
         $('hc-findings').value = hc.findings || hc.notesText || '';
 
         $('hc-differentials').value = hc.differentials || '';
         $('hc-exams').value = hc.exams || '';
         $('hc-final-dx').value = hc.finalDx || '';
         $('hc-obs').value = hc.obs || '';
+
+        $('hc-vet-name').value = hc.vetName || 'M.V. Carlos E. Rodríguez L.';
+        $('hc-vet-license').value = hc.vetLicense || '';
+        $('hc-student-name').value = hc.studentName || '';
+        $('hc-student-code').value = hc.studentCode || '';
 
         const sysMap = hc.systems || {};
         $('hc-systems-container').innerHTML = ORGAN_SYSTEMS.map((sysName, i) => {
@@ -2311,6 +2712,10 @@
         })).filter(r => r.drug || r.dose || r.pres || r.route || r.freq);
 
         const hcPayload = {
+            visitDate: $('hc-visit-date').value,
+            recordNum: $('hc-record-num').value.trim(),
+            petColor: $('hc-pet-color').value.trim(),
+            ownerEmail: $('hc-owner-email').value.trim(),
             reason: $('hc-reason').value.trim(),
             repro: $('hc-repro').value.trim(),
             vaccinesDetail: $('hc-vaccines-detail').value.trim(),
@@ -2320,13 +2725,20 @@
             hr: $('hc-hr').value.trim(),
             temp: $('hc-temp').value.trim(),
             pulse: $('hc-pulse').value.trim(),
+            tllc: $('hc-tllc').value.trim(),
+            lymph: $('hc-lymph').value.trim(),
             mucosa: $('hc-mucosa').value.trim(),
+            attitude: $('hc-attitude').value,
             systems,
             findings: $('hc-findings').value.trim(),
             differentials: $('hc-differentials').value.trim(),
             exams: $('hc-exams').value.trim(),
             finalDx: $('hc-final-dx').value.trim(),
             obs: $('hc-obs').value.trim(),
+            vetName: $('hc-vet-name').value.trim(),
+            vetLicense: $('hc-vet-license').value.trim(),
+            studentName: $('hc-student-name').value.trim(),
+            studentCode: $('hc-student-code').value.trim(),
             rx
         };
 
@@ -2353,27 +2765,72 @@
     }
 
     // =========================================================================
-    // VADEMÉCUM DE FÁRMACOS (ESTILO CPVET)
+    // VADEMÉCUM DE FÁRMACOS (ESTILO CPVET + PACIENTE + ENVÍO A RECETA)
     // =========================================================================
+    function populateCalcPatientSelect() {
+        const sel = $('calc-patient-select');
+        if (!sel) return;
+        sel.innerHTML = `<option value="">-- Peso manual --</option>` +
+            patientsDB.map(p => `<option value="${esc(p.id)}">${esc(p.petName)} (${esc(p.code)}) · ${esc(p.weight || 0)} kg</option>`).join('');
+    }
+
+    function onSelectCalcPatient() {
+        const pat = patientsDB.find(p => p.id === $('calc-patient-select').value);
+        if (pat && pat.weight) {
+            $('calc-pet-weight').value = pat.weight;
+        }
+        renderDrugsList();
+    }
+
     function addDrugToCatalog() {
         const name = $('drug-name').value.trim();
         const doseMgKg = parseFloat($('drug-dose-mgkg').value);
+        const conc = parseFloat($('drug-conc').value) || 0;
         if (!name || isNaN(doseMgKg)) return showToast('Indica nombre del fármaco y dosis mg/kg');
 
         drugsCatalog.push({
             id: 'drg-' + Date.now(),
             name,
             doseMgKg,
+            conc,
             pres: $('drug-pres').value.trim() || 'No especificada',
             route: $('drug-route').value.trim() || 'Según criterio clínico'
         });
         localStorage.setItem('gv_drugs_v6', JSON.stringify(drugsCatalog));
         $('drug-name').value = '';
         $('drug-dose-mgkg').value = '';
+        $('drug-conc').value = '';
         $('drug-pres').value = '';
         $('drug-route').value = '';
         renderDrugsList();
         showToast('Fármaco agregado');
+    }
+
+    function sendDrugToClinicalRx(idx) {
+        const d = drugsCatalog[idx];
+        const w = parseFloat($('calc-pet-weight').value) || 0;
+        if (!d) return;
+        const totalMg = (w * Number(d.doseMgKg || 0)).toFixed(2);
+        const volText = d.conc > 0 ? ` (${(totalMg / d.conc).toFixed(2)} mL/unid)` : '';
+
+        if ($('clinical-record-editor').classList.contains('hidden')) {
+            const selectedPatId = $('calc-patient-select').value;
+            if (selectedPatId) {
+                openClinicalRecordForPatient(selectedPatId);
+            } else {
+                return showToast('Abre primero una Historia Clínica o elige un paciente arriba');
+            }
+        }
+
+        addRxRow({
+            drug: d.name,
+            dose: `${d.doseMgKg} mg/kg = ${totalMg} mg${volText}`,
+            pres: d.pres,
+            route: d.route.split(' ')[0] || 'VO',
+            freq: d.route
+        });
+        switchConsultorioSub('historias');
+        showToast('Fármaco enviado a la Historia Clínica');
     }
 
     function renderDrugsList() {
@@ -2382,15 +2839,23 @@
         const w = parseFloat($('calc-pet-weight') ? $('calc-pet-weight').value : 0) || 0;
         box.innerHTML = drugsCatalog.map((d, idx) => {
             const totalMg = (w * Number(d.doseMgKg || 0)).toFixed(2);
+            const volStr = d.conc > 0 ? ` · <strong>${(totalMg / d.conc).toFixed(2)} mL / unid</strong>` : '';
             return `
             <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 flex items-start justify-between gap-3 text-xs">
                 <div class="space-y-1">
                     <h4 class="font-display font-bold text-sm text-brandNavy">${esc(d.name)}</h4>
                     <p class="text-slate-600">Dosis base: <strong>${d.doseMgKg} mg/kg</strong> · Presentación: ${esc(d.pres)}</p>
                     <p class="text-slate-500">Vía/Pauta: ${esc(d.route)}</p>
-                    <p class="font-bold text-brandPrimary pt-1">Para ${w} kg → ${totalMg} mg por toma</p>
+                    <p class="font-bold text-brandPrimary pt-1">Para ${w} kg → ${totalMg} mg${volStr}</p>
                 </div>
-                <button onclick="deleteDrug(${idx})" class="px-2 py-1 bg-red-100 text-red-700 rounded-lg text-[10px] font-bold">Borrar</button>
+                <div class="flex flex-col gap-1.5 shrink-0">
+                    <button onclick="sendDrugToClinicalRx(${idx})" class="px-2.5 py-1 bg-brandPrimary text-white rounded-lg text-[10px] font-bold">
+                        + Pasar a Receta
+                    </button>
+                    <button onclick="deleteDrug(${idx})" class="px-2.5 py-1 bg-red-100 text-red-700 rounded-lg text-[10px] font-bold">
+                        Borrar
+                    </button>
+                </div>
             </div>`;
         }).join('');
     }
